@@ -43,7 +43,7 @@ class TripCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(restaurantsLabel)
         
         editButton = UIButton()
-        editButton.addSubview(editButton)
+        contentView.addSubview(editButton)
         
         setupConstraints()
     }
