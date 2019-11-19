@@ -18,6 +18,10 @@ class ViewController: UIViewController {
     
     var collectionView: UICollectionView!
     var addButton: UIButton!
+    var headerGradientView: UIView!
+    var headerGradient: CAGradientLayer!
+    var footerGradientView: UIView!
+    var footerGradient: CAGradientLayer!
     
     let tripCellReuseIdentifier = "tripCellReuseIdentifier"
     
@@ -43,17 +47,23 @@ class ViewController: UIViewController {
         view.backgroundColor = BREEZE
         
         // headerGradient
-        let headerGradientView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: CELL_HEIGHT))
-        let headerGradient = CAGradientLayer()
-        headerGradient.frame = self.view.bounds
-        headerGradient.colors = [BREEZE, CLEAR]
-        headerGradientView.layer.addSublayer(headerGradient)
-        headerGradientView.layer.zPosition = 1
+        headerGradientView = UIView()
+        headerGradient = CAGradientLayer()
+        headerGradient.colors = [BREEZE.cgColor, CLEAR.cgColor]
+        headerGradientView.layer.insertSublayer(headerGradient, at: 0)
+        view.addSubview(headerGradientView)
+        
+        // footerGradient
+        footerGradientView = UIView()
+        footerGradient = CAGradientLayer()
+        footerGradient.colors = [CLEAR.cgColor, BREEZE.cgColor]
+        footerGradientView.layer.insertSublayer(footerGradient, at: 0)
+        view.addSubview(footerGradientView)
         
         let day1 = Day(num: 1, emoji: "hi", attractions: ["statue of liberty","empire state building"], restaurants: ["ichiran", "chipotle"])
         let day2 = Day(num: 2, emoji: "hi2", attractions: ["uh","uhh"], restaurants: ["yum", "tasty"])
         let nyc = Trip(name:"nyc spring break", location: "nyc", length: 3, days: [day1, day2] )
-        pastTrips = [nyc, nyc, nyc]
+        pastTrips = [nyc, nyc, nyc, nyc, nyc, nyc, nyc, nyc]
         trips = pastTrips
         
         let tripsLayout = UICollectionViewFlowLayout()
@@ -75,11 +85,29 @@ class ViewController: UIViewController {
         addButton.setTitleColor(.black, for: .normal)
         view.addSubview(addButton)
         
+        view.bringSubviewToFront(headerGradientView)
+        view.bringSubviewToFront(footerGradientView)
+        
         setupConstraints()
         
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        headerGradient.frame = headerGradientView.bounds
+        footerGradient.frame = footerGradientView.bounds
+    }
 
     func setupConstraints() {
+        headerGradientView.snp.makeConstraints { (make) in
+            make.top.leading.trailing.equalToSuperview()
+            make.height.equalTo(CELL_HEIGHT)
+        }
+        footerGradientView.snp.makeConstraints { (make) in
+            make.bottom.leading.trailing.equalToSuperview()
+            make.height.equalTo(CELL_HEIGHT)
+        }
         collectionView.snp.makeConstraints { (make) in
             make.top.bottom.equalToSuperview()
             make.leading.equalTo(SPACING_8)
