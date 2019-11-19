@@ -36,6 +36,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.setNavigationBarHidden(true, animated: false)
         
         let BREEZE = UIColor(red: 239/255, green: 246/255, blue: 255/255, alpha: 1.0)
         let CLEAR = UIColor(red: 239/255, green: 246/255, blue: 255/255, alpha: 0.0)
@@ -53,7 +54,7 @@ class ViewController: UIViewController {
         let day1 = Day(num: 1, emoji: "hi", attractions: ["statue of liberty","empire state building"], restaurants: ["ichiran", "chipotle"])
         let day2 = Day(num: 2, emoji: "hi2", attractions: ["uh","uhh"], restaurants: ["yum", "tasty"])
         let nyc = Trip(name:"nyc spring break", location: "nyc", length: 3, days: [day1, day2] )
-        pastTrips = [nyc, nyc, nyc]
+        pastTrips = [nyc, nyc, nyc, nyc, nyc]
         trips = pastTrips
         
         let tripsLayout = UICollectionViewFlowLayout()
@@ -81,7 +82,13 @@ class ViewController: UIViewController {
 
     func setupConstraints() {
         collectionView.snp.makeConstraints { (make) in
-            make.top.bottom.equalToSuperview()
+            make.top.equalTo(addButton.snp.bottom)
+            make.bottom.equalTo(view.snp.bottomMargin)
+            make.leading.equalTo(SPACING_8)
+            make.trailing.equalTo(-SPACING_8)
+        }
+        addButton.snp.makeConstraints { (make) in
+            make.top.equalTo(view.snp.topMargin)
             make.leading.equalTo(SPACING_8)
             make.trailing.equalTo(-SPACING_8)
         }
