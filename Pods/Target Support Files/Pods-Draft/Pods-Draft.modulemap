@@ -1,0 +1,6 @@
+framework module Pods_Draft {
+  umbrella header "Pods-Draft-umbrella.h"
+
+  export *
+  module * { export * }
+}
