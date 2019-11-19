@@ -20,7 +20,6 @@ class ViewController: UIViewController {
     var addButton: UIButton!
     
     let tripCellReuseIdentifier = "tripCellReuseIdentifier"
-    let padding: CGFloat = 8
     
     var pastTrips: [Trip]!
     var futureTrips: [Trip]!
@@ -29,9 +28,27 @@ class ViewController: UIViewController {
 //    var state: State = .past(pastTrips)
 //    var trips = selectTrips(state)
     
+    let SPACING_8: CGFloat = 8
+    let SPACING_12: CGFloat = 12
+    let SPACING_16: CGFloat = 16
+    let SPACING_24: CGFloat = 24
+    let CELL_HEIGHT: CGFloat = 156
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        
+        let BREEZE = UIColor(red: 239/255, green: 246/255, blue: 255/255, alpha: 1.0)
+        let CLEAR = UIColor(red: 239/255, green: 246/255, blue: 255/255, alpha: 0.0)
+        
+        view.backgroundColor = BREEZE
+        
+        // headerGradient
+        let headerGradientView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: CELL_HEIGHT))
+        let headerGradient = CAGradientLayer()
+        headerGradient.frame = self.view.bounds
+        headerGradient.colors = [BREEZE, CLEAR]
+        headerGradientView.layer.addSublayer(headerGradient)
+        headerGradientView.layer.zPosition = 1
         
         let day1 = Day(num: 1, emoji: "hi", attractions: ["statue of liberty","empire state building"], restaurants: ["ichiran", "chipotle"])
         let day2 = Day(num: 2, emoji: "hi2", attractions: ["uh","uhh"], restaurants: ["yum", "tasty"])
@@ -41,12 +58,12 @@ class ViewController: UIViewController {
         
         let tripsLayout = UICollectionViewFlowLayout()
         tripsLayout.scrollDirection = .vertical
-        tripsLayout.minimumLineSpacing = padding
-        tripsLayout.minimumInteritemSpacing = padding
+        tripsLayout.minimumLineSpacing = 48
+        tripsLayout.minimumInteritemSpacing = 24
         
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: tripsLayout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.backgroundColor = .gray
+        collectionView.backgroundColor = .none
         collectionView.register(TripCollectionViewCell.self, forCellWithReuseIdentifier: tripCellReuseIdentifier)
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -63,18 +80,11 @@ class ViewController: UIViewController {
     }
 
     func setupConstraints() {
-        NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
-            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
-            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-            ])
-        
-        NSLayoutConstraint.activate([
-            addButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            addButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
-            addButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding)
-            ])
+        collectionView.snp.makeConstraints { (make) in
+            make.top.bottom.equalToSuperview()
+            make.leading.equalTo(SPACING_8)
+            make.trailing.equalTo(-SPACING_8)
+        }
     }
     
     func selectTrips(state: State) -> [Trip]{
@@ -86,7 +96,6 @@ class ViewController: UIViewController {
         case .loading:
             return []
         }
-
     }
 }
 
@@ -105,9 +114,9 @@ extension ViewController: UICollectionViewDataSource {
 
 extension ViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        // We want: | padding CELL padding CELL padding CELL padding |
-        let size = (collectionView.frame.width - 2 * padding)
-        return CGSize(width: size, height: size)
+    
+        let w = collectionView.frame.width
+        return CGSize(width: w, height: CELL_HEIGHT)
     }
 }
 

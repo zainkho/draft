@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class TripCollectionViewCell: UICollectionViewCell {
     var nameLabel: UILabel!
@@ -14,9 +15,16 @@ class TripCollectionViewCell: UICollectionViewCell {
     var restaurantsLabel: UILabel!
     var editButton: UIButton!
     
+    var backgroundImage: UIImageView!
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .white
+        backgroundColor = .none
+        
+        backgroundImage = UIImageView()
+        backgroundImage.image = UIImage(named: "notecard-trip")
+        backgroundImage.contentMode = .scaleAspectFill
+        contentView.addSubview(backgroundImage)
         
         nameLabel = UILabel()
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -49,9 +57,9 @@ class TripCollectionViewCell: UICollectionViewCell {
     }
     
     func setupConstraints() {
-        NSLayoutConstraint.activate([
-        nameLabel.topAnchor.constraint(equalTo: contentView.topAnchor)
-        ])
+        backgroundImage.snp.makeConstraints { (make) in
+            make.top.bottom.leading.trailing.equalToSuperview()
+        }
     }
     
     func configure(for trip: Trip) {
