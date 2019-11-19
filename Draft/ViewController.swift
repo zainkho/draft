@@ -40,6 +40,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.setNavigationBarHidden(true, animated: false)
         
         let BREEZE = UIColor(red: 239/255, green: 246/255, blue: 255/255, alpha: 1.0)
         let CLEAR = UIColor(red: 239/255, green: 246/255, blue: 255/255, alpha: 0.0)
@@ -109,7 +110,13 @@ class ViewController: UIViewController {
             make.height.equalTo(CELL_HEIGHT)
         }
         collectionView.snp.makeConstraints { (make) in
-            make.top.bottom.equalToSuperview()
+            make.top.equalTo(addButton.snp.bottom)
+            make.bottom.equalTo(view.snp.bottomMargin)
+            make.leading.equalTo(SPACING_8)
+            make.trailing.equalTo(-SPACING_8)
+        }
+        addButton.snp.makeConstraints { (make) in
+            make.top.equalTo(view.snp.topMargin)
             make.leading.equalTo(SPACING_8)
             make.trailing.equalTo(-SPACING_8)
         }
