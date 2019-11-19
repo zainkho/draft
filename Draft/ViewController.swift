@@ -17,6 +17,7 @@ enum State {
 class ViewController: UIViewController {
     
     var collectionView: UICollectionView!
+    var addButton: UIButton!
     
     let tripCellReuseIdentifier = "tripCellReuseIdentifier"
     let padding: CGFloat = 8
@@ -51,6 +52,12 @@ class ViewController: UIViewController {
         collectionView.delegate = self
         view.addSubview(collectionView)
         
+        addButton = UIButton(frame: .zero)
+        addButton.setTitle("Start a new adventure", for: .normal)
+        addButton.translatesAutoresizingMaskIntoConstraints = false
+        addButton.setTitleColor(.black, for: .normal)
+        view.addSubview(addButton)
+        
         setupConstraints()
         
     }
@@ -61,6 +68,12 @@ class ViewController: UIViewController {
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            ])
+        
+        NSLayoutConstraint.activate([
+            addButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            addButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+            addButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding)
             ])
     }
     
