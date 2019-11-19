@@ -17,6 +17,7 @@ enum State {
 class ViewController: UIViewController {
     
     var collectionView: UICollectionView!
+    var addButton: UIButton!
     
     let tripCellReuseIdentifier = "tripCellReuseIdentifier"
     
@@ -67,6 +68,12 @@ class ViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.delegate = self
         view.addSubview(collectionView)
+        
+        addButton = UIButton(frame: .zero)
+        addButton.setTitle("Start a new adventure", for: .normal)
+        addButton.translatesAutoresizingMaskIntoConstraints = false
+        addButton.setTitleColor(.black, for: .normal)
+        view.addSubview(addButton)
         
         setupConstraints()
         
