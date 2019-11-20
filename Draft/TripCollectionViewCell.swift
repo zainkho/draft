@@ -13,7 +13,9 @@ class TripCollectionViewCell: UICollectionViewCell {
     var backgroundImage: UIImageView!
     var nameLabel: UILabel!
     var lengthLabel: UILabel!
+    var attractionsIcon: UIImageView!
     var attractionsLabel: UILabel!
+    var restaurantsIcon: UIImageView!
     var restaurantsLabel: UILabel!
     var editButton: UIButton!
     
@@ -23,6 +25,7 @@ class TripCollectionViewCell: UICollectionViewCell {
     let SPACING_12: CGFloat = 12
     let SPACING_16: CGFloat = 16
     let SPACING_24: CGFloat = 24
+    let SPACING_48: CGFloat = 48
     let HEADER_TEXT_HEIGHT: CGFloat = 29
     let BODY_TEXT_HEIGHT: CGFloat = 19
     
@@ -54,11 +57,21 @@ class TripCollectionViewCell: UICollectionViewCell {
         lengthLabel.font = UIFont(name: "NewYorkMedium-Regular", size: 16)
         lengthLabel.textColor = OCEAN
         contentView.addSubview(lengthLabel)
+        
+        attractionsIcon = UIImageView()
+        attractionsIcon.image = UIImage(named: "icon-attraction")
+        attractionsIcon.contentMode = .scaleAspectFill
+        contentView.addSubview(attractionsIcon)
 
         attractionsLabel = UILabel()
         attractionsLabel.font = UIFont(name: "NewYorkMedium-Regular", size: 16)
         attractionsLabel.textColor = OCEAN
         contentView.addSubview(attractionsLabel)
+        
+        restaurantsIcon = UIImageView()
+        restaurantsIcon.image = UIImage(named: "icon-restaurant")
+        restaurantsIcon.contentMode = .scaleAspectFill
+        contentView.addSubview(restaurantsIcon)
 
         restaurantsLabel = UILabel()
         restaurantsLabel.font = UIFont(name: "NewYorkMedium-Regular", size: 16)
@@ -91,17 +104,29 @@ class TripCollectionViewCell: UICollectionViewCell {
             make.height.equalTo(BODY_TEXT_HEIGHT)
         }
         
-        attractionsLabel.snp.makeConstraints { (make) in
+        attractionsIcon.snp.makeConstraints { (make) in
             make.top.equalTo(lengthLabel.snp.bottom).offset(SPACING_8)
             make.leading.equalTo(SPACING_12)
-            make.width.equalTo(contentView.frame.width - SPACING_12*2)
+            make.width.height.equalTo(SPACING_16)
+        }
+        
+        attractionsLabel.snp.makeConstraints { (make) in
+            make.centerY.equalTo(attractionsIcon.snp.centerY)
+            make.leading.equalTo(attractionsIcon.snp.trailing).offset(SPACING_8)
+            make.width.equalTo(contentView.frame.width - SPACING_48)
             make.height.equalTo(BODY_TEXT_HEIGHT)
         }
         
-        restaurantsLabel.snp.makeConstraints { (make) in
+        restaurantsIcon.snp.makeConstraints { (make) in
             make.top.equalTo(attractionsLabel.snp.bottom).offset(SPACING_8)
             make.leading.equalTo(SPACING_12)
-            make.width.equalTo(contentView.frame.width - SPACING_12*2)
+            make.width.height.equalTo(SPACING_16)
+        }
+        
+        restaurantsLabel.snp.makeConstraints { (make) in
+            make.centerY.equalTo(restaurantsIcon.snp.centerY)
+            make.leading.equalTo(restaurantsIcon.snp.trailing).offset(SPACING_8)
+            make.width.equalTo(contentView.frame.width - SPACING_48)
             make.height.equalTo(BODY_TEXT_HEIGHT)
         }
         
