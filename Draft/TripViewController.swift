@@ -13,12 +13,14 @@ class TripViewController: UIViewController {
     
     var trip: Trip!
     var tableView: UITableView!
+    var backgroundImage: UIImageView!
     
     var headerImageView: UIImageView!
     var emojiLabel: UILabel!
     var titleLabel: UILabel!
     var subtitleLabel: UILabel!
     
+    let SPACING_4: CGFloat = 4
     let SPACING_8: CGFloat = 8
     let SPACING_12: CGFloat = 12
     let SPACING_16: CGFloat = 16
@@ -47,6 +49,11 @@ class TripViewController: UIViewController {
         let backButton = UIBarButtonItem()
         backButton.tintColor = BREEZE
         navigationItem.backBarButtonItem = backButton
+        
+        backgroundImage = UIImageView()
+        backgroundImage.image = UIImage(named: "notecard-details")
+        backgroundImage.contentMode = .scaleAspectFill
+        view.addSubview(backgroundImage)
         
         headerImageView = UIImageView()
         headerImageView.backgroundColor = .black
@@ -97,8 +104,13 @@ class TripViewController: UIViewController {
             make.height.equalTo(TITLE_TEXT_HEIGHT)
         }
         
+        backgroundImage.snp.makeConstraints { (make) in
+            make.top.equalTo(titleLabel.snp.bottom).offset(SPACING_8)
+            make.leading.bottom.trailing.equalToSuperview()
+        }
+        
         subtitleLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(titleLabel.snp.bottom)
+            make.top.equalTo(titleLabel.snp.bottom).offset(SPACING_4)
             make.leading.equalTo(SPACING_16)
             make.width.equalTo(view.frame.width - SPACING_16*2)
             make.height.equalTo(BODY_TEXT_HEIGHT)
