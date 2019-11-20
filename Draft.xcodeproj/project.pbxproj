@@ -20,6 +20,7 @@
 		9279F8F823848F0600143DAC /* NewYorkMedium-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9279F8F623848F0600143DAC /* NewYorkMedium-Regular.otf */; };
 		9279F8FC2384A70400143DAC /* EditTripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9279F8FB2384A70400143DAC /* EditTripViewController.swift */; };
 		9279F8FE2384A8BF00143DAC /* TripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9279F8FD2384A8BF00143DAC /* TripViewController.swift */; };
+		92EA388D2384E8A7008A0EBC /* EmptyState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EA388C2384E8A7008A0EBC /* EmptyState.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		9279F8F623848F0600143DAC /* NewYorkMedium-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NewYorkMedium-Regular.otf"; sourceTree = "<group>"; };
 		9279F8FB2384A70400143DAC /* EditTripViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTripViewController.swift; sourceTree = "<group>"; };
 		9279F8FD2384A8BF00143DAC /* TripViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripViewController.swift; sourceTree = "<group>"; };
+		92EA388C2384E8A7008A0EBC /* EmptyState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyState.swift; sourceTree = "<group>"; };
 		C89E6EEE7B250728F530A48B /* Pods_Draft.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Draft.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF7342D4CEAAB2C0D4B29A96 /* Pods-Draft.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Draft.release.xcconfig"; path = "Target Support Files/Pods-Draft/Pods-Draft.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -83,6 +85,7 @@
 				9279F8FD2384A8BF00143DAC /* TripViewController.swift */,
 				2F7AC75B2380656D00A7FC3A /* Trip.swift */,
 				2F796F74238324AA00D143FE /* Day.swift */,
+				92EA388C2384E8A7008A0EBC /* EmptyState.swift */,
 				2F7AC75023805CB900A7FC3A /* Assets.xcassets */,
 				2F7AC75223805CB900A7FC3A /* LaunchScreen.storyboard */,
 				2F7AC75523805CB900A7FC3A /* Info.plist */,
@@ -239,6 +242,7 @@
 				2F7AC74C23805CB600A7FC3A /* ViewController.swift in Sources */,
 				2F796F75238324AA00D143FE /* Day.swift in Sources */,
 				2F7AC74A23805CB600A7FC3A /* AppDelegate.swift in Sources */,
+				92EA388D2384E8A7008A0EBC /* EmptyState.swift in Sources */,
 				9279F8FC2384A70400143DAC /* EditTripViewController.swift in Sources */,
 				921649B62383A340000CADF7 /* HeaderView.swift in Sources */,
 			);

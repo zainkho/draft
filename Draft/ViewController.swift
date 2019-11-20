@@ -33,6 +33,7 @@ class ViewController: UIViewController {
     var headerGradient: CAGradientLayer!
     var footerGradientView: UIView!
     var footerGradient: CAGradientLayer!
+    var emptyState: UIView!
     
     let tripCellReuseIdentifier = "tripCellReuseIdentifier"
     let headerViewReuseIdentifier = "filterViewReuseIdentifier"
@@ -45,6 +46,7 @@ class ViewController: UIViewController {
     let SPACING_12: CGFloat = 12
     let SPACING_16: CGFloat = 16
     let SPACING_24: CGFloat = 24
+    let SPACING_132: CGFloat = 132
     let HEADER_HEIGHT: CGFloat = 168
     let CELL_HEIGHT: CGFloat = 168
     let GRADIENT_HEIGHT: CGFloat = 96
@@ -57,6 +59,7 @@ class ViewController: UIViewController {
         navigationController?.setNavigationBarHidden(true, animated: false)
         
         view.backgroundColor = BREEZE
+        
         
         // headerGradient
         headerGradientView = UIView()
@@ -102,6 +105,10 @@ class ViewController: UIViewController {
         view.bringSubviewToFront(headerGradientView)
         view.bringSubviewToFront(footerGradientView)
         
+        // emptyState
+        emptyState = UIView()
+        view.addSubview(emptyState)
+        
         setupConstraints()
         
     }
@@ -128,13 +135,20 @@ class ViewController: UIViewController {
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(GRADIENT_HEIGHT)
         }
+        
         footerGradientView.snp.makeConstraints { (make) in
             make.bottom.leading.trailing.equalToSuperview()
             make.height.equalTo(GRADIENT_HEIGHT)
         }
+        
         collectionView.snp.makeConstraints { (make) in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.topMargin)
             make.bottom.leading.trailing.equalToSuperview()
+        }
+        
+        emptyState.snp.makeConstraints { (make) in
+            make.top.equalToSuperview().offset(SPACING_132)
+            make.leading.bottom.trailing.equalToSuperview()
         }
     }
 }

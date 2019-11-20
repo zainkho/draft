@@ -26,13 +26,13 @@ class TripViewController: UIViewController {
     let TITLE_TEXT_HEIGHT: CGFloat = 41
     let HEADER_TEXT_HEIGHT: CGFloat = 29
     let BODY_TEXT_HEIGHT: CGFloat = 19
-    var HEADER_HEIGHT: CGFloat = 168
+    let HEADER_HEIGHT: CGFloat = 168
     
     let BREEZE = UIColor(red: 239/255, green: 246/255, blue: 255/255, alpha: 1.0)
-    var CREAM = UIColor(red: 255/255, green: 251/255, blue: 242/255, alpha: 1.0)
-    var SPACE = UIColor(red: 27/255, green: 31/255, blue: 35/255, alpha: 1.0)
-    var OCEAN = UIColor(red: 68/255, green: 77/255, blue: 86/255, alpha: 1.0)
-    var RAIN = UIColor(red: 162/255, green: 162/255, blue: 162/255, alpha: 1.0)
+    let CREAM = UIColor(red: 255/255, green: 251/255, blue: 242/255, alpha: 1.0)
+    let SPACE = UIColor(red: 27/255, green: 31/255, blue: 35/255, alpha: 1.0)
+    let OCEAN = UIColor(red: 68/255, green: 77/255, blue: 86/255, alpha: 1.0)
+    let RAIN = UIColor(red: 162/255, green: 162/255, blue: 162/255, alpha: 1.0)
     
     init(trip: Trip) {
         self.trip = trip

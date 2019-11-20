@@ -20,7 +20,7 @@ class HeaderView: UICollectionReusableView {
     let LOGO_HEIGHT: CGFloat = 80
     let LOGO_WIDTH: CGFloat = 209
     
-    var SPACE = UIColor(red: 27/255, green: 31/255, blue: 35/255, alpha: 1.0)
+    let SPACE = UIColor(red: 27/255, green: 31/255, blue: 35/255, alpha: 1.0)
     
     override init(frame: CGRect) {
         super.init(frame: frame)

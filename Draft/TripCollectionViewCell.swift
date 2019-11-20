@@ -29,8 +29,8 @@ class TripCollectionViewCell: UICollectionViewCell {
     let HEADER_TEXT_HEIGHT: CGFloat = 29
     let BODY_TEXT_HEIGHT: CGFloat = 19
     
-    var SPACE = UIColor(red: 27/255, green: 31/255, blue: 35/255, alpha: 1.0)
-    var OCEAN = UIColor(red: 68/255, green: 77/255, blue: 86/255, alpha: 1.0)
+    let SPACE = UIColor(red: 27/255, green: 31/255, blue: 35/255, alpha: 1.0)
+    let OCEAN = UIColor(red: 68/255, green: 77/255, blue: 86/255, alpha: 1.0)
     
     var presentDelegate: PresentEditCardDelegate?
     
