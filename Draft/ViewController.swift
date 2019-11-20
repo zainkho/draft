@@ -236,7 +236,6 @@ extension ViewController : PushTripCardDelegate {
 extension ViewController : PresentEditCardDelegate {
     func presentEditViewController(trip: Trip, title: String) {
         let viewController = EditTripViewController(trip: trip, title: title)
-        
         let editTripViewController = UINavigationController(rootViewController: viewController)
         
         present(editTripViewController, animated: true, completion: nil)
