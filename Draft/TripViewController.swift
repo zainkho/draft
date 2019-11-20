@@ -9,12 +9,13 @@ import UIKit
 
 class TripViewController: UIViewController {
     var tableView: UITableView!
-
+    
     var trip: Trip!
     
     init(trip: Trip) {
         self.trip = trip
         super.init(nibName: nil, bundle: nil)
+        
     }
     
     override func viewDidLoad() {

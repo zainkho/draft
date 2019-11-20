@@ -29,7 +29,7 @@ class TripCollectionViewCell: UICollectionViewCell {
     var SPACE = UIColor(red: 27/255, green: 31/255, blue: 35/255, alpha: 1.0)
     var OCEAN = UIColor(red: 68/255, green: 77/255, blue: 86/255, alpha: 1.0)
     
-    var delegate: PushTripCardDelegate?
+    var presentDelegate: PresentEditCardDelegate?
     
     
     override init(frame: CGRect) {
@@ -67,6 +67,7 @@ class TripCollectionViewCell: UICollectionViewCell {
         
         editButton = UIButton()
         editButton.setBackgroundImage(UIImage(named: "icon-edit"), for: .normal)
+        editButton.addTarget(self, action: #selector(presentEditViewController), for: .touchUpInside)
         contentView.addSubview(editButton)
         
         setupConstraints()
@@ -119,8 +120,9 @@ class TripCollectionViewCell: UICollectionViewCell {
         
     }
     
-    @objc func pushTripViewController() {
-        delegate?.pushTripViewController()
+    @objc func presentEditViewController() {
+        print("cell call")
+        presentDelegate?.presentEditViewController()
     }
     
     required init?(coder: NSCoder) {
