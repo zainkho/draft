@@ -34,7 +34,6 @@ class TripCollectionViewCell: UICollectionViewCell {
     
     var presentDelegate: PresentEditCardDelegate?
     
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .none

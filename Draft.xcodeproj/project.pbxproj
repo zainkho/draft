@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2F18FEE22384D9E800B9239A /* InputTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F18FEE12384D9E800B9239A /* InputTableViewCell.swift */; };
+		2F18FEE62384DC1800B9239A /* InputCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F18FEE52384DC1800B9239A /* InputCell.swift */; };
 		2F796F75238324AA00D143FE /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F796F74238324AA00D143FE /* Day.swift */; };
 		2F7AC74A23805CB600A7FC3A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7AC74923805CB600A7FC3A /* AppDelegate.swift */; };
 		2F7AC74C23805CB600A7FC3A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7AC74B23805CB600A7FC3A /* ViewController.swift */; };
@@ -23,6 +25,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2F18FEE12384D9E800B9239A /* InputTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTableViewCell.swift; sourceTree = "<group>"; };
+		2F18FEE52384DC1800B9239A /* InputCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputCell.swift; sourceTree = "<group>"; };
 		2F796F74238324AA00D143FE /* Day.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day.swift; sourceTree = "<group>"; };
 		2F7AC74623805CB600A7FC3A /* Draft.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Draft.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F7AC74923805CB600A7FC3A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -80,9 +84,11 @@
 				2F7AC75D238071AE00A7FC3A /* TripCollectionViewCell.swift */,
 				921649B52383A340000CADF7 /* HeaderView.swift */,
 				9279F8FB2384A70400143DAC /* EditTripViewController.swift */,
+				2F18FEE12384D9E800B9239A /* InputTableViewCell.swift */,
 				9279F8FD2384A8BF00143DAC /* TripViewController.swift */,
 				2F7AC75B2380656D00A7FC3A /* Trip.swift */,
 				2F796F74238324AA00D143FE /* Day.swift */,
+				2F18FEE52384DC1800B9239A /* InputCell.swift */,
 				2F7AC75023805CB900A7FC3A /* Assets.xcassets */,
 				2F7AC75223805CB900A7FC3A /* LaunchScreen.storyboard */,
 				2F7AC75523805CB900A7FC3A /* Info.plist */,
@@ -233,6 +239,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F18FEE62384DC1800B9239A /* InputCell.swift in Sources */,
 				2F7AC75C2380656D00A7FC3A /* Trip.swift in Sources */,
 				9279F8FE2384A8BF00143DAC /* TripViewController.swift in Sources */,
 				2F7AC75E238071AE00A7FC3A /* TripCollectionViewCell.swift in Sources */,
@@ -240,6 +247,7 @@
 				2F796F75238324AA00D143FE /* Day.swift in Sources */,
 				2F7AC74A23805CB600A7FC3A /* AppDelegate.swift in Sources */,
 				9279F8FC2384A70400143DAC /* EditTripViewController.swift in Sources */,
+				2F18FEE22384D9E800B9239A /* InputTableViewCell.swift in Sources */,
 				921649B62383A340000CADF7 /* HeaderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
