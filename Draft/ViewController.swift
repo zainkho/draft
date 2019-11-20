@@ -49,12 +49,12 @@ class ViewController: UIViewController {
     let CELL_HEIGHT: CGFloat = 168
     let GRADIENT_HEIGHT: CGFloat = 96
     
+    let BREEZE = UIColor(red: 239/255, green: 246/255, blue: 255/255, alpha: 1.0)
+    let CLEAR = UIColor(red: 239/255, green: 246/255, blue: 255/255, alpha: 0.0)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.setNavigationBarHidden(true, animated: false)
-        
-        let BREEZE = UIColor(red: 239/255, green: 246/255, blue: 255/255, alpha: 1.0)
-        let CLEAR = UIColor(red: 239/255, green: 246/255, blue: 255/255, alpha: 0.0)
         
         view.backgroundColor = BREEZE
         
