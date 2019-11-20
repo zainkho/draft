@@ -33,6 +33,7 @@ class ViewController: UIViewController {
     var headerGradient: CAGradientLayer!
     var footerGradientView: UIView!
     var footerGradient: CAGradientLayer!
+    var emptyState: UIView!
     
     let tripCellReuseIdentifier = "tripCellReuseIdentifier"
     let headerViewReuseIdentifier = "filterViewReuseIdentifier"
@@ -48,6 +49,7 @@ class ViewController: UIViewController {
     let HEADER_HEIGHT: CGFloat = 168
     let CELL_HEIGHT: CGFloat = 168
     let GRADIENT_HEIGHT: CGFloat = 96
+    let SPACING_168: CGFloat = 168
     
     let BREEZE = UIColor(red: 239/255, green: 246/255, blue: 255/255, alpha: 1.0)
     let CLEAR = UIColor(red: 239/255, green: 246/255, blue: 255/255, alpha: 0.0)
@@ -105,6 +107,16 @@ class ViewController: UIViewController {
         view.bringSubviewToFront(headerGradientView)
         view.bringSubviewToFront(footerGradientView)
         
+        // emptyState
+        emptyState = EmptyState()
+        view.addSubview(emptyState)
+        if trips.isEmpty {
+            emptyState.alpha = 1
+        }
+        else {
+            emptyState.alpha = 0
+        }
+        
         setupConstraints()
         
     }
@@ -126,18 +138,26 @@ class ViewController: UIViewController {
     }
 
     func setupConstraints() {
+        
         headerGradientView.snp.makeConstraints { (make) in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.topMargin)
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(GRADIENT_HEIGHT)
         }
+        
         footerGradientView.snp.makeConstraints { (make) in
             make.bottom.leading.trailing.equalToSuperview()
             make.height.equalTo(GRADIENT_HEIGHT)
         }
+        
         collectionView.snp.makeConstraints { (make) in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.topMargin)
             make.bottom.leading.trailing.equalToSuperview()
+        }
+        
+        emptyState.snp.makeConstraints { (make) in
+            make.top.equalToSuperview().offset(SPACING_168)
+            make.leading.bottom.trailing.equalToSuperview()
         }
     }
     
@@ -215,9 +235,6 @@ extension ViewController : PushTripCardDelegate {
 
 extension ViewController : PresentEditCardDelegate {
     func presentEditViewController(trip: Trip, title: String) {
-//        let day1 = Day(num: 1, attractions: ["statue of liberty","empire state building"], restaurants: ["ichiran", "chipotle"])
-//        let day2 = Day(num: 2,attractions: ["uh","uhh"], restaurants: ["yum", "tasty"])
-//        let nyc = Trip(emoji: randomEmoji(), name:"NYC Spring Break", location: "nyc", length: 3, days: [day1, day2] )
         let viewController = EditTripViewController(trip: trip, title: title)
         
         let editTripViewController = UINavigationController(rootViewController: viewController)
