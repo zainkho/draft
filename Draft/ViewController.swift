@@ -21,13 +21,13 @@ protocol PushTripCardDelegate: class {
 class ViewController: UIViewController {
     
     var collectionView: UICollectionView!
-    var addButton: UIButton!
     var headerGradientView: UIView!
     var headerGradient: CAGradientLayer!
     var footerGradientView: UIView!
     var footerGradient: CAGradientLayer!
     
     let tripCellReuseIdentifier = "tripCellReuseIdentifier"
+    let headerViewReuseIdentifier = "filterViewReuseIdentifier"
     
     var pastTrips: [Trip]!
     var futureTrips: [Trip]!
@@ -37,7 +37,9 @@ class ViewController: UIViewController {
     let SPACING_12: CGFloat = 12
     let SPACING_16: CGFloat = 16
     let SPACING_24: CGFloat = 24
-    let CELL_HEIGHT: CGFloat = 156
+    let HEADER_HEIGHT: CGFloat = 168
+    let CELL_HEIGHT: CGFloat = 168
+    let GRADIENT_HEIGHT: CGFloat = 96
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,29 +66,31 @@ class ViewController: UIViewController {
         
         let day1 = Day(num: 1, emoji: "hi", attractions: ["statue of liberty","empire state building"], restaurants: ["ichiran", "chipotle"])
         let day2 = Day(num: 2, emoji: "hi2", attractions: ["uh","uhh"], restaurants: ["yum", "tasty"])
-        let nyc = Trip(name:"nyc spring break", location: "nyc", length: 3, days: [day1, day2] )
+        let nyc = Trip(name:"NYC Spring Break", location: "nyc", length: 3, days: [day1, day2] )
         pastTrips = [nyc, nyc, nyc, nyc, nyc, nyc, nyc, nyc]
         trips = pastTrips
         
+        // Set up tripsLayout
         let tripsLayout = UICollectionViewFlowLayout()
         tripsLayout.scrollDirection = .vertical
-        tripsLayout.minimumLineSpacing = 48
-        tripsLayout.minimumInteritemSpacing = 24
+        tripsLayout.minimumLineSpacing = SPACING_24
+        tripsLayout.minimumInteritemSpacing = SPACING_24
+        tripsLayout.sectionInset.left = SPACING_16
+        tripsLayout.sectionInset.right = SPACING_16
         
+        // Set up collectionView
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: tripsLayout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.backgroundColor = .none
+        
+        // Register cell
         collectionView.register(TripCollectionViewCell.self, forCellWithReuseIdentifier: tripCellReuseIdentifier)
+        collectionView.register(HeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerViewReuseIdentifier)
         collectionView.dataSource = self
         collectionView.delegate = self
         view.addSubview(collectionView)
         
-        addButton = UIButton(frame: .zero)
-        addButton.setTitle("Start a new adventure", for: .normal)
-        addButton.translatesAutoresizingMaskIntoConstraints = false
-        addButton.setTitleColor(.black, for: .normal)
-        view.addSubview(addButton)
-        
+        // Bring cloudy gradients to front
         view.bringSubviewToFront(headerGradientView)
         view.bringSubviewToFront(footerGradientView)
         
@@ -100,36 +104,36 @@ class ViewController: UIViewController {
         headerGradient.frame = headerGradientView.bounds
         footerGradient.frame = footerGradientView.bounds
     }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if collectionView.contentOffset.y <= 1 {
+            headerGradient.opacity = 0
+        }
+        else {
+            headerGradient.opacity = 1
+        }
+    }
 
     func setupConstraints() {
         headerGradientView.snp.makeConstraints { (make) in
-            make.top.leading.trailing.equalToSuperview()
-            make.height.equalTo(CELL_HEIGHT)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.topMargin)
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(GRADIENT_HEIGHT)
         }
         footerGradientView.snp.makeConstraints { (make) in
             make.bottom.leading.trailing.equalToSuperview()
-            make.height.equalTo(CELL_HEIGHT)
+            make.height.equalTo(GRADIENT_HEIGHT)
         }
         collectionView.snp.makeConstraints { (make) in
-            make.top.equalTo(addButton.snp.bottom)
-            make.bottom.equalTo(view.snp.bottomMargin)
-            make.leading.equalTo(SPACING_8)
-            make.trailing.equalTo(-SPACING_8)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.topMargin)
+            make.bottom.leading.trailing.equalToSuperview()
         }
-        addButton.snp.makeConstraints { (make) in
-            make.top.equalTo(view.snp.topMargin)
-            make.leading.equalTo(SPACING_8)
-            make.trailing.equalTo(-SPACING_8)
-        }
-    }
-    
-    @objc func presentTripViewController() {
-        let viewController = TripViewController()
-        present(viewController, animated: true, completion: nil)
     }
 }
-
+    
 extension ViewController: UICollectionViewDataSource {
+    
+    // collectionView
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return trips.count
     }
@@ -137,22 +141,43 @@ extension ViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: tripCellReuseIdentifier, for: indexPath) as! TripCollectionViewCell
         cell.configure(for: trips[indexPath.row])
+        
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerViewReuseIdentifier, for: indexPath) as! HeaderView
+        
+        return headerView
+    }
 }
 
 extension ViewController: UICollectionViewDelegateFlowLayout {
+    
+    // collectionView
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let w = collectionView.frame.width
+        let w = collectionView.frame.width - SPACING_16*2
+        
         return CGSize(width: w, height: CELL_HEIGHT)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let trip = trips[indexPath.row]
+        let viewController = TripViewController(trip: trip)
+    }
+    
+    // HeaderView
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        
+        let w = collectionView.frame.width - SPACING_16*2
+        return CGSize(width: w, height: HEADER_HEIGHT)
     }
 }
 
 extension ViewController : PushTripCardDelegate {
     func pushTripViewController() {
         print("hi")
-        let viewController = TripViewController()
+        let viewController = TripViewController(trip: )
         present(viewController, animated: true, completion: nil)
     }
 }
