@@ -10,6 +10,8 @@ import SnapKit
 
 class TripCollectionViewCell: UICollectionViewCell {
     
+    var trip: Trip!
+    
     var backgroundImage: UIImageView!
     var nameLabel: UILabel!
     var lengthLabel: UILabel!
@@ -142,12 +144,18 @@ class TripCollectionViewCell: UICollectionViewCell {
         lengthLabel.text = String(trip.length) + " days · " + trip.location
         attractionsLabel.text = trip.days[0].attractions.joined(separator: ", ")
         restaurantsLabel.text = trip.days[0].restaurants.joined(separator: ", ")
-        
+        self.trip = trip
     }
     
     @objc func presentEditViewController() {
-        print("cell call")
-        presentDelegate?.presentEditViewController()
+        presentDelegate?.presentEditViewController(trip: trip, title: "Edit Trip")
+    }
+    
+    func randomEmoji() -> String {
+        let emojiStart = 0x1F601
+        let ascii = emojiStart + Int(arc4random_uniform(UInt32(35)))
+        let emoji = UnicodeScalar(ascii)?.description
+        return emoji ?? "x"
     }
     
     required init?(coder: NSCoder) {

@@ -8,12 +8,14 @@
 import Foundation
 
 class Trip {
+    var emoji: String
     var name: String
     var location: String
     var length: Int
     var days: [Day]
     
-    init(name: String, location: String, length: Int, days: [Day] ) {
+    init(emoji: String, name: String, location: String, length: Int, days: [Day] ) {
+        self.emoji = emoji
         self.name = name
         self.location = location
         self.length = length

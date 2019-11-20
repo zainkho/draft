@@ -45,25 +45,20 @@ class TripViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = CREAM
         
-        // Back button
-        let backButton = UIBarButtonItem()
-        backButton.tintColor = BREEZE
-        navigationItem.backBarButtonItem = backButton
-        
         backgroundImage = UIImageView()
         backgroundImage.image = UIImage(named: "notecard-details")
         backgroundImage.contentMode = .scaleAspectFill
         view.addSubview(backgroundImage)
         
         headerImageView = UIImageView()
-        headerImageView.backgroundColor = .black
+        headerImageView.backgroundColor = .darkGray
 //        headerImageView.kf.setImage(with: <#T##ImageDataProvider?#>)
         headerImageView.contentMode = .scaleToFill
         view.addSubview(headerImageView)
         
         emojiLabel = UILabel()
         emojiLabel.font = UIFont(name: "NewYorkMedium-Bold", size: 34)
-        emojiLabel.text = randomEmoji()
+        emojiLabel.text = trip.emoji
         view.addSubview(emojiLabel)
         
         titleLabel = UILabel()
@@ -77,8 +72,6 @@ class TripViewController: UIViewController {
         subtitleLabel.text = String(trip.length) + " days · " + trip.location
         subtitleLabel.textColor = OCEAN
         view.addSubview(subtitleLabel)
-        
-        
         
         setupConstraints()
     }
@@ -115,13 +108,6 @@ class TripViewController: UIViewController {
             make.width.equalTo(view.frame.width - SPACING_16*2)
             make.height.equalTo(BODY_TEXT_HEIGHT)
         }
-    }
-    
-    func randomEmoji() -> String {
-        let emojiStart = 0x1F601
-        let ascii = emojiStart + Int(arc4random_uniform(UInt32(35)))
-        let emoji = UnicodeScalar(ascii)?.description
-        return emoji ?? "x"
     }
     
     required init?(coder: NSCoder) {

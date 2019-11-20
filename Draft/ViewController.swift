@@ -23,7 +23,7 @@ protocol PushTripCardDelegate: class {
 }
 
 protocol PresentEditCardDelegate: class {
-    func presentEditViewController()
+    func presentEditViewController(trip: Trip, title: String)
 }
 
 class ViewController: UIViewController {
@@ -54,7 +54,9 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.setNavigationBarHidden(true, animated: false)
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.isTranslucent = true
         
         view.backgroundColor = BREEZE
         
@@ -72,11 +74,12 @@ class ViewController: UIViewController {
         footerGradientView.layer.insertSublayer(footerGradient, at: 0)
         view.addSubview(footerGradientView)
         
-        let day1 = Day(num: 1, emoji: "hi", attractions: ["statue of liberty","empire state building"], restaurants: ["ichiran", "chipotle"])
-        let day2 = Day(num: 2, emoji: "hi2", attractions: ["uh","uhh"], restaurants: ["yum", "tasty"])
-        let nyc = Trip(name:"NYC Spring Break", location: "nyc", length: 3, days: [day1, day2] )
+        let day1 = Day(num: 1, attractions: ["statue of liberty","empire state building"], restaurants: ["ichiran", "chipotle"])
+        let day2 = Day(num: 2, attractions: ["uh","uhh"], restaurants: ["yum", "tasty"])
+        let nyc = Trip(emoji: randomEmoji(), name:"NYC Spring Break", location: "nyc", length: 3, days: [day1, day2] )
         pastTrips = [nyc, nyc, nyc, nyc, nyc, nyc, nyc, nyc]
-        trips = pastTrips
+//        trips = pastTrips
+        trips = []
         
         // Set up tripsLayout
         let tripsLayout = UICollectionViewFlowLayout()
@@ -137,6 +140,17 @@ class ViewController: UIViewController {
             make.bottom.leading.trailing.equalToSuperview()
         }
     }
+    
+    @objc func backButtonPushed() {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    func randomEmoji() -> String {
+        let emojiStart = 0x1F601
+        let ascii = emojiStart + Int(arc4random_uniform(UInt32(35)))
+        let emoji = UnicodeScalar(ascii)?.description
+        return emoji ?? "x"
+    }
 }
     
 extension ViewController: UICollectionViewDataSource {
@@ -156,6 +170,7 @@ extension ViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerViewReuseIdentifier, for: indexPath) as! HeaderView
+        headerView.presentDelegate = self
         
         return headerView
     }
@@ -173,6 +188,12 @@ extension ViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let trip = trips[indexPath.row]
         let viewController = TripViewController(trip: trip)
+        
+        // Back button
+        let backButton = UIBarButtonItem(title: "Back", style: .done, target: self, action: #selector(backButtonPushed))
+        backButton.tintColor = BREEZE
+        navigationItem.backBarButtonItem = backButton
+        
         navigationController?.pushViewController(viewController, animated: true)
         
     }
@@ -187,19 +208,20 @@ extension ViewController: UICollectionViewDelegateFlowLayout {
 
 extension ViewController : PushTripCardDelegate {
     func pushTripViewController() {
-        print("hi")
 //        let viewController = TripViewController()
 //        present(viewController, animated: true, completion: nil)
     }
 }
 
 extension ViewController : PresentEditCardDelegate {
-    func presentEditViewController() {
-        print("view call")
-        let day1 = Day(num: 1, emoji: "hi", attractions: ["statue of liberty","empire state building"], restaurants: ["ichiran", "chipotle"])
-        let day2 = Day(num: 2, emoji: "hi2", attractions: ["uh","uhh"], restaurants: ["yum", "tasty"])
-        let nyc = Trip(name:"NYC Spring Break", location: "nyc", length: 3, days: [day1, day2] )
-        let viewController = EditTripViewController(trip: nyc)
-        present(viewController, animated: true, completion: nil)
+    func presentEditViewController(trip: Trip, title: String) {
+//        let day1 = Day(num: 1, attractions: ["statue of liberty","empire state building"], restaurants: ["ichiran", "chipotle"])
+//        let day2 = Day(num: 2,attractions: ["uh","uhh"], restaurants: ["yum", "tasty"])
+//        let nyc = Trip(emoji: randomEmoji(), name:"NYC Spring Break", location: "nyc", length: 3, days: [day1, day2] )
+        let viewController = EditTripViewController(trip: trip, title: title)
+        
+        let editTripViewController = UINavigationController(rootViewController: viewController)
+        
+        present(editTripViewController, animated: true, completion: nil)
     }
 }
