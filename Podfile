@@ -7,5 +7,6 @@ target 'Draft' do
 
   # Pods for Draft
   pod 'SnapKit'
+  pod 'Kingfisher'
 
 end
