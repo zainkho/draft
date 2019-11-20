@@ -174,10 +174,10 @@ extension ViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-extension ViewController : PushTripCardDelegate {
-    func pushTripViewController() {
-        print("hi")
-        let viewController = TripViewController(trip: )
-        present(viewController, animated: true, completion: nil)
-    }
-}
+//extension ViewController : PushTripCardDelegate {
+//    func pushTripViewController() {
+//        print("hi")
+//        let viewController = TripViewController(trip: )
+//        present(viewController, animated: true, completion: nil)
+//    }
+//}
