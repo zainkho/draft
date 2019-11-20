@@ -14,8 +14,10 @@ class TripCollectionViewCell: UICollectionViewCell {
     var attractionsLabel: UILabel!
     var restaurantsLabel: UILabel!
     var editButton: UIButton!
-    
     var backgroundImage: UIImageView!
+    
+    var delegate: PushTripCardDelegate?
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -51,6 +53,10 @@ class TripCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(restaurantsLabel)
         
         editButton = UIButton()
+        editButton.translatesAutoresizingMaskIntoConstraints = false
+        editButton.setTitle("edit", for: .normal)
+        editButton.setTitleColor(.black, for: .normal)
+        editButton.addTarget(self, action: #selector(pushTripViewController), for: .touchUpInside)
         contentView.addSubview(editButton)
         
         setupConstraints()
@@ -60,6 +66,9 @@ class TripCollectionViewCell: UICollectionViewCell {
         backgroundImage.snp.makeConstraints { (make) in
             make.top.bottom.leading.trailing.equalToSuperview()
         }
+        editButton.snp.makeConstraints { (make) in
+            make.bottom.trailing.equalToSuperview()
+        }
     }
     
     func configure(for trip: Trip) {
@@ -68,6 +77,10 @@ class TripCollectionViewCell: UICollectionViewCell {
         attractionsLabel.text = trip.days[0].attractions.joined(separator: ",")
         restaurantsLabel.text = trip.days[0].restaurants.joined(separator: ",")
         
+    }
+    
+    @objc func pushTripViewController() {
+        delegate?.pushTripViewController()
     }
     
     required init?(coder: NSCoder) {

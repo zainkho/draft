@@ -14,6 +14,10 @@ enum State {
     case future([Trip])
 }
 
+protocol PushTripCardDelegate: class {
+    func pushTripViewController()
+}
+
 class ViewController: UIViewController {
     
     var collectionView: UICollectionView!
@@ -28,9 +32,6 @@ class ViewController: UIViewController {
     var pastTrips: [Trip]!
     var futureTrips: [Trip]!
     var trips: [Trip]!
-    
-//    var state: State = .past(pastTrips)
-//    var trips = selectTrips(state)
     
     let SPACING_8: CGFloat = 8
     let SPACING_12: CGFloat = 12
@@ -122,15 +123,9 @@ class ViewController: UIViewController {
         }
     }
     
-    func selectTrips(state: State) -> [Trip]{
-        switch state {
-        case .past(let trips):
-            return trips
-        case .future(let trips):
-            return trips
-        case .loading:
-            return []
-        }
+    @objc func presentTripViewController() {
+        let viewController = TripViewController()
+        present(viewController, animated: true, completion: nil)
     }
 }
 
@@ -149,9 +144,15 @@ extension ViewController: UICollectionViewDataSource {
 
 extension ViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    
         let w = collectionView.frame.width
         return CGSize(width: w, height: CELL_HEIGHT)
     }
 }
 
+extension ViewController : PushTripCardDelegate {
+    func pushTripViewController() {
+        print("hi")
+        let viewController = TripViewController()
+        present(viewController, animated: true, completion: nil)
+    }
+}
