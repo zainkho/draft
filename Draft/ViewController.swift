@@ -173,6 +173,8 @@ extension ViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let trip = trips[indexPath.row]
         let viewController = TripViewController(trip: trip)
+        navigationController?.pushViewController(viewController, animated: true)
+        
     }
     
     // HeaderView
