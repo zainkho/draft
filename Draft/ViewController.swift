@@ -241,4 +241,5 @@ extension ViewController : PresentEditCardDelegate {
         
         present(editTripViewController, animated: true, completion: nil)
     }
+    
 }
