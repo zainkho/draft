@@ -17,6 +17,7 @@
 		2F7AC75C2380656D00A7FC3A /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7AC75B2380656D00A7FC3A /* Trip.swift */; };
 		2F7AC75E238071AE00A7FC3A /* TripCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7AC75D238071AE00A7FC3A /* TripCollectionViewCell.swift */; };
 		54B4A8D565F301DE23806E91 /* Pods_Draft.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C89E6EEE7B250728F530A48B /* Pods_Draft.framework */; };
+		5DDE1C5F2384DFED009523EE /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDE1C5E2384DFED009523EE /* Networking.swift */; };
 		921649B62383A340000CADF7 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921649B52383A340000CADF7 /* HeaderView.swift */; };
 		9279F8F723848F0600143DAC /* NewYorkMedium-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9279F8F523848F0600143DAC /* NewYorkMedium-Bold.otf */; };
 		9279F8F823848F0600143DAC /* NewYorkMedium-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9279F8F623848F0600143DAC /* NewYorkMedium-Regular.otf */; };
@@ -37,6 +38,7 @@
 		2F7AC75B2380656D00A7FC3A /* Trip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
 		2F7AC75D238071AE00A7FC3A /* TripCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripCollectionViewCell.swift; sourceTree = "<group>"; };
 		56FF142833CF044F66D0F902 /* Pods-Draft.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Draft.debug.xcconfig"; path = "Target Support Files/Pods-Draft/Pods-Draft.debug.xcconfig"; sourceTree = "<group>"; };
+		5DDE1C5E2384DFED009523EE /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		921649B52383A340000CADF7 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		9279F8F523848F0600143DAC /* NewYorkMedium-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NewYorkMedium-Bold.otf"; sourceTree = "<group>"; };
 		9279F8F623848F0600143DAC /* NewYorkMedium-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NewYorkMedium-Regular.otf"; sourceTree = "<group>"; };
@@ -93,6 +95,7 @@
 				2F7AC75223805CB900A7FC3A /* LaunchScreen.storyboard */,
 				2F7AC75523805CB900A7FC3A /* Info.plist */,
 				9279F8F423848EFC00143DAC /* fonts */,
+				5DDE1C5E2384DFED009523EE /* Networking.swift */,
 			);
 			path = Draft;
 			sourceTree = "<group>";
@@ -243,6 +246,7 @@
 				2F7AC75C2380656D00A7FC3A /* Trip.swift in Sources */,
 				9279F8FE2384A8BF00143DAC /* TripViewController.swift in Sources */,
 				2F7AC75E238071AE00A7FC3A /* TripCollectionViewCell.swift in Sources */,
+				5DDE1C5F2384DFED009523EE /* Networking.swift in Sources */,
 				2F7AC74C23805CB600A7FC3A /* ViewController.swift in Sources */,
 				2F796F75238324AA00D143FE /* Day.swift in Sources */,
 				2F7AC74A23805CB600A7FC3A /* AppDelegate.swift in Sources */,
