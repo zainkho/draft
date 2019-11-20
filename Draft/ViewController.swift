@@ -14,8 +14,16 @@ enum State {
     case future([Trip])
 }
 
+protocol EditTripDelegate: class {
+    
+}
+
 protocol PushTripCardDelegate: class {
     func pushTripViewController()
+}
+
+protocol PresentEditCardDelegate: class {
+    func presentEditViewController()
 }
 
 class ViewController: UIViewController {
@@ -141,6 +149,7 @@ extension ViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: tripCellReuseIdentifier, for: indexPath) as! TripCollectionViewCell
         cell.configure(for: trips[indexPath.row])
+        cell.presentDelegate = self
         
         return cell
     }
@@ -174,10 +183,21 @@ extension ViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-//extension ViewController : PushTripCardDelegate {
-//    func pushTripViewController() {
-//        print("hi")
-//        let viewController = TripViewController(trip: )
+extension ViewController : PushTripCardDelegate {
+    func pushTripViewController() {
+        print("hi")
+//        let viewController = TripViewController()
 //        present(viewController, animated: true, completion: nil)
-//    }
-//}
+    }
+}
+
+extension ViewController : PresentEditCardDelegate {
+    func presentEditViewController() {
+        print("view call")
+        let day1 = Day(num: 1, emoji: "hi", attractions: ["statue of liberty","empire state building"], restaurants: ["ichiran", "chipotle"])
+        let day2 = Day(num: 2, emoji: "hi2", attractions: ["uh","uhh"], restaurants: ["yum", "tasty"])
+        let nyc = Trip(name:"NYC Spring Break", location: "nyc", length: 3, days: [day1, day2] )
+        let viewController = EditTripViewController(trip: nyc)
+        present(viewController, animated: true, completion: nil)
+    }
+}
