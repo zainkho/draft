@@ -26,6 +26,8 @@ class EmptyState: UIView {
     let BREEZE = UIColor(red: 239/255, green: 246/255, blue: 255/255, alpha: 1.0)
     let SPACE = UIColor(red: 27/255, green: 31/255, blue: 35/255, alpha: 1.0)
     
+    var presentDelegate: PresentEditCardDelegate?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = BREEZE
@@ -54,7 +56,7 @@ class EmptyState: UIView {
         startButton.layer.shadowRadius = 3
         addSubview(startButton)
         
-        startButton.addTarget(self, action: #selector(startButtonPushed), for: .touchUpInside)
+        startButton.addTarget(self, action: #selector(presentEditViewController), for: .touchUpInside)
 
         setupConstraints()
     }
@@ -79,11 +81,8 @@ class EmptyState: UIView {
         }
     }
     
-    @objc func startButtonPushed() {
-        let viewController = EditTripViewController(trip: Trip(emoji: randomEmoji(), name: "New trip", location: "", length: 1, days: [Day(num: 1, attractions: [], restaurants: [])]), title: "New Trip")
-        let editTripViewController = UINavigationController(rootViewController: viewController)
-        
-        present(editTripViewController, animated: true, completion: nil)
+    @objc func presentEditViewController() {
+        presentDelegate?.presentEditViewController(trip: Trip(emoji: randomEmoji(), name: "New trip", location: "", length: 1, days: [Day(num: 1, attractions: [], restaurants: [])]), title: "New Trip")
     }
     
     required init?(coder: NSCoder) {
