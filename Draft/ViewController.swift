@@ -106,11 +106,16 @@ class ViewController: UIViewController {
         view.bringSubviewToFront(footerGradientView)
         
         // emptyState
-        emptyState = UIView()
+        emptyState = EmptyState()
         view.addSubview(emptyState)
+        if trips.isEmpty {
+            emptyState.alpha = 1
+        }
+        else {
+            emptyState.alpha = 0
+        }
         
         setupConstraints()
-        
     }
     
     override func viewDidLayoutSubviews() {

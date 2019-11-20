@@ -19,6 +19,7 @@ class HeaderView: UICollectionReusableView {
     let SPACING_24: CGFloat = 24
     let LOGO_HEIGHT: CGFloat = 80
     let LOGO_WIDTH: CGFloat = 209
+    let BUTTON_HEIGHT: CGFloat = 50
     
     let SPACE = UIColor(red: 27/255, green: 31/255, blue: 35/255, alpha: 1.0)
     
@@ -59,7 +60,7 @@ class HeaderView: UICollectionReusableView {
         // newTripButton
         newTripButton.snp.makeConstraints { (make) in
             make.top.equalTo(draftImageView.snp.bottom).offset(SPACING_12)
-            make.height.equalTo(50)
+            make.height.equalTo(BUTTON_HEIGHT)
             make.leading.equalTo(SPACING_16)
             make.trailing.equalTo(-SPACING_16)
         }
