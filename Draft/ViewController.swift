@@ -219,6 +219,8 @@ extension ViewController : PresentEditCardDelegate {
         let day2 = Day(num: 2, emoji: "hi2", attractions: ["uh","uhh"], restaurants: ["yum", "tasty"])
         let nyc = Trip(name:"NYC Spring Break", location: "nyc", length: 3, days: [day1, day2] )
         let viewController = EditTripViewController(trip: nyc)
-        present(viewController, animated: true, completion: nil)
+        let navigationController = UINavigationController(rootViewController: viewController)
+        present(navigationController, animated: true, completion: nil)
     }
+    
 }
