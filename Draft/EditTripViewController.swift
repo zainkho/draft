@@ -65,8 +65,7 @@ class EditTripViewController: UIViewController {
         tableView.register(InputTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
         view.addSubview(tableView)
 
-        setupConstraints()
-        
+        setupConstraints() 
     }
     
     func setupConstraints() {
@@ -107,7 +106,7 @@ extension EditTripViewController : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return cells.count
+        return 2
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
