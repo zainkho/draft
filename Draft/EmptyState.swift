@@ -13,7 +13,7 @@ class EmptyState: UIView {
     var taglineLabel: UILabel!
     var startButton: UIButton!
 
-    let ILLUSTRATION_SPACING: CGFloat = 120
+    let ILLUSTRATION_SPACING: CGFloat = 96
     let ILLUSTRATION_HEIGHT: CGFloat = 205
     let TAGLINE_HEIGHT: CGFloat = 144
     let BUTTON_HEIGHT: CGFloat = 50
@@ -30,7 +30,7 @@ class EmptyState: UIView {
         addSubview(flyingIllustration)
         
         taglineLabel = UILabel()
-        taglineLabel.font = UIFont(name: "NewYorkMedium-Regular", size: 36)
+        taglineLabel.font = UIFont.TITLE
         taglineLabel.text = "Start your next \nadventure"
         taglineLabel.textAlignment = .center
         taglineLabel.numberOfLines = 0
@@ -39,7 +39,7 @@ class EmptyState: UIView {
         
         startButton = UIButton()
         startButton.setTitle("+ Begin traveling", for: .normal)
-        startButton.titleLabel?.font = UIFont(name: "NewYorkMedium-Regular", size: 24)
+        startButton.titleLabel?.font = UIFont.H2
         startButton.setTitleColor(.SPACE, for: .normal)
         startButton.setBackgroundImage(UIImage(named: "notecard-button"), for: .normal)
         startButton.layer.cornerRadius = 12
@@ -66,7 +66,7 @@ class EmptyState: UIView {
         }
         
         startButton.snp.makeConstraints { (make) in
-            make.top.equalTo(taglineLabel.snp.bottom).offset(SPACING_12)
+            make.top.equalTo(taglineLabel.snp.bottom).offset(SPACING_24)
             make.height.equalTo(BUTTON_HEIGHT)
             make.leading.equalTo(SPACING_16)
             make.trailing.equalTo(-SPACING_16)

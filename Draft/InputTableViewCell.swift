@@ -16,18 +16,31 @@ class InputTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+        self.backgroundColor = .CREAM
+        
+        let attrs = [
+            NSAttributedString.Key.foregroundColor: UIColor.RAIN,
+            NSAttributedString.Key.font: UIFont.LABEL!
+        ]
+        
         inputField = UITextField()
-        inputField.backgroundColor = .white
+        inputField.backgroundColor = .CLOUD
+        inputField.attributedPlaceholder = NSAttributedString(string: "Empire State Building", attributes: attrs)
+        inputField.font = UIFont.LABEL
         inputField.text = inputFieldText
-        inputField.textColor = .black
+        inputField.textColor = .SPACE
+        
         contentView.addSubview(inputField)
         
         setupConstraints()
     }
     
     func setupConstraints() {
+        
         inputField.snp.makeConstraints { (make) in
-            make.top.bottom.leading.trailing.equalToSuperview()
+            make.top.bottom.equalToSuperview()
+            make.leading.equalToSuperview().offset(SPACING_16)
+            make.trailing.equalToSuperview().offset(-SPACING_16)
         }
     }
     

@@ -28,7 +28,7 @@ class HeaderView: UICollectionReusableView {
         
         newTripButton = UIButton()
         newTripButton.setTitle("+ Start a new adventure", for: .normal)
-        newTripButton.titleLabel?.font = UIFont(name: "NewYorkMedium-Regular", size: 24)
+        newTripButton.titleLabel?.font = UIFont.H2
         newTripButton.setTitleColor(.SPACE, for: .normal)
         newTripButton.setBackgroundImage(UIImage(named: "notecard-button"), for: .normal)
         newTripButton.layer.cornerRadius = 12

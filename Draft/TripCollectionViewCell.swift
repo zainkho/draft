@@ -40,12 +40,12 @@ class TripCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(backgroundImage)
         
         nameLabel = UILabel()
-        nameLabel.font = UIFont(name: "NewYorkMedium-Bold", size: 24)
+        nameLabel.font = UIFont.H1
         nameLabel.textColor = .SPACE
         contentView.addSubview(nameLabel)
         
         lengthLabel = UILabel()
-        lengthLabel.font = UIFont(name: "NewYorkMedium-Regular", size: 16)
+        lengthLabel.font = UIFont.BODY
         lengthLabel.textColor = .OCEAN
         contentView.addSubview(lengthLabel)
         
@@ -55,7 +55,7 @@ class TripCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(attractionsIcon)
 
         attractionsLabel = UILabel()
-        attractionsLabel.font = UIFont(name: "NewYorkMedium-Regular", size: 16)
+        attractionsLabel.font = UIFont.BODY
         attractionsLabel.textColor = .OCEAN
         contentView.addSubview(attractionsLabel)
         
@@ -65,7 +65,7 @@ class TripCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(restaurantsIcon)
 
         restaurantsLabel = UILabel()
-        restaurantsLabel.font = UIFont(name: "NewYorkMedium-Regular", size: 16)
+        restaurantsLabel.font = UIFont.BODY
         restaurantsLabel.textColor = .OCEAN
         contentView.addSubview(restaurantsLabel)
         

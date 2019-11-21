@@ -52,18 +52,18 @@ class TripViewController: UIViewController {
         view.addSubview(headerImageView)
         
         emojiLabel = UILabel()
-        emojiLabel.font = UIFont(name: "NewYorkMedium-Bold", size: 34)
+        emojiLabel.font = UIFont.TITLE
         emojiLabel.text = trip.emoji
         view.addSubview(emojiLabel)
         
         titleLabel = UILabel()
-        titleLabel.font = UIFont(name: "NewYorkMedium-Bold", size: 34)
+        titleLabel.font = UIFont.TITLE
         titleLabel.text = trip.name
         titleLabel.textColor = SPACE
         view.addSubview(titleLabel)
         
         subtitleLabel = UILabel()
-        subtitleLabel.font = UIFont(name: "NewYorkMedium-Bold", size: 17)
+        subtitleLabel.font = UIFont.LABEL
         subtitleLabel.text = String(trip.length) + " days · " + trip.location
         subtitleLabel.textColor = OCEAN
         view.addSubview(subtitleLabel)

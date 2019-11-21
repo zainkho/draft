@@ -14,11 +14,18 @@ class EditTripViewController: UIViewController {
     var tableView: UITableView!
     var cells: [InputCell]!
     
+    var tripName: String
+    var location: String
+    var days: [Day]
+    
     let reuseIdentifier = "inputCellReuseIdentifiers"
     let cellHeight: CGFloat = 48
     
     init(trip: Trip, title: String) {
         self.trip = trip
+        self.tripName = trip.name
+        self.location = trip.location
+        self.days = [Day(num: 1, attractions: [], restaurants: [])]
         super.init(nibName: nil, bundle: nil)
         self.title = title
     }
@@ -34,7 +41,7 @@ class EditTripViewController: UIViewController {
         title = self.title
         let attrs = [
             NSAttributedString.Key.foregroundColor: UIColor.SPACE,
-            NSAttributedString.Key.font: UIFont(name: "NewYorkMedium-Bold", size: 17)!
+            NSAttributedString.Key.font: UIFont.LABEL!
         ]
         navigationController?.navigationBar.titleTextAttributes = attrs
         // Cancel button
@@ -46,17 +53,13 @@ class EditTripViewController: UIViewController {
         addButton.tintColor = .SPACE
         navigationItem.rightBarButtonItem = addButton
         
-        view.backgroundColor = .white
-        title = "New Trip"
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(dismissViewController))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add", style: .done, target: self, action: nil) //action nil rn bc unimplemented
-        
         
         let inputCell1 = InputCell(text: "hi")
         let inputCell2 = InputCell(text: "hi2")
         cells = [inputCell1, inputCell2]
         
         tableView = UITableView()
+        tableView.backgroundColor = .CREAM
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(InputTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
@@ -68,7 +71,8 @@ class EditTripViewController: UIViewController {
     
     func setupConstraints() {
         tableView.snp.makeConstraints { (make) in
-            make.top.leading.trailing.bottom.equalToSuperview()
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.topMargin).offset(SPACING_24)
+            make.leading.trailing.bottom.equalToSuperview()
         }
     }
     
@@ -97,6 +101,11 @@ extension EditTripViewController : UITableViewDelegate {
 }
 
 extension EditTripViewController : UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2 + days.count
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return cells.count
     }
