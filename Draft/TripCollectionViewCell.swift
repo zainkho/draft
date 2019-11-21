@@ -21,18 +21,8 @@ class TripCollectionViewCell: UICollectionViewCell {
     var restaurantsLabel: UILabel!
     var editButton: UIButton!
     
-    let SPACING_4: CGFloat = 4
-    let SPACING_6: CGFloat = 6
-    let SPACING_8: CGFloat = 8
-    let SPACING_12: CGFloat = 12
-    let SPACING_16: CGFloat = 16
-    let SPACING_24: CGFloat = 24
-    let SPACING_48: CGFloat = 48
     let HEADER_TEXT_HEIGHT: CGFloat = 29
     let BODY_TEXT_HEIGHT: CGFloat = 19
-    
-    var SPACE = UIColor(red: 27/255, green: 31/255, blue: 35/255, alpha: 1.0)
-    var OCEAN = UIColor(red: 68/255, green: 77/255, blue: 86/255, alpha: 1.0)
     
     var presentDelegate: PresentEditCardDelegate?
     
@@ -51,12 +41,12 @@ class TripCollectionViewCell: UICollectionViewCell {
         
         nameLabel = UILabel()
         nameLabel.font = UIFont(name: "NewYorkMedium-Bold", size: 24)
-        nameLabel.textColor = SPACE
+        nameLabel.textColor = .SPACE
         contentView.addSubview(nameLabel)
         
         lengthLabel = UILabel()
         lengthLabel.font = UIFont(name: "NewYorkMedium-Regular", size: 16)
-        lengthLabel.textColor = OCEAN
+        lengthLabel.textColor = .OCEAN
         contentView.addSubview(lengthLabel)
         
         attractionsIcon = UIImageView()
@@ -66,7 +56,7 @@ class TripCollectionViewCell: UICollectionViewCell {
 
         attractionsLabel = UILabel()
         attractionsLabel.font = UIFont(name: "NewYorkMedium-Regular", size: 16)
-        attractionsLabel.textColor = OCEAN
+        attractionsLabel.textColor = .OCEAN
         contentView.addSubview(attractionsLabel)
         
         restaurantsIcon = UIImageView()
@@ -76,7 +66,7 @@ class TripCollectionViewCell: UICollectionViewCell {
 
         restaurantsLabel = UILabel()
         restaurantsLabel.font = UIFont(name: "NewYorkMedium-Regular", size: 16)
-        restaurantsLabel.textColor = OCEAN
+        restaurantsLabel.textColor = .OCEAN
         contentView.addSubview(restaurantsLabel)
         
         editButton = UIButton()

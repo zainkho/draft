@@ -20,11 +20,6 @@ class TripViewController: UIViewController {
     var titleLabel: UILabel!
     var subtitleLabel: UILabel!
     
-    let SPACING_4: CGFloat = 4
-    let SPACING_8: CGFloat = 8
-    let SPACING_12: CGFloat = 12
-    let SPACING_16: CGFloat = 16
-    let SPACING_24: CGFloat = 24
     let TITLE_TEXT_HEIGHT: CGFloat = 41
     let HEADER_TEXT_HEIGHT: CGFloat = 29
     let BODY_TEXT_HEIGHT: CGFloat = 19

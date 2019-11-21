@@ -13,14 +13,8 @@ class HeaderView: UICollectionReusableView {
     var draftImageView: UIImageView!
     var newTripButton: UIButton!
     
-    let SPACING_8: CGFloat = 8
-    let SPACING_12: CGFloat = 12
-    let SPACING_16: CGFloat = 16
-    let SPACING_24: CGFloat = 24
     let LOGO_HEIGHT: CGFloat = 80
     let LOGO_WIDTH: CGFloat = 209
-    
-    var SPACE = UIColor(red: 27/255, green: 31/255, blue: 35/255, alpha: 1.0)
     
     var presentDelegate: PresentEditCardDelegate?
     
@@ -35,7 +29,7 @@ class HeaderView: UICollectionReusableView {
         newTripButton = UIButton()
         newTripButton.setTitle("+ Start a new adventure", for: .normal)
         newTripButton.titleLabel?.font = UIFont(name: "NewYorkMedium-Regular", size: 24)
-        newTripButton.setTitleColor(SPACE, for: .normal)
+        newTripButton.setTitleColor(.SPACE, for: .normal)
         newTripButton.setBackgroundImage(UIImage(named: "notecard-button"), for: .normal)
         newTripButton.layer.cornerRadius = 12
         newTripButton.layer.shadowOpacity = 0.12

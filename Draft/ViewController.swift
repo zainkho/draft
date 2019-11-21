@@ -42,17 +42,10 @@ class ViewController: UIViewController {
     var futureTrips: [Trip]!
     var trips: [Trip]!
     
-    let SPACING_8: CGFloat = 8
-    let SPACING_12: CGFloat = 12
-    let SPACING_16: CGFloat = 16
-    let SPACING_24: CGFloat = 24
     let HEADER_HEIGHT: CGFloat = 168
     let CELL_HEIGHT: CGFloat = 168
     let GRADIENT_HEIGHT: CGFloat = 96
     let SPACING_168: CGFloat = 168
-    
-    let BREEZE = UIColor(red: 239/255, green: 246/255, blue: 255/255, alpha: 1.0)
-    let CLEAR = UIColor(red: 239/255, green: 246/255, blue: 255/255, alpha: 0.0)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,19 +53,19 @@ class ViewController: UIViewController {
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.isTranslucent = true
         
-        view.backgroundColor = BREEZE
+        view.backgroundColor = .BREEZE
         
         // headerGradient
         headerGradientView = UIView()
         headerGradient = CAGradientLayer()
-        headerGradient.colors = [BREEZE.cgColor, CLEAR.cgColor]
+        headerGradient.colors = [UIColor.BREEZE.cgColor, UIColor.CLEAR.cgColor]
         headerGradientView.layer.insertSublayer(headerGradient, at: 0)
         view.addSubview(headerGradientView)
         
         // footerGradient
         footerGradientView = UIView()
         footerGradient = CAGradientLayer()
-        footerGradient.colors = [CLEAR.cgColor, BREEZE.cgColor]
+        footerGradient.colors = [UIColor.CLEAR.cgColor, UIColor.BREEZE.cgColor]
         footerGradientView.layer.insertSublayer(footerGradient, at: 0)
         view.addSubview(footerGradientView)
         
@@ -212,7 +205,7 @@ extension ViewController: UICollectionViewDelegateFlowLayout {
         
         // Back button
         let backButton = UIBarButtonItem(title: "Back", style: .done, target: self, action: #selector(backButtonPushed))
-        backButton.tintColor = BREEZE
+        backButton.tintColor = .BREEZE
         navigationItem.backBarButtonItem = backButton
         
         navigationController?.pushViewController(viewController, animated: true)
