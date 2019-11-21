@@ -19,7 +19,7 @@ class EditTripViewController: UIViewController {
     var days: [Day]
     
     let reuseIdentifier = "inputCellReuseIdentifiers"
-    let cellHeight: CGFloat = 48
+    let CELL_HEIGHT: CGFloat = 48
     
     init(trip: Trip, title: String) {
         self.trip = trip
@@ -56,10 +56,11 @@ class EditTripViewController: UIViewController {
         
         let inputCell1 = InputCell(text: "hi")
         let inputCell2 = InputCell(text: "hi2")
-        cells = [inputCell1, inputCell2]
+        cells = [inputCell1, inputCell2, inputCell1, inputCell2, inputCell1, inputCell2]
         
         tableView = UITableView()
         tableView.backgroundColor = .CREAM
+        tableView.separatorColor = .RAIN
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(InputTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
@@ -69,9 +70,9 @@ class EditTripViewController: UIViewController {
     }
     
     func setupConstraints() {
+        
         tableView.snp.makeConstraints { (make) in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.topMargin).offset(SPACING_24)
-            make.leading.trailing.bottom.equalToSuperview()
+            make.top.leading.trailing.bottom.equalToSuperview()
         }
     }
     
@@ -94,26 +95,42 @@ class EditTripViewController: UIViewController {
 }
 
 extension EditTripViewController : UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return cellHeight
+        return CELL_HEIGHT
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: CELL_HEIGHT))
     }
 }
 
 extension EditTripViewController : UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2 + days.count
+        return 1 + days.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        if section == 0 {
+            return 2
+        }
+        else {
+            return 2 + trip.days[section - 1].attractions.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! InputTableViewCell
-        let inputCell = cells[indexPath.row]
-        cell.configure(for: inputCell)
         cell.selectionStyle = .none
+        let inputCell = cells[indexPath.row]
+        
+        if indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1 {
+            cell.configure(for: inputCell, section: indexPath.section, index: -1, trip: trip)
+        }
+        else {
+            cell.configure(for: inputCell, section: indexPath.section, index: indexPath.row, trip: trip)
+        }
         return cell
     }
 }

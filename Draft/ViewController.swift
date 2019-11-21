@@ -73,8 +73,8 @@ class ViewController: UIViewController {
         let day2 = Day(num: 2, attractions: ["uh","uhh"], restaurants: ["yum", "tasty"])
         let nyc = Trip(emoji: randomEmoji(), name:"NYC Spring Break", location: "nyc", length: 3, days: [day1, day2] )
         pastTrips = [nyc, nyc, nyc, nyc, nyc, nyc, nyc, nyc]
-//        trips = pastTrips
-        trips = []
+        trips = pastTrips
+//        trips = []
         
         // Set up tripsLayout
         let tripsLayout = UICollectionViewFlowLayout()
