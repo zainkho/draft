@@ -18,10 +18,6 @@ protocol EditTripDelegate: class {
     
 }
 
-protocol PushTripCardDelegate: class {
-    func pushTripViewController()
-}
-
 protocol PresentEditCardDelegate: class {
     func presentEditViewController(trip: Trip, title: String)
 }
@@ -217,13 +213,6 @@ extension ViewController: UICollectionViewDelegateFlowLayout {
         
         let w = collectionView.frame.width - SPACING_16*2
         return CGSize(width: w, height: HEADER_HEIGHT)
-    }
-}
-
-extension ViewController : PushTripCardDelegate {
-    func pushTripViewController() {
-//        let viewController = TripViewController()
-//        present(viewController, animated: true, completion: nil)
     }
 }
 

@@ -75,12 +75,12 @@ class EditTripViewController: UIViewController {
                 print(a)
                 inputCells.append(InputCell(text: a, type: .input))
             }
-            inputCells.append(InputCell(text: "Add Attraction", type: .button))
+            inputCells.append(InputCell(text: "+ Add Attraction", type: .button))
             for r in day.restaurants {
                 print(r)
                 inputCells.append(InputCell(text: r, type: .input))
             }
-            inputCells.append(InputCell(text: "Add Restaurant", type: .button))
+            inputCells.append(InputCell(text: "+ Add Restaurant", type: .button))
         }
         
 //        let inputCell1 = InputCell(text: "hi", type: .input)
@@ -161,7 +161,7 @@ extension EditTripViewController : UITableViewDataSource {
             return 2
         }
         else {
-            return 2 + trip.days[section - 1].attractions.count + 1 + trip.days[section - 1].restaurants.count + 1
+            return 2 + trip.days[section - 1].attractions.count + trip.days[section - 1].restaurants.count
         }
     }
     

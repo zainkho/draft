@@ -11,9 +11,9 @@ import SnapKit
 class InputTableViewCell: UITableViewCell {
 
     var inputField: UITextField!
-    var inputFieldText: String!
     var topSeparator: UIView!
     var bottomSeparator: UIView!
+    var cellType: cellType!
     
     let attrs = [
         NSAttributedString.Key.foregroundColor: UIColor.RAIN,
@@ -27,9 +27,8 @@ class InputTableViewCell: UITableViewCell {
         
         inputField = UITextField()
         inputField.backgroundColor = .CLOUD
-//        inputField.attributedPlaceholder = NSAttributedString(string: inputFieldText, attributes: attrs)
         inputField.font = UIFont.LABEL
-        inputField.text = inputFieldText
+
         inputField.textColor = .SPACE
         
         contentView.addSubview(inputField)
@@ -50,24 +49,41 @@ class InputTableViewCell: UITableViewCell {
         
         // Logic for first section cells
         if section == 0 && index == 0 {
+            self.cellType = .input
             self.inputField.text = trip.name == "" ? "New trip": trip.name
         }
         else if section == 0 {
-            self.inputField.attributedPlaceholder = NSAttributedString(string: "Location", attributes: attrs)
+            self.cellType = .input
+            self.inputField.attributedPlaceholder =
+                trip.location == "" ? NSAttributedString(string: "Location", attributes: attrs) : NSAttributedString(string: trip.location, attributes: attrs)
         }
-        else if index == 0 {
+        else {
+            self.cellType = cell.type
+            if cell.type == .button {
+                self.inputField.text = cell.text
+            }
+            else {
+                if cell.text != "" {
+                    self.inputField.text = cell.text
+                }
+                else {
+                    self.inputField.attributedPlaceholder = NSAttributedString(string: "Placeholder", attributes: attrs)
+                }
+            }
+        }
+        
+        
+        if index == 0 {
             topSeparator = UIView(frame: CGRect(x: 0, y: 0, width: contentView.frame.width, height: 0.25))
             topSeparator.backgroundColor = .RAIN
             contentView.addSubview(topSeparator)
         }
-        else if index == -1 {
+        if index == -1 {
             bottomSeparator = UIView(frame: CGRect(x: 0, y: contentView.frame.height - 0.25, width: contentView.frame.width, height: 0.25))
             bottomSeparator.backgroundColor = .RAIN
             contentView.addSubview(bottomSeparator)
         }
-        else {
-            self.inputField.attributedPlaceholder = NSAttributedString(string: cell.text, attributes: attrs)
-        }
+
     }
     
     required init?(coder aDecoder: NSCoder) {
