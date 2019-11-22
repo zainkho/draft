@@ -20,6 +20,7 @@ class EditTripViewController: UIViewController {
     
     let reuseIdentifier = "inputCellReuseIdentifiers"
     let CELL_HEIGHT: CGFloat = 48
+    let HEADER_LABEL_HEIGHT: CGFloat = 68
     
     init(trip: Trip, title: String) {
         self.trip = trip
@@ -101,7 +102,12 @@ extension EditTripViewController : UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: CELL_HEIGHT))
+        if section == 0 {
+            return UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: CELL_HEIGHT))
+        }
+        else {
+            return HeaderLabel(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: HEADER_LABEL_HEIGHT))
+        }
     }
 }
 
