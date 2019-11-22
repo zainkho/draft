@@ -27,7 +27,7 @@ class InputTableViewCell: UITableViewCell {
         
         inputField = UITextField()
         inputField.backgroundColor = .CLOUD
-        inputField.attributedPlaceholder = NSAttributedString(string: "Empire State Building", attributes: attrs)
+//        inputField.attributedPlaceholder = NSAttributedString(string: inputFieldText, attributes: attrs)
         inputField.font = UIFont.LABEL
         inputField.text = inputFieldText
         inputField.textColor = .SPACE
@@ -55,18 +55,18 @@ class InputTableViewCell: UITableViewCell {
         else if section == 0 {
             self.inputField.attributedPlaceholder = NSAttributedString(string: "Location", attributes: attrs)
         }
-        
-        
-        if index == 0 {
+        else if index == 0 {
             topSeparator = UIView(frame: CGRect(x: 0, y: 0, width: contentView.frame.width, height: 0.25))
             topSeparator.backgroundColor = .RAIN
             contentView.addSubview(topSeparator)
         }
-        
-        if index == -1 {
+        else if index == -1 {
             bottomSeparator = UIView(frame: CGRect(x: 0, y: contentView.frame.height - 0.25, width: contentView.frame.width, height: 0.25))
             bottomSeparator.backgroundColor = .RAIN
             contentView.addSubview(bottomSeparator)
+        }
+        else {
+            self.inputField.attributedPlaceholder = NSAttributedString(string: cell.text, attributes: attrs)
         }
     }
     

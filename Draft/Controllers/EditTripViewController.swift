@@ -55,30 +55,39 @@ class EditTripViewController: UIViewController {
         navigationItem.rightBarButtonItem = addButton
         
         
-        let days = trip.days
-        var allRestaurants = [String]()
-        var allAttractions = [String]()
-        for day in days {
-            var restaurants = [String]()
-            var attractions = [String]()
-            for restaurant in day.restaurants {
-                restaurants.append(restaurant)
-            }
-            for attraction in day.attractions {
-                attractions.append(attraction)
-            }
-        }
         
+//        var allRestaurants = [String]()
+//        var allAttractions = [String]()
+//        for day in days {
+//            var restaurants = [String]()
+//            var attractions = [String]()
+//            for restaurant in day.restaurants {
+//                restaurants.append(restaurant)
+//            }
+//            for attraction in day.attractions {
+//                attractions.append(attraction)
+//            }
+//        }
+        let days = trip.days
         var inputCells = [InputCell]()
         for day in days {
-            for r in day.restaurants {
-                inputCells.append(InputCell(text: r))
+            for a in day.attractions {
+                print(a)
+                inputCells.append(InputCell(text: a, type: .input))
             }
+            inputCells.append(InputCell(text: "Add Attraction", type: .button))
+            for r in day.restaurants {
+                print(r)
+                inputCells.append(InputCell(text: r, type: .input))
+            }
+            inputCells.append(InputCell(text: "Add Restaurant", type: .button))
         }
         
-        let inputCell1 = InputCell(text: "hi")
-        let inputCell2 = InputCell(text: "hi2")
-        cells = [inputCell1, inputCell2, inputCell1, inputCell2, inputCell1, inputCell2]
+//        let inputCell1 = InputCell(text: "hi", type: .input)
+//        let inputCell2 = InputCell(text: "hi2", type: .input)
+//        cells = [inputCell1, inputCell2, inputCell1, inputCell2, inputCell1, inputCell2]
+        cells = inputCells
+        print(cells)
         
         // Set up tableView
         tableView = UITableView()
@@ -93,7 +102,6 @@ class EditTripViewController: UIViewController {
     }
     
     func setupConstraints() {
-        
         tableView.snp.makeConstraints { (make) in
             make.top.leading.trailing.bottom.equalToSuperview()
         }
@@ -153,7 +161,7 @@ extension EditTripViewController : UITableViewDataSource {
             return 2
         }
         else {
-            return 2 + trip.days[section - 1].attractions.count
+            return 2 + trip.days[section - 1].attractions.count + 1 + trip.days[section - 1].restaurants.count + 1
         }
     }
     
