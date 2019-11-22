@@ -33,7 +33,7 @@ class ViewController: UIViewController {
     var headerGradient: CAGradientLayer!
     var footerGradientView: UIView!
     var footerGradient: CAGradientLayer!
-    var emptyState: EmptyState!
+    var emptyState: EmptyStateView!
     
     let tripCellReuseIdentifier = "tripCellReuseIdentifier"
     let headerViewReuseIdentifier = "filterViewReuseIdentifier"
@@ -101,7 +101,7 @@ class ViewController: UIViewController {
         view.bringSubviewToFront(footerGradientView)
         
         // emptyState
-        emptyState = EmptyState()
+        emptyState = EmptyStateView()
         emptyState.presentDelegate = self
         view.addSubview(emptyState)
         if trips.isEmpty {

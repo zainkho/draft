@@ -55,10 +55,32 @@ class EditTripViewController: UIViewController {
         navigationItem.rightBarButtonItem = addButton
         
         
+        let days = trip.days
+        var allRestaurants = [String]()
+        var allAttractions = [String]()
+        for day in days {
+            var restaurants = [String]()
+            var attractions = [String]()
+            for restaurant in day.restaurants {
+                restaurants.append(restaurant)
+            }
+            for attraction in day.attractions {
+                attractions.append(attraction)
+            }
+        }
+        
+        var inputCells = [InputCell]()
+        for day in days {
+            for r in day.restaurants {
+                inputCells.append(InputCell(text: r))
+            }
+        }
+        
         let inputCell1 = InputCell(text: "hi")
         let inputCell2 = InputCell(text: "hi2")
         cells = [inputCell1, inputCell2, inputCell1, inputCell2, inputCell1, inputCell2]
         
+        // Set up tableView
         tableView = UITableView()
         tableView.backgroundColor = .CREAM
         tableView.separatorColor = .RAIN
@@ -106,7 +128,16 @@ extension EditTripViewController : UITableViewDelegate {
             return UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: CELL_HEIGHT))
         }
         else {
-            return HeaderLabel(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: HEADER_LABEL_HEIGHT))
+            return HeaderLabelView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: HEADER_LABEL_HEIGHT))
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 0 {
+            return CELL_HEIGHT
+        }
+        else {
+            return HEADER_LABEL_HEIGHT
         }
     }
 }

@@ -8,14 +8,21 @@
 import UIKit
 import SnapKit
 
-class HeaderLabel: UIView {
+class HeaderLabelView: UIView {
 
     var headerLabel: UILabel!
-
+    var dayNum: Int!
+    
+    var LABEL_HEIGHT: CGFloat = 29
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         headerLabel = UILabel()
+        headerLabel.font = UIFont.H1
+        headerLabel.text = "test"
+        headerLabel.textColor = .SPACE
+        addSubview(headerLabel)
         
         setupConstraints()
     }
@@ -23,7 +30,10 @@ class HeaderLabel: UIView {
     func setupConstraints() {
         
         headerLabel.snp.makeConstraints { (make) in
-            
+            make.bottom.equalToSuperview().offset(-SPACING_12)
+            make.leading.equalToSuperview().offset(SPACING_16)
+            make.trailing.equalToSuperview().offset(-SPACING_16)
+            make.height.equalTo(LABEL_HEIGHT)
         }
     }
     

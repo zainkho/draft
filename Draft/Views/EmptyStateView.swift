@@ -1,5 +1,5 @@
 //
-//  EmptyState.swift
+//  EmptyStateView.swift
 //  Draft
 //
 //  Created by Zain Khoja on 11/19/19.
@@ -7,7 +7,7 @@
 import UIKit
 import SnapKit
 
-class EmptyState: UIView {
+class EmptyStateView: UIView {
     
     var flyingIllustration: UIImageView!
     var taglineLabel: UILabel!
@@ -54,6 +54,7 @@ class EmptyState: UIView {
     }
     
     func setupConstraints() {
+
         flyingIllustration.snp.makeConstraints { (make) in
             make.top.equalTo(ILLUSTRATION_SPACING)
             make.leading.trailing.equalToSuperview()
@@ -62,7 +63,7 @@ class EmptyState: UIView {
         
         taglineLabel.snp.makeConstraints { (make) in
             make.top.equalTo(flyingIllustration.snp.bottom)
-            make.width.equalToSuperview()
+            make.leading.trailing.equalToSuperview()
         }
         
         startButton.snp.makeConstraints { (make) in
