@@ -33,7 +33,7 @@ class ViewController: UIViewController {
     var headerGradient: CAGradientLayer!
     var footerGradientView: UIView!
     var footerGradient: CAGradientLayer!
-    var emptyState: EmptyState!
+    var emptyState: EmptyStateView!
     
     let tripCellReuseIdentifier = "tripCellReuseIdentifier"
     let headerViewReuseIdentifier = "filterViewReuseIdentifier"
@@ -73,8 +73,8 @@ class ViewController: UIViewController {
         let day2 = Day(num: 2, attractions: ["uh","uhh"], restaurants: ["yum", "tasty"])
         let nyc = Trip(emoji: randomEmoji(), name:"NYC Spring Break", location: "nyc", length: 3, days: [day1, day2] )
         pastTrips = [nyc, nyc, nyc, nyc, nyc, nyc, nyc, nyc]
-//        trips = pastTrips
-        trips = []
+        trips = pastTrips
+//        trips = []
         
         // Set up tripsLayout
         let tripsLayout = UICollectionViewFlowLayout()
@@ -101,7 +101,7 @@ class ViewController: UIViewController {
         view.bringSubviewToFront(footerGradientView)
         
         // emptyState
-        emptyState = EmptyState()
+        emptyState = EmptyStateView()
         emptyState.presentDelegate = self
         view.addSubview(emptyState)
         if trips.isEmpty {

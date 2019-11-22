@@ -23,7 +23,8 @@
 		9279F8F823848F0600143DAC /* NewYorkMedium-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9279F8F623848F0600143DAC /* NewYorkMedium-Regular.otf */; };
 		9279F8FC2384A70400143DAC /* EditTripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9279F8FB2384A70400143DAC /* EditTripViewController.swift */; };
 		9279F8FE2384A8BF00143DAC /* TripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9279F8FD2384A8BF00143DAC /* TripViewController.swift */; };
-		929DA2B22385E57C00B4CD68 /* EmptyState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929DA2B12385E57C00B4CD68 /* EmptyState.swift */; };
+		929B3781238793F60050B46A /* HeaderLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929B3780238793F60050B46A /* HeaderLabelView.swift */; };
+		929DA2B22385E57C00B4CD68 /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929DA2B12385E57C00B4CD68 /* EmptyStateView.swift */; };
 		929DA2B42385E76C00B4CD68 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929DA2B32385E76C00B4CD68 /* Utils.swift */; };
 /* End PBXBuildFile section */
 
@@ -46,7 +47,8 @@
 		9279F8F623848F0600143DAC /* NewYorkMedium-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NewYorkMedium-Regular.otf"; sourceTree = "<group>"; };
 		9279F8FB2384A70400143DAC /* EditTripViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTripViewController.swift; sourceTree = "<group>"; };
 		9279F8FD2384A8BF00143DAC /* TripViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripViewController.swift; sourceTree = "<group>"; };
-		929DA2B12385E57C00B4CD68 /* EmptyState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyState.swift; sourceTree = "<group>"; };
+		929B3780238793F60050B46A /* HeaderLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderLabelView.swift; sourceTree = "<group>"; };
+		929DA2B12385E57C00B4CD68 /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
 		929DA2B32385E76C00B4CD68 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		C89E6EEE7B250728F530A48B /* Pods_Draft.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Draft.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF7342D4CEAAB2C0D4B29A96 /* Pods-Draft.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Draft.release.xcconfig"; path = "Target Support Files/Pods-Draft/Pods-Draft.release.xcconfig"; sourceTree = "<group>"; };
@@ -86,17 +88,11 @@
 			isa = PBXGroup;
 			children = (
 				2F7AC74923805CB600A7FC3A /* AppDelegate.swift */,
-				2F7AC74B23805CB600A7FC3A /* ViewController.swift */,
-				2F7AC75D238071AE00A7FC3A /* TripCollectionViewCell.swift */,
-				921649B52383A340000CADF7 /* HeaderView.swift */,
-				9279F8FB2384A70400143DAC /* EditTripViewController.swift */,
-				2F18FEE12384D9E800B9239A /* InputTableViewCell.swift */,
-				9279F8FD2384A8BF00143DAC /* TripViewController.swift */,
-				929DA2B12385E57C00B4CD68 /* EmptyState.swift */,
-				2F7AC75B2380656D00A7FC3A /* Trip.swift */,
-				2F796F74238324AA00D143FE /* Day.swift */,
+				9251195F23878E17008BDB13 /* Controllers */,
+				9251196023878E25008BDB13 /* Cells */,
+				9251195E23878DE3008BDB13 /* Views */,
+				9251195D23878DD8008BDB13 /* Models */,
 				929DA2B32385E76C00B4CD68 /* Utils.swift */,
-				2F18FEE52384DC1800B9239A /* InputCell.swift */,
 				2F7AC75023805CB900A7FC3A /* Assets.xcassets */,
 				2F7AC75223805CB900A7FC3A /* LaunchScreen.storyboard */,
 				2F7AC75523805CB900A7FC3A /* Info.plist */,
@@ -112,6 +108,45 @@
 				C89E6EEE7B250728F530A48B /* Pods_Draft.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9251195D23878DD8008BDB13 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				2F7AC75B2380656D00A7FC3A /* Trip.swift */,
+				2F796F74238324AA00D143FE /* Day.swift */,
+				2F18FEE52384DC1800B9239A /* InputCell.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		9251195E23878DE3008BDB13 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				929DA2B12385E57C00B4CD68 /* EmptyStateView.swift */,
+				929B3780238793F60050B46A /* HeaderLabelView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		9251195F23878E17008BDB13 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				2F7AC74B23805CB600A7FC3A /* ViewController.swift */,
+				9279F8FB2384A70400143DAC /* EditTripViewController.swift */,
+				9279F8FD2384A8BF00143DAC /* TripViewController.swift */,
+				921649B52383A340000CADF7 /* HeaderView.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		9251196023878E25008BDB13 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				2F7AC75D238071AE00A7FC3A /* TripCollectionViewCell.swift */,
+				2F18FEE12384D9E800B9239A /* InputTableViewCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		9279F8F423848EFC00143DAC /* fonts */ = {
@@ -257,7 +292,8 @@
 				2F796F75238324AA00D143FE /* Day.swift in Sources */,
 				929DA2B42385E76C00B4CD68 /* Utils.swift in Sources */,
 				2F7AC74A23805CB600A7FC3A /* AppDelegate.swift in Sources */,
-				929DA2B22385E57C00B4CD68 /* EmptyState.swift in Sources */,
+				929DA2B22385E57C00B4CD68 /* EmptyStateView.swift in Sources */,
+				929B3781238793F60050B46A /* HeaderLabelView.swift in Sources */,
 				9279F8FC2384A70400143DAC /* EditTripViewController.swift in Sources */,
 				2F18FEE22384D9E800B9239A /* InputTableViewCell.swift in Sources */,
 				921649B62383A340000CADF7 /* HeaderView.swift in Sources */,

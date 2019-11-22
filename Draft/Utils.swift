@@ -33,3 +33,11 @@ extension UIColor {
     static let CLOUD = UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 1.0)
     
 }
+
+extension UIFont {
+    static let TITLE = UIFont(name: "NewYorkMedium-Bold", size: 34)
+    static let H1 = UIFont(name: "NewYorkMedium-Bold", size: 24)
+    static let H2 = UIFont(name: "NewYorkMedium-Regular", size: 24)
+    static let LABEL = UIFont(name: "NewYorkMedium-Bold", size: 17)
+    static let BODY = UIFont(name: "NewYorkMedium-Regular", size: 16)
+}
