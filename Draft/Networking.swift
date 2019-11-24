@@ -10,6 +10,7 @@ import Foundation
 final class Networking {
 
     enum Error: Swift.Error {
+
         case backendError(String)
 
         var localizedDescription: String {
@@ -61,6 +62,7 @@ final class Networking {
 
         let location: String?
         let imageUrl: URL?
+        let imageCredits: String?
 
         init(id: Int, name: String, entries: [Entry], location: String) {
             self.id = id
@@ -68,6 +70,7 @@ final class Networking {
             self.entries = entries
             self.location = location
             self.imageUrl = nil
+            self.imageCredits = nil
         }
 
         init?(json: [String: Any]) {
@@ -83,6 +86,7 @@ final class Networking {
 
             self.location = json["location"] as? String
             self.imageUrl = (json["image_url"] as? String).flatMap { URL(string: $0) }
+            self.imageCredits = json["image_credits"] as? String
         }
 
     }
