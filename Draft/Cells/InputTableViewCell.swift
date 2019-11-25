@@ -59,16 +59,11 @@ class InputTableViewCell: UITableViewCell {
         }
         else {
             self.cellType = cell.type
-            if cell.type == .button {
+            if cell.text != "" {
                 self.inputField.text = cell.text
             }
             else {
-                if cell.text != "" {
-                    self.inputField.text = cell.text
-                }
-                else {
-                    self.inputField.attributedPlaceholder = NSAttributedString(string: "Placeholder", attributes: attrs)
-                }
+                self.inputField.attributedPlaceholder = NSAttributedString(string: "Placeholder", attributes: attrs)
             }
         }
         
