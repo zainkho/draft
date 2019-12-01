@@ -12,13 +12,15 @@ class EditTripViewController: UIViewController {
     
     var trip: Trip
     var tableView: UITableView!
-    var cells: [InputCell]!
+//    var cells: [InputCell]!
+    var cells: [[InputCell]]!
     
     var tripName: String
     var location: String
     var days: [Day]
     
-    let reuseIdentifier = "inputCellReuseIdentifiers"
+    let inputReuseIdentifier = "inputCellReuseIdentifiers"
+    let buttonReuseIdentifier = "buttonCellReuseIdentifiers"
     let CELL_HEIGHT: CGFloat = 48
     let HEADER_LABEL_HEIGHT: CGFloat = 68
     
@@ -56,38 +58,45 @@ class EditTripViewController: UIViewController {
         
         
         
-//        var allRestaurants = [String]()
-//        var allAttractions = [String]()
-//        for day in days {
-//            var restaurants = [String]()
-//            var attractions = [String]()
-//            for restaurant in day.restaurants {
-//                restaurants.append(restaurant)
-//            }
-//            for attraction in day.attractions {
-//                attractions.append(attraction)
-//            }
-//        }
+        var inputCells = [[InputCell]]()
         let days = trip.days
-        var inputCells = [InputCell]()
         for day in days {
+            var dayArray = [InputCell]()
             for a in day.attractions {
                 print(a)
-                inputCells.append(InputCell(text: a, type: .input))
+                dayArray.append(InputCell(text: a, type: .input))
             }
-            inputCells.append(InputCell(text: "+ Add Attraction", type: .button))
+            dayArray.append(InputCell(text: "+ Add Attraction", type: .button))
             for r in day.restaurants {
                 print(r)
-                inputCells.append(InputCell(text: r, type: .input))
+                dayArray.append(InputCell(text: r, type: .input))
             }
-            inputCells.append(InputCell(text: "+ Add Restaurant", type: .button))
+            dayArray.append(InputCell(text: "+ Add Restaurant", type: .button))
+            inputCells.append(dayArray)
         }
+        cells = inputCells
+        print(cells)
+        
+//        let days = trip.days
+//        var inputCells = [InputCell]()
+//        for day in days {
+//            for a in day.attractions {
+//                print(a)
+//                inputCells.append(InputCell(text: a, type: .input))
+//            }
+//            inputCells.append(InputCell(text: "+ Add Attraction", type: .button))
+//            for r in day.restaurants {
+//                print(r)
+//                inputCells.append(InputCell(text: r, type: .input))
+//            }
+//            inputCells.append(InputCell(text: "+ Add Restaurant", type: .button))
+//        }
         
 //        let inputCell1 = InputCell(text: "hi", type: .input)
 //        let inputCell2 = InputCell(text: "hi2", type: .input)
 //        cells = [inputCell1, inputCell2, inputCell1, inputCell2, inputCell1, inputCell2]
-        cells = inputCells
-        print(cells)
+//        cells = inputCells
+//        print(cells)
         
         // Set up tableView
         tableView = UITableView()
@@ -95,7 +104,8 @@ class EditTripViewController: UIViewController {
         tableView.separatorColor = .RAIN
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.register(InputTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
+        tableView.register(InputTableViewCell.self, forCellReuseIdentifier: inputReuseIdentifier)
+        tableView.register(ButtonTableViewCell.self, forCellReuseIdentifier: buttonReuseIdentifier)
         view.addSubview(tableView)
 
         setupConstraints() 
@@ -148,6 +158,10 @@ extension EditTripViewController : UITableViewDelegate {
             return HEADER_LABEL_HEIGHT
         }
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+    }
 }
 
 extension EditTripViewController : UITableViewDataSource {
@@ -166,16 +180,49 @@ extension EditTripViewController : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! InputTableViewCell
-        cell.selectionStyle = .none
-        let inputCell = cells[indexPath.row]
-        
-        if indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1 {
-            cell.configure(for: inputCell, section: indexPath.section, index: -1, trip: trip)
+        let inputCell = cells[indexPath.section][indexPath.row]
+        if inputCell.type == .input {
+            let cell = tableView.dequeueReusableCell(withIdentifier: inputReuseIdentifier, for: indexPath) as! InputTableViewCell
+            cell.selectionStyle = .none
+            //        let inputCell = cells[indexPath.row]
+            
+            if indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1 {
+                //            let inputCell = cells[indexPath.section][indexPath.row]
+                cell.configure(for: inputCell, section: indexPath.section, index: -1, trip: trip)
+            }
+            else {
+                //            let inputCell = cells[indexPath.section][indexPath.row]
+                cell.configure(for: inputCell, section: indexPath.section, index: indexPath.row, trip: trip)
+            }
+            return cell
         }
         else {
-            cell.configure(for: inputCell, section: indexPath.section, index: indexPath.row, trip: trip)
+            let cell = tableView.dequeueReusableCell(withIdentifier: buttonReuseIdentifier, for: indexPath) as! ButtonTableViewCell
+            cell.selectionStyle = .none
+            //        let inputCell = cells[indexPath.row]
+            
+            if indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1 {
+                //            let inputCell = cells[indexPath.section][indexPath.row]
+                cell.configure(for: inputCell, section: indexPath.section, index: -1, trip: trip)
+            }
+            else {
+                //            let inputCell = cells[indexPath.section][indexPath.row]
+                cell.configure(for: inputCell, section: indexPath.section, index: indexPath.row, trip: trip)
+            }
+            return cell
+
         }
-        return cell
+//        cell.selectionStyle = .none
+////        let inputCell = cells[indexPath.row]
+//
+//        if indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1 {
+////            let inputCell = cells[indexPath.section][indexPath.row]
+//            cell.configure(for: inputCell, section: indexPath.section, index: -1, trip: trip)
+//        }
+//        else {
+////            let inputCell = cells[indexPath.section][indexPath.row]
+//            cell.configure(for: inputCell, section: indexPath.section, index: indexPath.row, trip: trip)
+//        }
+//        return cell
     }
 }

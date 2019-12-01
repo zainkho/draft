@@ -11,6 +11,7 @@ import SnapKit
 class InputTableViewCell: UITableViewCell {
 
     var inputField: UITextField!
+    var buttonLabel: UILabel?
     var topSeparator: UIView!
     var bottomSeparator: UIView!
     var cellType: cellType!
@@ -28,17 +29,29 @@ class InputTableViewCell: UITableViewCell {
         inputField = UITextField()
         inputField.backgroundColor = .CLOUD
         inputField.font = UIFont.LABEL
-
         inputField.textColor = .SPACE
-        
         contentView.addSubview(inputField)
         
+        if var label = buttonLabel {
+            label = UILabel()
+            label.backgroundColor = .CLOUD
+            label.font = UIFont.LABEL
+            label.textColor = .SPACE
+            contentView.addSubview(label)
+        }
+
+
         setupConstraints()
     }
     
     func setupConstraints() {
         
         inputField.snp.makeConstraints { (make) in
+            make.top.bottom.equalToSuperview()
+            make.leading.equalToSuperview().offset(SPACING_16)
+            make.trailing.equalToSuperview().offset(-SPACING_16)
+        }
+        buttonLabel?.snp.makeConstraints { (make) in
             make.top.bottom.equalToSuperview()
             make.leading.equalToSuperview().offset(SPACING_16)
             make.trailing.equalToSuperview().offset(-SPACING_16)
@@ -59,12 +72,20 @@ class InputTableViewCell: UITableViewCell {
         }
         else {
             self.cellType = cell.type
-            if cell.text != "" {
-                self.inputField.text = cell.text
+            if self.cellType == .input {
+                if cell.text != "" {
+                    self.inputField.text = cell.text
+                }
+                else {
+                    self.inputField.attributedPlaceholder = NSAttributedString(string: "Placeholder", attributes: attrs)
+                }
             }
             else {
-                self.inputField.attributedPlaceholder = NSAttributedString(string: "Placeholder", attributes: attrs)
+                self.buttonLabel = UILabel()
+                self.buttonLabel?.text = cell.text
             }
+
+
         }
         
         
