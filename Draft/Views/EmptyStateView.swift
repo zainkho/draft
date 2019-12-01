@@ -31,14 +31,14 @@ class EmptyStateView: UIView {
         
         taglineLabel = UILabel()
         taglineLabel.font = UIFont.TITLE
-        taglineLabel.text = "Start your next \nadventure"
+        taglineLabel.text = "Start logging your\ntravels"
         taglineLabel.textAlignment = .center
         taglineLabel.numberOfLines = 0
         taglineLabel.textColor = .SPACE
         addSubview(taglineLabel)
         
         startButton = UIButton()
-        startButton.setTitle("+ Begin traveling", for: .normal)
+        startButton.setTitle("+ Start a new adventure", for: .normal)
         startButton.titleLabel?.font = UIFont.H2
         startButton.setTitleColor(.SPACE, for: .normal)
         startButton.setBackgroundImage(UIImage(named: "notecard-button"), for: .normal)
