@@ -26,10 +26,9 @@ class InputTableViewCell: UITableViewCell {
         self.backgroundColor = .CLOUD
         
         inputField = UITextField()
+        inputField.textColor = .SPACE
         inputField.backgroundColor = .CLOUD
         inputField.font = UIFont.LABEL
-
-        inputField.textColor = .SPACE
         
         contentView.addSubview(inputField)
         
@@ -54,8 +53,7 @@ class InputTableViewCell: UITableViewCell {
         }
         else if section == 0 {
             self.cellType = .input
-            self.inputField.attributedPlaceholder =
-                trip.location == "" ? NSAttributedString(string: "Location", attributes: attrs) : NSAttributedString(string: trip.location, attributes: attrs)
+             
         }
         else {
             self.cellType = cell.type

@@ -20,7 +20,7 @@ class HeaderLabelView: UIView {
         
         headerLabel = UILabel()
         headerLabel.font = UIFont.H1
-        headerLabel.text = "test"
+        headerLabel.text = "Test"
         headerLabel.textColor = .SPACE
         addSubview(headerLabel)
         

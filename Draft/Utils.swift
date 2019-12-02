@@ -14,6 +14,8 @@ let SPACING_12: CGFloat = 12
 let SPACING_16: CGFloat = 16
 let SPACING_24: CGFloat = 24
 let SPACING_48: CGFloat = 48
+let SPACING_72: CGFloat = 72
+let SPACING_96: CGFloat = 96
 
 func randomEmoji() -> String {
     let emojiStart = 0x1F601

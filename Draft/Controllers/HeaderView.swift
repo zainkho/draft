@@ -15,6 +15,7 @@ class HeaderView: UICollectionReusableView {
     
     let LOGO_HEIGHT: CGFloat = 80
     let LOGO_WIDTH: CGFloat = 209
+    let BUTTON_HEIGHT: CGFloat = 50
     
     var presentDelegate: PresentEditCardDelegate?
     
@@ -55,7 +56,7 @@ class HeaderView: UICollectionReusableView {
         // newTripButton
         newTripButton.snp.makeConstraints { (make) in
             make.top.equalTo(draftImageView.snp.bottom).offset(SPACING_12)
-            make.height.equalTo(50)
+            make.height.equalTo(BUTTON_HEIGHT)
             make.leading.equalTo(SPACING_16)
             make.trailing.equalTo(-SPACING_16)
         }
