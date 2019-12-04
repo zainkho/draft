@@ -9,7 +9,8 @@ import Foundation
 
 enum cellType {
     case input
-    case button
+    case aButton
+    case rButton
 }
 
 class InputCell {

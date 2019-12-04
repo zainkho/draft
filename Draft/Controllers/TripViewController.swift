@@ -14,15 +14,18 @@ class TripViewController: UIViewController {
     var trip: Trip!
     var tableView: UITableView!
     var backgroundImage: UIImageView!
+    var cells: [[String]]!
     
     var headerImageView: UIImageView!
     var emojiLabel: UILabel!
     var titleLabel: UILabel!
     var subtitleLabel: UILabel!
+    let tripReuseIdentifier = "tripReuseIdentifier"
     
     let TITLE_TEXT_HEIGHT: CGFloat = 41
     let HEADER_TEXT_HEIGHT: CGFloat = 29
     let BODY_TEXT_HEIGHT: CGFloat = 19
+    let CELL_HEIGHT: CGFloat = 48
     var HEADER_HEIGHT: CGFloat = 168
     
     let BREEZE = UIColor(red: 239/255, green: 246/255, blue: 255/255, alpha: 1.0)
@@ -39,6 +42,9 @@ class TripViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = CREAM
+        
+        cells = createCellsFromTrip(trip: self.trip)
+        print(cells)
         
         backgroundImage = UIImageView()
         backgroundImage.image = UIImage(named: "notecard-details")
@@ -68,6 +74,12 @@ class TripViewController: UIViewController {
         subtitleLabel.text = String(trip.length) + " days · " + trip.location
         subtitleLabel.textColor = OCEAN
         view.addSubview(subtitleLabel)
+        
+        tableView = UITableView()
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.register(TripTableViewCell.self, forCellReuseIdentifier: tripReuseIdentifier)
+        view.addSubview(tableView)
         
         setupConstraints()
     }
@@ -108,5 +120,66 @@ class TripViewController: UIViewController {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func createCellsFromTrip(trip: Trip) -> [[String]] {
+        var cells = [[String]]()
+        let days = trip.days
+        for day in days {
+            var dayArray = [String]()
+            dayArray.append("Attractions")
+            for a in day.attractions {
+                dayArray.append(a)
+            }
+            
+            dayArray.append("Restaurants")
+            for r in day.restaurants {
+                dayArray.append(r)
+            }
+            cells.append(dayArray)
+        }
+        return cells
+    }
+    
+}
+
+extension TripViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return CELL_HEIGHT
+    }
+    
+//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        if section == 0 {
+//            return UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: CELL_HEIGHT))
+//        }
+//        else {
+//            return HeaderLabelView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: HEADER_HEIGHT))
+//        }
+//    }
+    
+//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        if section == 0 {
+//            return CELL_HEIGHT
+//        }
+//        else {
+//            return HEADER_LABEL_HEIGHT
+//        }
+//    }
+}
+
+extension TripViewController: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: tripReuseIdentifier, for: indexPath) as! TripTableViewCell
+        cell.cellLabel.text = cells[indexPath.section][indexPath.row]
+        return cell
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return trip.days.count
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 2 + trip.days[section].attractions.count + trip.days[section].restaurants.count
     }
 }
