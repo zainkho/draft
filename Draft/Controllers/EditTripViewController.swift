@@ -118,6 +118,7 @@ class EditTripViewController: UIViewController {
             dayArray.append(InputCell(text: "+ Add Restaurant", type: .rButton))
             inputCells.append(dayArray)
         }
+        print(inputCells)
         return inputCells
     }
 }
@@ -177,7 +178,7 @@ extension EditTripViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //for the first section
         if indexPath.section == 0 {
-            if indexPath.row == 1 {
+            if indexPath.row == 0 {
                 //for the trip name cell
                 let cell = tableView.dequeueReusableCell(withIdentifier: inputReuseIdentifier, for: indexPath) as! InputTableViewCell
                 cell.cellType = .input
@@ -204,27 +205,22 @@ extension EditTripViewController : UITableViewDataSource {
                 let cell = tableView.dequeueReusableCell(withIdentifier: inputReuseIdentifier, for: indexPath) as! InputTableViewCell
                 cell.cellType = .input
                 cell.selectionStyle = .none
-                if pathCell.text != "" {
-                    cell.inputField.text = pathCell.text
-                }
-                else {
-                    cell.inputField.attributedPlaceholder = NSAttributedString(string: "Placeholder", attributes: attrs)
-                }
+                cell.inputField.text = pathCell.text
+                cell.inputField.attributedPlaceholder = NSAttributedString(string: "Placeholder", attributes: attrs)
                 return cell
             }
             //add attraction cells
             else if cells[indexPath.section-1][indexPath.row].type == .aButton {
                 let cell = tableView.dequeueReusableCell(withIdentifier: buttonReuseIdentifier, for: indexPath) as! ButtonTableViewCell
                 cell.cellType = .aButton
-                cell.buttonLabel = UILabel()
                 cell.buttonLabel.text = pathCell.text
+                
                 return cell
             }
             //add restaurant cells
             else {
                 let cell = tableView.dequeueReusableCell(withIdentifier: buttonReuseIdentifier, for: indexPath) as! ButtonTableViewCell
                 cell.cellType = .rButton
-                cell.buttonLabel = UILabel()
                 cell.buttonLabel.text = pathCell.text
                 return cell
             }
