@@ -22,10 +22,6 @@ class EditTripViewController: UIViewController {
     let buttonReuseIdentifier = "buttonCellReuseIdentifiers"
     let CELL_HEIGHT: CGFloat = 48
     let HEADER_LABEL_HEIGHT: CGFloat = 68
-    let attrs = [
-        NSAttributedString.Key.foregroundColor: UIColor.SPACE,
-        NSAttributedString.Key.font: UIFont.LABEL!
-    ]
     
     init(trip: Trip, title: String) {
         self.trip = trip
@@ -46,7 +42,7 @@ class EditTripViewController: UIViewController {
         // Appearance
         title = self.title
 
-        navigationController?.navigationBar.titleTextAttributes = attrs
+        navigationController?.navigationBar.titleTextAttributes = labelAttrs
         // Cancel button
         let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelPressed))
         cancelButton.tintColor = .SPACE
@@ -192,7 +188,7 @@ extension EditTripViewController : UITableViewDataSource {
                 cell.selectionStyle = .none
                 cell.cellType = .input
                 cell.inputField.attributedPlaceholder =
-                    self.trip.location == "" ? NSAttributedString(string: "Location", attributes: attrs) : NSAttributedString(string: trip.location, attributes: attrs)
+                    self.trip.location == "" ? NSAttributedString(string: "Location", attributes: placeholderAttrs) : NSAttributedString(string: trip.location, attributes: labelAttrs)
                 cell.selectionStyle = .none
                 return cell
             }
@@ -206,7 +202,7 @@ extension EditTripViewController : UITableViewDataSource {
                 cell.cellType = .input
                 cell.selectionStyle = .none
                 cell.inputField.text = pathCell.text
-                cell.inputField.attributedPlaceholder = NSAttributedString(string: "Placeholder", attributes: attrs)
+                cell.inputField.attributedPlaceholder = NSAttributedString(string: "Placeholder", attributes: placeholderAttrs)
                 return cell
             }
             //add attraction cells
