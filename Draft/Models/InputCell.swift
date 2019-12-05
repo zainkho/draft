@@ -7,17 +7,22 @@
 
 import Foundation
 
-enum cellType {
+enum cellType: String {
     case input
-    case button
+    case aButton
+    case rButton
 }
 
-class InputCell {
+class InputCell: CustomDebugStringConvertible {
     var text: String!
     var type: cellType!
     
     init(text: String, type: cellType) {
         self.text = text
         self.type = type
+    }
+    
+    var debugDescription: String {
+        return "text: \(text!), type: \(type!.rawValue)"
     }
 }

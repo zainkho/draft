@@ -137,6 +137,7 @@ class TripCollectionViewCell: UICollectionViewCell {
     }
     
     @objc func presentEditViewController() {
+        print("in present view")
         presentDelegate?.presentEditViewController(trip: trip, title: "Edit Trip")
     }
     
