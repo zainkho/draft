@@ -15,12 +15,12 @@ class HeaderLabelView: UIView {
     
     var LABEL_HEIGHT: CGFloat = 29
     
-    override init(frame: CGRect) {
+    init(frame: CGRect, dayNum: Int) {
         super.init(frame: frame)
         
         headerLabel = UILabel()
         headerLabel.font = UIFont.H1
-        headerLabel.text = "test"
+        headerLabel.text = "Day \(dayNum)"
         headerLabel.textColor = .SPACE
         addSubview(headerLabel)
         
