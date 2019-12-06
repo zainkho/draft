@@ -16,10 +16,42 @@ let SPACING_24: CGFloat = 24
 let SPACING_48: CGFloat = 48
 
 func randomEmoji() -> String {
-    let emojiStart = 0x1F601
-    let ascii = emojiStart + Int(arc4random_uniform(UInt32(35)))
+    let emojiStart = 0x1F300
+    let ascii = emojiStart + Int(arc4random_uniform(UInt32(13)))
     let emoji = UnicodeScalar(ascii)?.description
     return emoji ?? "x"
+}
+
+func randomAttraction() -> String {
+    let attractions = [
+        "Eiffel Tower",
+        "Colosseum",
+        "Great Wall of China",
+        "Golden Gate Bridge",
+        "Empire State Building",
+        "Times Square",
+        "Sydney Opera House",
+        "Buckingham Palace",
+        "Burj Khalifa",
+        "Leaning Tower of Pisa"
+    ]
+    return attractions.randomElement()!
+}
+
+func randomRestaurant() -> String {
+    let restaurants = [
+        "Ichiran Ramen",
+        "Din Tai Fung Dim Sum",
+        "Gusteau's Restaurant",
+        "Milk Bar",
+        "Halal Guys",
+        "BCD Tofu House",
+        "Tiger Sugar Boba",
+        "Abiko Curry",
+        "Peter Luger's Steakhouse",
+        "Udon Mugizo"
+    ]
+    return restaurants.randomElement()!
 }
 
 extension UIColor {

@@ -31,6 +31,7 @@
 		929B3781238793F60050B46A /* HeaderLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929B3780238793F60050B46A /* HeaderLabelView.swift */; };
 		929DA2B22385E57C00B4CD68 /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929DA2B12385E57C00B4CD68 /* EmptyStateView.swift */; };
 		929DA2B42385E76C00B4CD68 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929DA2B32385E76C00B4CD68 /* Utils.swift */; };
+		92E17648239A043C006F184D /* ButtonFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E17647239A043C006F184D /* ButtonFooterView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,7 @@
 		929B3780238793F60050B46A /* HeaderLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderLabelView.swift; sourceTree = "<group>"; };
 		929DA2B12385E57C00B4CD68 /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
 		929DA2B32385E76C00B4CD68 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		92E17647239A043C006F184D /* ButtonFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ButtonFooterView.swift; path = Draft/Views/ButtonFooterView.swift; sourceTree = SOURCE_ROOT; };
 		C89E6EEE7B250728F530A48B /* Pods_Draft.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Draft.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF7342D4CEAAB2C0D4B29A96 /* Pods-Draft.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Draft.release.xcconfig"; path = "Target Support Files/Pods-Draft/Pods-Draft.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -136,6 +138,7 @@
 			children = (
 				929DA2B12385E57C00B4CD68 /* EmptyStateView.swift */,
 				929B3780238793F60050B46A /* HeaderLabelView.swift */,
+				92E17647239A043C006F184D /* ButtonFooterView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -301,6 +304,7 @@
 				2FEA8F2B239A081A009EC21D /* TripHeadingTableViewCell.swift in Sources */,
 				2F18FEE62384DC1800B9239A /* InputCell.swift in Sources */,
 				2F7AC75C2380656D00A7FC3A /* Trip.swift in Sources */,
+				92E17648239A043C006F184D /* ButtonFooterView.swift in Sources */,
 				9279F8FE2384A8BF00143DAC /* TripViewController.swift in Sources */,
 				2F7AC75E238071AE00A7FC3A /* TripCollectionViewCell.swift in Sources */,
 				2FC03DDD2396F7FB0032B219 /* TripTableViewCell.swift in Sources */,

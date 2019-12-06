@@ -56,8 +56,7 @@ class HeaderView: UICollectionReusableView {
         newTripButton.snp.makeConstraints { (make) in
             make.top.equalTo(draftImageView.snp.bottom).offset(SPACING_12)
             make.height.equalTo(50)
-            make.leading.equalTo(SPACING_16)
-            make.trailing.equalTo(-SPACING_16)
+            make.leading.trailing.equalToSuperview().inset(SPACING_16)
         }
     }
     
