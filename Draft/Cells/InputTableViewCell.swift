@@ -11,8 +11,6 @@ import SnapKit
 class InputTableViewCell: UITableViewCell {
 
     var inputField: UITextField!
-    var topSeparator: UIView!
-    var bottomSeparator: UIView!
     var cellType: cellType!
     
     var didModifyInputField: ((String) -> Void)?

@@ -166,7 +166,6 @@ extension NewTripViewController : UITableViewDataSource {
         }
     }
     
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //for the first section
         if indexPath.section == 0 {
@@ -223,7 +222,7 @@ extension NewTripViewController : UITableViewDataSource {
                 }
                 return cell
             }
-                //add attraction cells
+            //add attraction cells
             else if cells[indexPath.section-1][indexPath.row].type == .aButton {
                 let cell = tableView.dequeueReusableCell(withIdentifier: buttonReuseIdentifier, for: indexPath) as! ButtonTableViewCell
                 cell.cellType = .aButton
