@@ -41,3 +41,14 @@ extension UIFont {
     static let LABEL = UIFont(name: "NewYorkMedium-Bold", size: 17)
     static let BODY = UIFont(name: "NewYorkMedium-Regular", size: 16)
 }
+
+
+let placeholderAttrs = [
+    NSAttributedString.Key.foregroundColor: UIColor.RAIN,
+    NSAttributedString.Key.font: UIFont.LABEL!
+]
+
+let labelAttrs = [
+    NSAttributedString.Key.foregroundColor: UIColor.SPACE,
+    NSAttributedString.Key.font: UIFont.LABEL!
+]
