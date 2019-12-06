@@ -16,7 +16,8 @@ class EditTripViewController: UIViewController {
     
     var tripName: String
     var location: String
-//    var days: [Day]
+    
+    var reloadDelegate: ReloadTripDelegate!
     
     let inputReuseIdentifier = "inputCellReuseIdentifiers"
     let buttonReuseIdentifier = "buttonCellReuseIdentifiers"
@@ -82,17 +83,8 @@ class EditTripViewController: UIViewController {
     }
     
     @objc func donePressed() {
-        
-    }
-    
-    @objc func addRestaurantPressed(day: Int) {
-        
-        tableView.reloadData()
-    }
-    
-    @objc func addAttractionPressed(day: Int) {
-        cells[day].append(InputCell(text: "", type: .input))
-        tableView.reloadData()
+        reloadDelegate.reloadTrips()
+        dismiss(animated: true)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -118,7 +110,6 @@ class EditTripViewController: UIViewController {
             dayArray.append(InputCell(text: "+ Add Restaurant", type: .rButton))
             inputCells.append(dayArray)
         }
-        print(inputCells)
         return inputCells
     }
 }
@@ -158,7 +149,28 @@ extension EditTripViewController : UITableViewDelegate {
         cells = createCellsFromTrip(trip: self.trip)
         tableView.reloadData()
     }
-}
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        print("deselected")
+        if indexPath.section == 0 {
+            let cell = tableView.cellForRow(at: indexPath) as! InputTableViewCell
+            if indexPath.row == 0 {
+                trip.name = cell.inputField.text!
+                tableView.reloadData()
+            }
+            else {
+                trip.location = cell.inputField.text!
+                tableView.reloadData()
+            }
+        }
+        else {
+//            let cell = tableView.cellForRow(at: indexPath)
+//            if cells[indexPath.section-1][indexPath.row].type == .input {
+//                trip.days
+            }
+        }
+    }
+
 
 extension EditTripViewController : UITableViewDataSource {
     
@@ -175,6 +187,7 @@ extension EditTripViewController : UITableViewDataSource {
         }
     }
     
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //for the first section
         if indexPath.section == 0 {
@@ -184,6 +197,11 @@ extension EditTripViewController : UITableViewDataSource {
                 cell.cellType = .input
                 cell.inputField.text = trip.name == "" ? "New trip": trip.name
                 cell.selectionStyle = .none
+                cell.configure(section: indexPath.section, index: indexPath.row, trip: trip)
+                cell.didModifyInputField = { newText in
+                    self.cells[indexPath.section][indexPath.row].text = newText
+                    self.trip.name = newText
+                }
                 return cell
             }
             else {
@@ -194,6 +212,11 @@ extension EditTripViewController : UITableViewDataSource {
                 cell.inputField.attributedPlaceholder =
                     self.trip.location == "" ? NSAttributedString(string: "Location", attributes: attrs) : NSAttributedString(string: trip.location, attributes: attrs)
                 cell.selectionStyle = .none
+                cell.configure(section: indexPath.section, index: indexPath.row, trip: trip)
+                cell.didModifyInputField = { newText in
+                    self.cells[indexPath.section][indexPath.row].text = newText
+                    self.trip.location = newText
+                }
                 return cell
             }
         }
@@ -207,6 +230,11 @@ extension EditTripViewController : UITableViewDataSource {
                 cell.selectionStyle = .none
                 cell.inputField.text = pathCell.text
                 cell.inputField.attributedPlaceholder = NSAttributedString(string: "Placeholder", attributes: attrs)
+                cell.configure(section: indexPath.section, index: indexPath.row, trip: trip)
+                cell.didModifyInputField = { newText in
+                    self.cells[indexPath.section][indexPath.row].text = newText
+                    self.trip.days[indexPath.section - 1].attractions[indexPath.row] = newText
+                }
                 return cell
             }
             //add attraction cells
@@ -214,7 +242,7 @@ extension EditTripViewController : UITableViewDataSource {
                 let cell = tableView.dequeueReusableCell(withIdentifier: buttonReuseIdentifier, for: indexPath) as! ButtonTableViewCell
                 cell.cellType = .aButton
                 cell.buttonLabel.text = pathCell.text
-                
+                cell.configure(section: indexPath.section, index: indexPath.row, trip: trip)
                 return cell
             }
             //add restaurant cells
@@ -222,6 +250,7 @@ extension EditTripViewController : UITableViewDataSource {
                 let cell = tableView.dequeueReusableCell(withIdentifier: buttonReuseIdentifier, for: indexPath) as! ButtonTableViewCell
                 cell.cellType = .rButton
                 cell.buttonLabel.text = pathCell.text
+                cell.configure(section: indexPath.section, index: indexPath.row, trip: trip)
                 return cell
             }
         }

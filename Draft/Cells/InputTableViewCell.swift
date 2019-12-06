@@ -15,6 +15,8 @@ class InputTableViewCell: UITableViewCell {
     var bottomSeparator: UIView!
     var cellType: cellType!
     
+    var didModifyInputField: ((String) -> Void)?
+    
     let attrs = [
         NSAttributedString.Key.foregroundColor: UIColor.RAIN,
         NSAttributedString.Key.font: UIFont.LABEL!
@@ -30,9 +32,14 @@ class InputTableViewCell: UITableViewCell {
         inputField.backgroundColor = .CLOUD
         inputField.font = UIFont.LABEL
         inputField.textColor = .SPACE
+        inputField.addTarget(self, action: #selector(inputFieldTextDidChange), for: .editingChanged)
         contentView.addSubview(inputField)
 
         setupConstraints()
+    }
+    
+    @objc private func inputFieldTextDidChange() {
+        didModifyInputField?(inputField.text ?? "")
     }
     
     func setupConstraints() {
@@ -44,49 +51,19 @@ class InputTableViewCell: UITableViewCell {
         }
     }
     
-//    func configure(for cell: InputCell? = nil, section: Int, index: Int, trip: Trip) {
-//        
-//        // Logic for first section cells
-//        if section == 0 && index == 0 {
-//            self.cellType = .input
-//            self.inputField.text = trip.name == "" ? "New trip": trip.name
-//        }
-//        else if section == 0 {
-//            self.cellType = .input
-//            self.inputField.attributedPlaceholder =
-//                trip.location == "" ? NSAttributedString(string: "Location", attributes: attrs) : NSAttributedString(string: trip.location, attributes: attrs)
-//        }
-//        else if let cell = cell {
-//            self.cellType = cell.type
-//            if self.cellType == .input {
-//                if cell.text != "" {
-//                    self.inputField.text = cell.text
-//                }
-//                else {
-//                    self.inputField.attributedPlaceholder = NSAttributedString(string: "Placeholder", attributes: attrs)
-//                }
-//            }
-//            else {
-//                self.buttonLabel = UILabel()
-//                self.buttonLabel?.text = cell.text
-//            }
-//
-//
-//        }
-//        
-//        
-//        if index == 0 {
-//            topSeparator = UIView(frame: CGRect(x: 0, y: 0, width: contentView.frame.width, height: 0.25))
-//            topSeparator.backgroundColor = .RAIN
-//            contentView.addSubview(topSeparator)
-//        }
-//        if index == -1 {
-//            bottomSeparator = UIView(frame: CGRect(x: 0, y: contentView.frame.height - 0.25, width: contentView.frame.width, height: 0.25))
-//            bottomSeparator.backgroundColor = .RAIN
-//            contentView.addSubview(bottomSeparator)
-//        }
-//
-//    }
+    func configure(for cell: InputCell? = nil, section: Int, index: Int, trip: Trip) {
+        if index == 0 {
+            topSeparator = UIView(frame: CGRect(x: 0, y: 0, width: contentView.frame.width, height: 0.25))
+            topSeparator.backgroundColor = .RAIN
+            contentView.addSubview(topSeparator)
+        }
+        
+        if index == -1 {
+            bottomSeparator = UIView(frame: CGRect(x: 0, y: contentView.frame.height - 0.25, width: contentView.frame.width, height: 0.25))
+            bottomSeparator.backgroundColor = .RAIN
+            contentView.addSubview(bottomSeparator)
+        }
+    }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

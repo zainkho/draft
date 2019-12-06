@@ -148,23 +148,6 @@ extension TripViewController: UITableViewDelegate {
         return CELL_HEIGHT
     }
     
-//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        if section == 0 {
-//            return UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: CELL_HEIGHT))
-//        }
-//        else {
-//            return HeaderLabelView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: HEADER_HEIGHT))
-//        }
-//    }
-    
-//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        if section == 0 {
-//            return CELL_HEIGHT
-//        }
-//        else {
-//            return HEADER_LABEL_HEIGHT
-//        }
-//    }
 }
 
 extension TripViewController: UITableViewDataSource {
