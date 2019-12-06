@@ -94,6 +94,7 @@ class TripViewController: UIViewController {
         headerGradientView = UIView()
         headerGradient = CAGradientLayer()
         headerGradient.colors = [UIColor.CREAM.cgColor, UIColor.CLEAR.cgColor]
+        headerGradient.opacity = 0
         headerGradientView.layer.insertSublayer(headerGradient, at: 0)
         view.addSubview(headerGradientView)
         
@@ -101,6 +102,7 @@ class TripViewController: UIViewController {
         footerGradientView = UIView()
         footerGradient = CAGradientLayer()
         footerGradient.colors = [UIColor.CLEAR.cgColor, UIColor.CREAM.cgColor]
+        footerGradient.opacity = 0
         footerGradientView.layer.insertSublayer(footerGradient, at: 0)
         view.addSubview(footerGradientView)
         

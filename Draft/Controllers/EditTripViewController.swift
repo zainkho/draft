@@ -20,8 +20,10 @@ class EditTripViewController: UIViewController {
     
     let inputReuseIdentifier = "inputCellReuseIdentifiers"
     let buttonReuseIdentifier = "buttonCellReuseIdentifiers"
+    
     let CELL_HEIGHT: CGFloat = 48
     let HEADER_LABEL_HEIGHT: CGFloat = 68
+    let BUTTON_FOOTER_HEIGHT: CGFloat = 98
     
     init(trip: Trip, title: String) {
         self.trip = trip
@@ -62,6 +64,7 @@ class EditTripViewController: UIViewController {
         tableView.delegate = self
         tableView.register(InputTableViewCell.self, forCellReuseIdentifier: inputReuseIdentifier)
         tableView.register(ButtonTableViewCell.self, forCellReuseIdentifier: buttonReuseIdentifier)
+        tableView.tableFooterView = ButtonFooterView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: BUTTON_FOOTER_HEIGHT))
         view.addSubview(tableView)
 
         setupConstraints() 
@@ -124,6 +127,7 @@ extension EditTripViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return CELL_HEIGHT
     }
+    
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 0 {
