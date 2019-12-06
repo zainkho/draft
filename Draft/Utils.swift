@@ -65,6 +65,7 @@ extension UIColor {
     static let RAIN = UIColor(red: 162/255, green: 162/255, blue: 162/255, alpha: 1.0)
     static let CLOUD = UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 1.0)
     static let DUSK = UIColor(red: 68/255, green: 77/255, blue: 86/255, alpha: 1.0)
+    static let SKY = UIColor(red: 0/255, green: 112/255, blue: 255/255, alpha: 1.0)
     
 }
 

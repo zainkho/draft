@@ -189,13 +189,11 @@ class TripViewController: UIViewController {
         let days = trip.days
         for day in days {
             var dayArray = [TripViewCellModel]()
-            // TODO: add image here
-            dayArray.append(TripViewCellModel(text: "Attractions", type: .heading, img: ""))
+            dayArray.append(TripViewCellModel(text: "Attractions", type: .heading, img: "icon-attraction"))
             for a in day.attractions {
                 dayArray.append(TripViewCellModel(text: a, type: .normal, img: nil))
             }
-            // TODO: add image here
-            dayArray.append(TripViewCellModel(text: "Restaurants", type: .heading, img: ""))
+            dayArray.append(TripViewCellModel(text: "Restaurants", type: .heading, img: "icon-restaurant"))
             for r in day.restaurants {
                 dayArray.append(TripViewCellModel(text: r, type: .normal, img: nil))
             }
@@ -235,7 +233,12 @@ extension TripViewController: UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: tripHeadingReuseIdentifier, for: indexPath) as! TripHeadingTableViewCell
             cell.cellType = .heading
             cell.cellLabel.text = pathCell.text
-            cell.img = pathCell.image
+            if pathCell.text == "Attractions" {
+                cell.img = "icon-attraction"
+            }
+            else {
+                cell.img = "icon-restaurant"
+            }
             return cell
         }
     }

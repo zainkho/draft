@@ -208,7 +208,7 @@ extension EditTripViewController : UITableViewDataSource {
                 cell.cellType = .ainput
                 cell.selectionStyle = .none
                 cell.inputField.text = pathCell.text
-                cell.inputField.attributedPlaceholder = NSAttributedString(string: "Placeholder", attributes: placeholderAttrs)
+                cell.inputField.attributedPlaceholder = NSAttributedString(string: randomAttraction(), attributes: placeholderAttrs)
                 cell.didModifyInputField = { newText in
                     self.trip.days[indexPath.section - 1].attractions[indexPath.row] = newText
                 }
@@ -219,7 +219,7 @@ extension EditTripViewController : UITableViewDataSource {
                 cell.cellType = .rinput
                 cell.selectionStyle = .none
                 cell.inputField.text = pathCell.text
-                cell.inputField.attributedPlaceholder = NSAttributedString(string: "Placeholder", attributes: placeholderAttrs)
+                cell.inputField.attributedPlaceholder = NSAttributedString(string: randomRestaurant(), attributes: placeholderAttrs)
                 cell.didModifyInputField = { newText in
                     //                    self.cells[indexPath.section][indexPath.row].text = newText
                     self.trip.days[indexPath.section - 1].restaurants[indexPath.row-(self.trip.days[indexPath.section-1].attractions.count+1)] = newText
@@ -231,6 +231,7 @@ extension EditTripViewController : UITableViewDataSource {
                 let cell = tableView.dequeueReusableCell(withIdentifier: buttonReuseIdentifier, for: indexPath) as! ButtonTableViewCell
                 cell.cellType = .aButton
                 cell.buttonLabel.text = pathCell.text
+                cell.buttonLabel.textColor = .SKY
                 return cell
             }
             //add restaurant cells
@@ -238,6 +239,7 @@ extension EditTripViewController : UITableViewDataSource {
                 let cell = tableView.dequeueReusableCell(withIdentifier: buttonReuseIdentifier, for: indexPath) as! ButtonTableViewCell
                 cell.cellType = .rButton
                 cell.buttonLabel.text = pathCell.text
+                cell.buttonLabel.textColor = .SKY
                 return cell
             }
         }

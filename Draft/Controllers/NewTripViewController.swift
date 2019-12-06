@@ -20,8 +20,10 @@ class NewTripViewController: UIViewController {
     
     let inputReuseIdentifier = "inputCellReuseIdentifiers"
     let buttonReuseIdentifier = "buttonCellReuseIdentifiers"
+    
     let CELL_HEIGHT: CGFloat = 48
     let HEADER_LABEL_HEIGHT: CGFloat = 68
+    let BUTTON_FOOTER_HEIGHT: CGFloat = 98
     
     init(trip: Trip, title: String) {
         self.trip = trip
@@ -62,6 +64,7 @@ class NewTripViewController: UIViewController {
         tableView.delegate = self
         tableView.register(InputTableViewCell.self, forCellReuseIdentifier: inputReuseIdentifier)
         tableView.register(ButtonTableViewCell.self, forCellReuseIdentifier: buttonReuseIdentifier)
+        tableView.tableFooterView = ButtonFooterView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: BUTTON_FOOTER_HEIGHT))
         view.addSubview(tableView)
         
         setupConstraints()
@@ -120,7 +123,7 @@ extension NewTripViewController : UITableViewDelegate {
             return UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: CELL_HEIGHT))
         }
         else {
-            return HeaderLabelView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: HEADER_LABEL_HEIGHT), dayNum: section)
+            return HeaderLabelView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: HEADER_LABEL_HEIGHT), dayNum: section - 1)
         }
     }
     
@@ -173,7 +176,6 @@ extension NewTripViewController : UITableViewDataSource {
                 cell.cellType = .input
                 cell.inputField.text = trip.name == "" ? "New trip": trip.name
                 cell.selectionStyle = .none
-                cell.configure(section: indexPath.section, index: indexPath.row, trip: trip)
                 cell.didModifyInputField = { newText in
                     self.cells[indexPath.section][indexPath.row].text = newText
                     self.trip.name = newText
@@ -188,7 +190,6 @@ extension NewTripViewController : UITableViewDataSource {
                 cell.inputField.attributedPlaceholder =
                     self.trip.location == "" ? NSAttributedString(string: "Location", attributes: placeholderAttrs) : NSAttributedString(string: trip.location, attributes: labelAttrs)
                 cell.selectionStyle = .none
-                cell.configure(section: indexPath.section, index: indexPath.row, trip: trip)
                 cell.didModifyInputField = { newText in
                     self.cells[indexPath.section][indexPath.row].text = newText
                     self.trip.location = newText
@@ -205,8 +206,7 @@ extension NewTripViewController : UITableViewDataSource {
                 cell.cellType = .ainput
                 cell.selectionStyle = .none
                 cell.inputField.text = pathCell.text
-                cell.inputField.attributedPlaceholder = NSAttributedString(string: "Placeholder", attributes: placeholderAttrs)
-                cell.configure(section: indexPath.section, index: indexPath.row, trip: trip)
+                cell.inputField.attributedPlaceholder = NSAttributedString(string: randomAttraction(), attributes: placeholderAttrs)
                 cell.didModifyInputField = { newText in
 //                    self.cells[indexPath.section][indexPath.row].text = newText
                     self.trip.days[indexPath.section - 1].attractions[indexPath.row] = newText
@@ -218,8 +218,7 @@ extension NewTripViewController : UITableViewDataSource {
                 cell.cellType = .rinput
                 cell.selectionStyle = .none
                 cell.inputField.text = pathCell.text
-                cell.inputField.attributedPlaceholder = NSAttributedString(string: "Placeholder", attributes: placeholderAttrs)
-                cell.configure(section: indexPath.section, index: indexPath.row, trip: trip)
+                cell.inputField.attributedPlaceholder = NSAttributedString(string: randomRestaurant(), attributes: placeholderAttrs)
                 cell.didModifyInputField = { newText in
                     //                    self.cells[indexPath.section][indexPath.row].text = newText
                  self.trip.days[indexPath.section - 1].restaurants[indexPath.row-(self.trip.days[indexPath.section-1].attractions.count+1)] = newText
@@ -231,7 +230,7 @@ extension NewTripViewController : UITableViewDataSource {
                 let cell = tableView.dequeueReusableCell(withIdentifier: buttonReuseIdentifier, for: indexPath) as! ButtonTableViewCell
                 cell.cellType = .aButton
                 cell.buttonLabel.text = pathCell.text
-                cell.configure(section: indexPath.section, index: indexPath.row, trip: trip)
+                cell.buttonLabel.textColor = .SKY
                 return cell
             }
                 //add restaurant cells
@@ -239,7 +238,7 @@ extension NewTripViewController : UITableViewDataSource {
                 let cell = tableView.dequeueReusableCell(withIdentifier: buttonReuseIdentifier, for: indexPath) as! ButtonTableViewCell
                 cell.cellType = .rButton
                 cell.buttonLabel.text = pathCell.text
-                cell.configure(section: indexPath.section, index: indexPath.row, trip: trip)
+                cell.buttonLabel.textColor = .SKY
                 return cell
             }
         }
