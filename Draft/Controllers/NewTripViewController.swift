@@ -22,6 +22,7 @@ class NewTripViewController: UIViewController {
     let buttonReuseIdentifier = "buttonCellReuseIdentifiers"
     let CELL_HEIGHT: CGFloat = 48
     let HEADER_LABEL_HEIGHT: CGFloat = 68
+    let BUTTON_FOOTER_HEIGHT: CGFloat = 98
     
     init(trip: Trip, title: String) {
         self.trip = trip
@@ -62,8 +63,9 @@ class NewTripViewController: UIViewController {
         tableView.delegate = self
         tableView.register(InputTableViewCell.self, forCellReuseIdentifier: inputReuseIdentifier)
         tableView.register(ButtonTableViewCell.self, forCellReuseIdentifier: buttonReuseIdentifier)
+        tableView.tableFooterView = ButtonFooterView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: BUTTON_FOOTER_HEIGHT))
         view.addSubview(tableView)
-        
+
         setupConstraints()
     }
     
@@ -208,7 +210,6 @@ extension NewTripViewController : UITableViewDataSource {
                 cell.inputField.attributedPlaceholder = NSAttributedString(string: "Placeholder", attributes: placeholderAttrs)
                 cell.configure(section: indexPath.section, index: indexPath.row, trip: trip)
                 cell.didModifyInputField = { newText in
-//                    self.cells[indexPath.section][indexPath.row].text = newText
                     self.trip.days[indexPath.section - 1].attractions[indexPath.row] = newText
                 }
                 return cell
@@ -221,7 +222,6 @@ extension NewTripViewController : UITableViewDataSource {
                 cell.inputField.attributedPlaceholder = NSAttributedString(string: "Placeholder", attributes: placeholderAttrs)
                 cell.configure(section: indexPath.section, index: indexPath.row, trip: trip)
                 cell.didModifyInputField = { newText in
-                    //                    self.cells[indexPath.section][indexPath.row].text = newText
                  self.trip.days[indexPath.section - 1].restaurants[indexPath.row-(self.trip.days[indexPath.section-1].attractions.count+1)] = newText
                 }
                 return cell
