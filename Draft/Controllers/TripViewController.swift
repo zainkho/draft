@@ -14,13 +14,14 @@ class TripViewController: UIViewController {
     var trip: Trip!
     var tableView: UITableView!
     var backgroundImage: UIImageView!
-    var cells: [[String]]!
+    var cells: [[TripViewCellModel]]!
     
     var headerImageView: UIImageView!
     var emojiLabel: UILabel!
     var titleLabel: UILabel!
     var subtitleLabel: UILabel!
     let tripReuseIdentifier = "tripReuseIdentifier"
+    let tripHeadingReuseIdentifier = "tripReuseHeadingIdentifier"
     
     var headerGradientView: UIView!
     var headerGradient: CAGradientLayer!
@@ -51,7 +52,6 @@ class TripViewController: UIViewController {
         view.backgroundColor = CREAM
         
         cells = createCellsFromTrip(trip: self.trip)
-        print(cells)
         
         backgroundImage = UIImageView()
         backgroundImage.image = UIImage(named: "notecard-details")
@@ -88,6 +88,7 @@ class TripViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(TripTableViewCell.self, forCellReuseIdentifier: tripReuseIdentifier)
+        tableView.register(TripHeadingTableViewCell.self, forCellReuseIdentifier: tripHeadingReuseIdentifier)
         view.addSubview(tableView)
         
         // headerGradient
@@ -181,19 +182,20 @@ class TripViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func createCellsFromTrip(trip: Trip) -> [[String]] {
-        var cells = [[String]]()
+    func createCellsFromTrip(trip: Trip) -> [[TripViewCellModel]] {
+        var cells = [[TripViewCellModel]]()
         let days = trip.days
         for day in days {
-            var dayArray = [String]()
-            dayArray.append("Attractions")
+            var dayArray = [TripViewCellModel]()
+            // TODO: add image here
+            dayArray.append(TripViewCellModel(text: "Attractions", type: .heading, img: ""))
             for a in day.attractions {
-                dayArray.append(a)
+                dayArray.append(TripViewCellModel(text: a, type: .normal, img: nil))
             }
-            
-            dayArray.append("Restaurants")
+            // TODO: add image here
+            dayArray.append(TripViewCellModel(text: "Restaurants", type: .heading, img: ""))
             for r in day.restaurants {
-                dayArray.append(r)
+                dayArray.append(TripViewCellModel(text: r, type: .normal, img: nil))
             }
             cells.append(dayArray)
         }
@@ -219,10 +221,21 @@ extension TripViewController: UITableViewDelegate {
 extension TripViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: tripReuseIdentifier, for: indexPath) as! TripTableViewCell
-        cell.cellLabel.text = cells[indexPath.section][indexPath.row]
-        
-        return cell
+        let pathCell = cells[indexPath.section][indexPath.row]
+        //input cells
+        if pathCell.type == .normal {
+            let cell = tableView.dequeueReusableCell(withIdentifier: tripReuseIdentifier, for: indexPath) as! TripTableViewCell
+            cell.cellType = .normal
+            cell.cellLabel.text = pathCell.text
+            return cell
+        }
+        else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: tripHeadingReuseIdentifier, for: indexPath) as! TripHeadingTableViewCell
+            cell.cellType = .heading
+            cell.cellLabel.text = pathCell.text
+            cell.img = pathCell.image
+            return cell
+        }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
