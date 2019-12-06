@@ -66,7 +66,7 @@ class NewTripViewController: UIViewController {
         tableView.register(ButtonTableViewCell.self, forCellReuseIdentifier: buttonReuseIdentifier)
         tableView.tableFooterView = ButtonFooterView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: BUTTON_FOOTER_HEIGHT))
         view.addSubview(tableView)
-        
+
         setupConstraints()
     }
     
@@ -208,7 +208,6 @@ extension NewTripViewController : UITableViewDataSource {
                 cell.inputField.text = pathCell.text
                 cell.inputField.attributedPlaceholder = NSAttributedString(string: randomAttraction(), attributes: placeholderAttrs)
                 cell.didModifyInputField = { newText in
-//                    self.cells[indexPath.section][indexPath.row].text = newText
                     self.trip.days[indexPath.section - 1].attractions[indexPath.row] = newText
                 }
                 return cell
@@ -220,7 +219,6 @@ extension NewTripViewController : UITableViewDataSource {
                 cell.inputField.text = pathCell.text
                 cell.inputField.attributedPlaceholder = NSAttributedString(string: randomRestaurant(), attributes: placeholderAttrs)
                 cell.didModifyInputField = { newText in
-                    //                    self.cells[indexPath.section][indexPath.row].text = newText
                  self.trip.days[indexPath.section - 1].restaurants[indexPath.row-(self.trip.days[indexPath.section-1].attractions.count+1)] = newText
                 }
                 return cell

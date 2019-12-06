@@ -14,9 +14,6 @@ class EditTripViewController: UIViewController {
     var tableView: UITableView!
     var cells: [[InputCell]]!
     
-    var tripName: String
-    var location: String
-    
     var reloadDelegate: ReloadTripDelegate!
     
     let inputReuseIdentifier = "inputCellReuseIdentifiers"
@@ -28,9 +25,6 @@ class EditTripViewController: UIViewController {
     
     init(trip: Trip, title: String) {
         self.trip = trip
-        self.tripName = trip.name
-        self.location = trip.location
-//        self.days = [Day(num: 1, attractions: [], restaurants: [])]
         super.init(nibName: nil, bundle: nil)
         self.title = title
     }
@@ -65,7 +59,9 @@ class EditTripViewController: UIViewController {
         tableView.delegate = self
         tableView.register(InputTableViewCell.self, forCellReuseIdentifier: inputReuseIdentifier)
         tableView.register(ButtonTableViewCell.self, forCellReuseIdentifier: buttonReuseIdentifier)
-        tableView.tableFooterView = ButtonFooterView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: BUTTON_FOOTER_HEIGHT))
+        let buttonFooterView = ButtonFooterView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: BUTTON_FOOTER_HEIGHT))
+        buttonFooterView.addDayDelegate = self
+        tableView.tableFooterView = buttonFooterView
         view.addSubview(tableView)
 
         setupConstraints() 
@@ -168,7 +164,6 @@ extension EditTripViewController : UITableViewDataSource {
         }
     }
     
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //for the first section
         if indexPath.section == 0 {
@@ -221,7 +216,6 @@ extension EditTripViewController : UITableViewDataSource {
                 cell.inputField.text = pathCell.text
                 cell.inputField.attributedPlaceholder = NSAttributedString(string: randomRestaurant(), attributes: placeholderAttrs)
                 cell.didModifyInputField = { newText in
-                    //                    self.cells[indexPath.section][indexPath.row].text = newText
                     self.trip.days[indexPath.section - 1].restaurants[indexPath.row-(self.trip.days[indexPath.section-1].attractions.count+1)] = newText
                 }
                 return cell
@@ -243,5 +237,14 @@ extension EditTripViewController : UITableViewDataSource {
                 return cell
             }
         }
+    }
+}
+
+extension EditTripViewController : AddDayDelegate {
+    func addDay() {
+        self.trip.days.append(Day(num: trip.days.count+1, attractions: [""], restaurants: [""]))
+        reloadDelegate.reloadTrips(trip: nil)
+        self.cells = createCellsFromTrip(trip: self.trip)
+        self.tableView.reloadData()
     }
 }

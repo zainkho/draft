@@ -130,11 +130,11 @@ class TripCollectionViewCell: UICollectionViewCell {
     
     func configure(for trip: Trip) {
         nameLabel.text = trip.name
-        if trip.length == 1 {
-            lengthLabel.text = String(trip.length) + " day · " + trip.location
+        if trip.length() == 1 {
+            lengthLabel.text = String(trip.length()) + " day · " + trip.location
         }
         else {
-            lengthLabel.text = String(trip.length) + " days · " + trip.location
+            lengthLabel.text = String(trip.length()) + " days · " + trip.location
         }
         attractionsLabel.text = trip.days[0].attractions.joined(separator: ", ")
         restaurantsLabel.text = trip.days[0].restaurants.joined(separator: ", ")

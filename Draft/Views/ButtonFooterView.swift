@@ -10,6 +10,7 @@ import UIKit
 class ButtonFooterView: UIView {
 
     var addDayButton: UIButton!
+    var addDayDelegate: AddDayDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -41,7 +42,8 @@ class ButtonFooterView: UIView {
     }
     
     @objc func addDay() {
-        
+        print("here1")
+        self.addDayDelegate?.addDay()
     }
     
     required init?(coder: NSCoder) {
