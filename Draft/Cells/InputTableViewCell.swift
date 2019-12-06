@@ -15,11 +15,6 @@ class InputTableViewCell: UITableViewCell {
     var bottomSeparator: UIView!
     var cellType: cellType!
     
-    let attrs = [
-        NSAttributedString.Key.foregroundColor: UIColor.RAIN,
-        NSAttributedString.Key.font: UIFont.LABEL!
-    ]
-    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         

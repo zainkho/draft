@@ -27,10 +27,12 @@ extension UIColor {
     static let BREEZE = UIColor(red: 239/255, green: 246/255, blue: 255/255, alpha: 1.0)
     static let CLEAR = UIColor(red: 239/255, green: 246/255, blue: 255/255, alpha: 0)
     static let CREAM = UIColor(red: 255/255, green: 251/255, blue: 242/255, alpha: 1.0)
+    static let CREAM_GRADIENT = UIColor(red: 255/255, green: 251/255, blue: 242/255, alpha: 0)
     static let SPACE = UIColor(red: 27/255, green: 31/255, blue: 35/255, alpha: 1.0)
     static let OCEAN = UIColor(red: 68/255, green: 77/255, blue: 86/255, alpha: 1.0)
     static let RAIN = UIColor(red: 162/255, green: 162/255, blue: 162/255, alpha: 1.0)
     static let CLOUD = UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 1.0)
+    static let DUSK = UIColor(red: 68/255, green: 77/255, blue: 86/255, alpha: 1.0)
     
 }
 
