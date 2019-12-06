@@ -20,7 +20,7 @@ class HeaderLabelView: UIView {
         
         headerLabel = UILabel()
         headerLabel.font = UIFont.H1
-        headerLabel.text = "Day \(dayNum)"
+        headerLabel.text = "Day \(dayNum + 1)"
         headerLabel.textColor = .SPACE
         addSubview(headerLabel)
         

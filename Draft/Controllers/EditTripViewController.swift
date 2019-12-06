@@ -56,7 +56,7 @@ class EditTripViewController: UIViewController {
         cells = createCellsFromTrip(trip: self.trip)
         
         // Set up tableView
-        tableView = UITableView()
+        tableView = UITableView(frame: CGRect(), style: .grouped)
         tableView.backgroundColor = .CREAM
         tableView.separatorColor = .RAIN
         tableView.dataSource = self
@@ -121,7 +121,7 @@ extension EditTripViewController : UITableViewDelegate {
             return UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: CELL_HEIGHT))
         }
         else {
-            return HeaderLabelView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: HEADER_LABEL_HEIGHT), dayNum: section)
+            return HeaderLabelView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: HEADER_LABEL_HEIGHT), dayNum: section - 1)
         }
     }
     
@@ -228,7 +228,7 @@ extension EditTripViewController : UITableViewDataSource {
                 return cell
             }
             //add attraction cells
-            else if cells[indexPath.section-1][indexPath.row].type == .aButton {
+            else if pathCell.type == .aButton {
                 let cell = tableView.dequeueReusableCell(withIdentifier: buttonReuseIdentifier, for: indexPath) as! ButtonTableViewCell
                 cell.cellType = .aButton
                 cell.buttonLabel.text = pathCell.text

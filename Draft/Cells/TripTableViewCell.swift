@@ -14,8 +14,13 @@ class TripTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+        self.backgroundColor = .none
+        self.selectionStyle = .none
+        
         cellLabel = UILabel()
-        cellLabel.text = "test"
+        cellLabel.backgroundColor = .clear
+        cellLabel.font = UIFont.BODY
+        cellLabel.textColor = .DUSK
         contentView.addSubview(cellLabel)
         
         setupConstraints()
@@ -25,8 +30,8 @@ class TripTableViewCell: UITableViewCell {
         
         cellLabel.snp.makeConstraints { (make) in
             make.top.bottom.equalToSuperview()
-            make.leading.equalToSuperview()
-            make.trailing.equalToSuperview()
+            make.leading.equalToSuperview().offset(SPACING_16)
+            make.trailing.equalToSuperview().offset(-SPACING_16)
         }
     }
     
