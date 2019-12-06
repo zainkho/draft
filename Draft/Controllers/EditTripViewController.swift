@@ -174,7 +174,6 @@ extension EditTripViewController : UITableViewDataSource {
                 cell.cellType = .input
                 cell.inputField.text = trip.name == "" ? "New trip": trip.name
                 cell.selectionStyle = .none
-                cell.configure(section: indexPath.section, index: indexPath.row, trip: trip)
                 cell.didModifyInputField = { newText in
                     self.cells[indexPath.section][indexPath.row].text = newText
                     self.trip.name = newText
@@ -189,7 +188,6 @@ extension EditTripViewController : UITableViewDataSource {
                 cell.inputField.attributedPlaceholder =
                     self.trip.location == "" ? NSAttributedString(string: "Location", attributes: placeholderAttrs) : NSAttributedString(string: trip.location, attributes: labelAttrs)
                 cell.selectionStyle = .none
-                cell.configure(section: indexPath.section, index: indexPath.row, trip: trip)
                 cell.didModifyInputField = { newText in
                     self.cells[indexPath.section][indexPath.row].text = newText
                     self.trip.location = newText
@@ -207,9 +205,7 @@ extension EditTripViewController : UITableViewDataSource {
                 cell.selectionStyle = .none
                 cell.inputField.text = pathCell.text
                 cell.inputField.attributedPlaceholder = NSAttributedString(string: "Placeholder", attributes: placeholderAttrs)
-                cell.configure(section: indexPath.section, index: indexPath.row, trip: trip)
                 cell.didModifyInputField = { newText in
-//                    self.cells[indexPath.section][indexPath.row].text = newText
                     self.trip.days[indexPath.section - 1].attractions[indexPath.row] = newText
                 }
                 return cell
@@ -220,7 +216,6 @@ extension EditTripViewController : UITableViewDataSource {
                 cell.selectionStyle = .none
                 cell.inputField.text = pathCell.text
                 cell.inputField.attributedPlaceholder = NSAttributedString(string: "Placeholder", attributes: placeholderAttrs)
-                cell.configure(section: indexPath.section, index: indexPath.row, trip: trip)
                 cell.didModifyInputField = { newText in
                     //                    self.cells[indexPath.section][indexPath.row].text = newText
                     self.trip.days[indexPath.section - 1].restaurants[indexPath.row-(self.trip.days[indexPath.section-1].attractions.count+1)] = newText
@@ -232,7 +227,6 @@ extension EditTripViewController : UITableViewDataSource {
                 let cell = tableView.dequeueReusableCell(withIdentifier: buttonReuseIdentifier, for: indexPath) as! ButtonTableViewCell
                 cell.cellType = .aButton
                 cell.buttonLabel.text = pathCell.text
-                cell.configure(section: indexPath.section, index: indexPath.row, trip: trip)
                 return cell
             }
             //add restaurant cells
@@ -240,7 +234,6 @@ extension EditTripViewController : UITableViewDataSource {
                 let cell = tableView.dequeueReusableCell(withIdentifier: buttonReuseIdentifier, for: indexPath) as! ButtonTableViewCell
                 cell.cellType = .rButton
                 cell.buttonLabel.text = pathCell.text
-                cell.configure(section: indexPath.section, index: indexPath.row, trip: trip)
                 return cell
             }
         }
