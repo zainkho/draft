@@ -78,7 +78,7 @@ class TripViewController: UIViewController {
         
         subtitleLabel = UILabel()
         subtitleLabel.font = UIFont.LABEL
-        subtitleLabel.text = String(trip.length) + " days · " + trip.location
+        subtitleLabel.text = String(trip.length()) + " days · " + trip.location
         subtitleLabel.textColor = OCEAN
         view.addSubview(subtitleLabel)
         

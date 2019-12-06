@@ -61,7 +61,7 @@ class HeaderView: UICollectionReusableView {
     }
     
     @objc func presentEditViewController() {
-        presentDelegate?.presentNewTripViewController(trip: Trip(emoji: randomEmoji(), name: "New trip", location: "", length: 1, days: [Day(num: 1, attractions: [""], restaurants: [""])]), title: "New Trip")
+        presentDelegate?.presentNewTripViewController(trip: Trip(emoji: randomEmoji(), name: "New trip", location: "", days: [Day(num: 1, attractions: [""], restaurants: [""])]), title: "New Trip")
     }
     
     required init?(coder: NSCoder) {

@@ -75,7 +75,7 @@ class EmptyStateView: UIView {
     }
     
     @objc func presentEditViewController() {
-        presentDelegate?.presentEditViewController(trip: Trip(emoji: randomEmoji(), name: "New trip", location: "", length: 1, days: [Day(num: 1, attractions: [], restaurants: [])]), title: "New Trip")
+        presentDelegate?.presentEditViewController(trip: Trip(emoji: randomEmoji(), name: "New trip", location: "", days: [Day(num: 1, attractions: [], restaurants: [])]), title: "New Trip")
     }
     
     required init?(coder: NSCoder) {
