@@ -19,6 +19,8 @@
 		2F7AC75E238071AE00A7FC3A /* TripCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7AC75D238071AE00A7FC3A /* TripCollectionViewCell.swift */; };
 		2FC03DDD2396F7FB0032B219 /* TripTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC03DDC2396F7FB0032B219 /* TripTableViewCell.swift */; };
 		2FEA8F272399FBA8009EC21D /* NewTripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEA8F262399FBA7009EC21D /* NewTripViewController.swift */; };
+		2FEA8F29239A05C2009EC21D /* TripViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEA8F28239A05C2009EC21D /* TripViewCellModel.swift */; };
+		2FEA8F2B239A081A009EC21D /* TripHeadingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEA8F2A239A081A009EC21D /* TripHeadingTableViewCell.swift */; };
 		54B4A8D565F301DE23806E91 /* Pods_Draft.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C89E6EEE7B250728F530A48B /* Pods_Draft.framework */; };
 		5DDE1C5F2384DFED009523EE /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDE1C5E2384DFED009523EE /* Networking.swift */; };
 		921649B62383A340000CADF7 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921649B52383A340000CADF7 /* HeaderView.swift */; };
@@ -46,6 +48,8 @@
 		2F7AC75D238071AE00A7FC3A /* TripCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripCollectionViewCell.swift; sourceTree = "<group>"; };
 		2FC03DDC2396F7FB0032B219 /* TripTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TripTableViewCell.swift; path = Draft/Cells/TripTableViewCell.swift; sourceTree = SOURCE_ROOT; };
 		2FEA8F262399FBA7009EC21D /* NewTripViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTripViewController.swift; sourceTree = "<group>"; };
+		2FEA8F28239A05C2009EC21D /* TripViewCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripViewCellModel.swift; sourceTree = "<group>"; };
+		2FEA8F2A239A081A009EC21D /* TripHeadingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripHeadingTableViewCell.swift; sourceTree = "<group>"; };
 		56FF142833CF044F66D0F902 /* Pods-Draft.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Draft.debug.xcconfig"; path = "Target Support Files/Pods-Draft/Pods-Draft.debug.xcconfig"; sourceTree = "<group>"; };
 		5DDE1C5E2384DFED009523EE /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		921649B52383A340000CADF7 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
@@ -122,6 +126,7 @@
 				2F7AC75B2380656D00A7FC3A /* Trip.swift */,
 				2F796F74238324AA00D143FE /* Day.swift */,
 				2F18FEE52384DC1800B9239A /* InputCell.swift */,
+				2FEA8F28239A05C2009EC21D /* TripViewCellModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -151,6 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				2F7AC75D238071AE00A7FC3A /* TripCollectionViewCell.swift */,
+				2FEA8F2A239A081A009EC21D /* TripHeadingTableViewCell.swift */,
 				2F18FEE12384D9E800B9239A /* InputTableViewCell.swift */,
 				2FC03DDC2396F7FB0032B219 /* TripTableViewCell.swift */,
 				2F1997C4238D8FDC0037CEF2 /* ButtonTableViewCell.swift */,
@@ -292,11 +298,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2FEA8F2B239A081A009EC21D /* TripHeadingTableViewCell.swift in Sources */,
 				2F18FEE62384DC1800B9239A /* InputCell.swift in Sources */,
 				2F7AC75C2380656D00A7FC3A /* Trip.swift in Sources */,
 				9279F8FE2384A8BF00143DAC /* TripViewController.swift in Sources */,
 				2F7AC75E238071AE00A7FC3A /* TripCollectionViewCell.swift in Sources */,
 				2FC03DDD2396F7FB0032B219 /* TripTableViewCell.swift in Sources */,
+				2FEA8F29239A05C2009EC21D /* TripViewCellModel.swift in Sources */,
 				5DDE1C5F2384DFED009523EE /* Networking.swift in Sources */,
 				2F7AC74C23805CB600A7FC3A /* ViewController.swift in Sources */,
 				2F796F75238324AA00D143FE /* Day.swift in Sources */,

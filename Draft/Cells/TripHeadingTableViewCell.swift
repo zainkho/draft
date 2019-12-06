@@ -1,17 +1,18 @@
 //
-//  TripTableViewCell.swift
+//  TripHeadingTableViewCell.swift
 //  Draft
 //
-//  Created by Olivia on 12/3/19.
+//  Created by Olivia on 12/5/19.
 //
 
 import UIKit
 
-class TripTableViewCell: UITableViewCell {
-
+class TripHeadingTableViewCell: UITableViewCell {
+    
     var cellLabel: UILabel!
+    var img: String!
     var cellType: tripCellType!
-
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
