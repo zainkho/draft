@@ -1,14 +1,13 @@
 //
-//  EditTripViewController.swift
+//  NewTripViewController.swift
 //  Draft
 //
-//  Created by Zain Khoja on 11/19/19.
+//  Created by Olivia on 12/5/19.
 //
 
 import UIKit
-import SnapKit
 
-class EditTripViewController: UIViewController {
+class NewTripViewController: UIViewController {
     
     var trip: Trip
     var tableView: UITableView!
@@ -28,7 +27,7 @@ class EditTripViewController: UIViewController {
         self.trip = trip
         self.tripName = trip.name
         self.location = trip.location
-//        self.days = [Day(num: 1, attractions: [], restaurants: [])]
+        //        self.days = [Day(num: 1, attractions: [], restaurants: [])]
         super.init(nibName: nil, bundle: nil)
         self.title = title
     }
@@ -42,14 +41,14 @@ class EditTripViewController: UIViewController {
         
         // Appearance
         title = self.title
-
+        
         navigationController?.navigationBar.titleTextAttributes = labelAttrs
         // Cancel button
         let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelPressed))
         cancelButton.tintColor = .SPACE
         navigationItem.leftBarButtonItem = cancelButton
         // Add button
-        let addButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(donePressed))
+        let addButton = UIBarButtonItem(title: "Add", style: .done, target: self, action: #selector(donePressed))
         addButton.tintColor = .SPACE
         navigationItem.rightBarButtonItem = addButton
         
@@ -64,8 +63,8 @@ class EditTripViewController: UIViewController {
         tableView.register(InputTableViewCell.self, forCellReuseIdentifier: inputReuseIdentifier)
         tableView.register(ButtonTableViewCell.self, forCellReuseIdentifier: buttonReuseIdentifier)
         view.addSubview(tableView)
-
-        setupConstraints() 
+        
+        setupConstraints()
     }
     
     func setupConstraints() {
@@ -79,18 +78,18 @@ class EditTripViewController: UIViewController {
     }
     
     @objc func donePressed() {
-        reloadDelegate.reloadTrips(trip: nil)
+        reloadDelegate.reloadTrips(trip: trip)
         dismiss(animated: true)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     @objc func dismissViewController() {
         dismiss(animated: true, completion: nil)
     }
-
+    
     func createCellsFromTrip(trip: Trip) -> [[InputCell]] {
         var inputCells = [[InputCell]]()
         let days = trip.days
@@ -110,7 +109,7 @@ class EditTripViewController: UIViewController {
     }
 }
 
-extension EditTripViewController : UITableViewDelegate {
+extension NewTripViewController : UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return CELL_HEIGHT
@@ -149,7 +148,7 @@ extension EditTripViewController : UITableViewDelegate {
 }
 
 
-extension EditTripViewController : UITableViewDataSource {
+extension NewTripViewController : UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1 + trip.days.count
@@ -197,7 +196,7 @@ extension EditTripViewController : UITableViewDataSource {
                 return cell
             }
         }
-        //for all other sections
+            //for all other sections
         else {
             let pathCell = cells[indexPath.section-1][indexPath.row]
             //input cells
@@ -214,7 +213,7 @@ extension EditTripViewController : UITableViewDataSource {
                 }
                 return cell
             }
-            else if pathCell.type == .rinput {
+            if pathCell.type == .rinput {
                 let cell = tableView.dequeueReusableCell(withIdentifier: inputReuseIdentifier, for: indexPath) as! InputTableViewCell
                 cell.cellType = .rinput
                 cell.selectionStyle = .none
@@ -223,11 +222,11 @@ extension EditTripViewController : UITableViewDataSource {
                 cell.configure(section: indexPath.section, index: indexPath.row, trip: trip)
                 cell.didModifyInputField = { newText in
                     //                    self.cells[indexPath.section][indexPath.row].text = newText
-                    self.trip.days[indexPath.section - 1].restaurants[indexPath.row-(self.trip.days[indexPath.section-1].attractions.count+1)] = newText
+                 self.trip.days[indexPath.section - 1].restaurants[indexPath.row-(self.trip.days[indexPath.section-1].attractions.count+1)] = newText
                 }
                 return cell
             }
-            //add attraction cells
+                //add attraction cells
             else if cells[indexPath.section-1][indexPath.row].type == .aButton {
                 let cell = tableView.dequeueReusableCell(withIdentifier: buttonReuseIdentifier, for: indexPath) as! ButtonTableViewCell
                 cell.cellType = .aButton
@@ -235,7 +234,7 @@ extension EditTripViewController : UITableViewDataSource {
                 cell.configure(section: indexPath.section, index: indexPath.row, trip: trip)
                 return cell
             }
-            //add restaurant cells
+                //add restaurant cells
             else {
                 let cell = tableView.dequeueReusableCell(withIdentifier: buttonReuseIdentifier, for: indexPath) as! ButtonTableViewCell
                 cell.cellType = .rButton
@@ -246,3 +245,4 @@ extension EditTripViewController : UITableViewDataSource {
         }
     }
 }
+

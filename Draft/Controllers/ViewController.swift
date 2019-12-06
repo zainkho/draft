@@ -12,8 +12,12 @@ protocol PresentEditCardDelegate: class {
     func presentEditViewController(trip: Trip, title: String)
 }
 
+protocol PresentNewTripDelegate: class {
+    func presentNewTripViewController(trip: Trip, title: String)
+}
+
 protocol ReloadTripDelegate: class {
-    func reloadTrips()
+    func reloadTrips(trip: Trip?)
 }
 
 class ViewController: UIViewController {
@@ -218,7 +222,20 @@ extension ViewController : PresentEditCardDelegate {
 }
 
 extension ViewController : ReloadTripDelegate {
-    func reloadTrips() {
+    func reloadTrips(trip: Trip?) {
+        if let newTrip = trip {
+            trips.append(newTrip)
+        }
         self.collectionView.reloadData()
+    }
+}
+
+extension ViewController : PresentNewTripDelegate {
+    func presentNewTripViewController(trip: Trip, title: String) {
+        let viewController = NewTripViewController(trip: trip, title: title)
+        viewController.reloadDelegate = self
+        let newTripViewController = UINavigationController(rootViewController: viewController)
+        
+        present(newTripViewController, animated: true, completion: nil)
     }
 }

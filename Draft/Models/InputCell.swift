@@ -9,6 +9,8 @@ import Foundation
 
 enum cellType: String {
     case input
+    case ainput
+    case rinput
     case aButton
     case rButton
 }
