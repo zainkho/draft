@@ -8,18 +8,16 @@
 import UIKit
 import SnapKit
 
-enum State {
-    case loading
-    case past([Trip])
-    case future([Trip])
-}
-
-protocol EditTripDelegate: class {
-    
-}
-
 protocol PresentEditCardDelegate: class {
     func presentEditViewController(trip: Trip, title: String)
+}
+
+protocol PresentNewTripDelegate: class {
+    func presentNewTripViewController(trip: Trip, title: String)
+}
+
+protocol ReloadTripDelegate: class {
+    func reloadTrips(trip: Trip?)
 }
 
 class ViewController: UIViewController {
@@ -34,8 +32,6 @@ class ViewController: UIViewController {
     let tripCellReuseIdentifier = "tripCellReuseIdentifier"
     let headerViewReuseIdentifier = "filterViewReuseIdentifier"
     
-    var pastTrips: [Trip]!
-    var futureTrips: [Trip]!
     var trips: [Trip]!
     
     let HEADER_HEIGHT: CGFloat = 168
@@ -68,10 +64,8 @@ class ViewController: UIViewController {
         let day1 = Day(num: 1, attractions: ["statue of liberty","empire state building"], restaurants: ["ichiran", "chipotle"])
         let day2 = Day(num: 2, attractions: ["uh","uhh"], restaurants: ["yum", "tasty"])
         let nyc = Trip(emoji: randomEmoji(), name:"NYC Spring Break", location: "nyc", length: 3, days: [day1, day2] )
-        pastTrips = [nyc, nyc, nyc, nyc, nyc, nyc, nyc, nyc]
-        trips = pastTrips
-//        trips = []
-        
+        trips = [nyc, nyc, nyc, nyc, nyc, nyc, nyc, nyc]
+
         // Set up tripsLayout
         let tripsLayout = UICollectionViewFlowLayout()
         tripsLayout.scrollDirection = .vertical
@@ -219,9 +213,29 @@ extension ViewController: UICollectionViewDelegateFlowLayout {
 extension ViewController : PresentEditCardDelegate {
     func presentEditViewController(trip: Trip, title: String) {
         let viewController = EditTripViewController(trip: trip, title: title)
+        viewController.reloadDelegate = self
         let editTripViewController = UINavigationController(rootViewController: viewController)
         
         present(editTripViewController, animated: true, completion: nil)
     }
     
+}
+
+extension ViewController : ReloadTripDelegate {
+    func reloadTrips(trip: Trip?) {
+        if let newTrip = trip {
+            trips.append(newTrip)
+        }
+        self.collectionView.reloadData()
+    }
+}
+
+extension ViewController : PresentNewTripDelegate {
+    func presentNewTripViewController(trip: Trip, title: String) {
+        let viewController = NewTripViewController(trip: trip, title: title)
+        viewController.reloadDelegate = self
+        let newTripViewController = UINavigationController(rootViewController: viewController)
+        
+        present(newTripViewController, animated: true, completion: nil)
+    }
 }
