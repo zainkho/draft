@@ -156,8 +156,8 @@ class ViewController: UIViewController {
     }
     
     func randomEmoji() -> String {
-        let emojiStart = 0x1F601
-        let ascii = emojiStart + Int(arc4random_uniform(UInt32(35)))
+        let emojiStart = 0x1F300
+        let ascii = emojiStart + Int(arc4random_uniform(UInt32(13)))
         let emoji = UnicodeScalar(ascii)?.description
         return emoji ?? "x"
     }

@@ -22,11 +22,18 @@ class TripViewController: UIViewController {
     var subtitleLabel: UILabel!
     let tripReuseIdentifier = "tripReuseIdentifier"
     
+    var headerGradientView: UIView!
+    var headerGradient: CAGradientLayer!
+    var footerGradientView: UIView!
+    var footerGradient: CAGradientLayer!
+    
     let TITLE_TEXT_HEIGHT: CGFloat = 41
     let HEADER_TEXT_HEIGHT: CGFloat = 29
     let BODY_TEXT_HEIGHT: CGFloat = 19
-    let CELL_HEIGHT: CGFloat = 48
+    let CELL_HEIGHT: CGFloat = 24
     var HEADER_HEIGHT: CGFloat = 168
+    let HEADER_LABEL_HEIGHT: CGFloat = 68
+    let GRADIENT_HEIGHT: CGFloat = 96
     
     let BREEZE = UIColor(red: 239/255, green: 246/255, blue: 255/255, alpha: 1.0)
     var CREAM = UIColor(red: 255/255, green: 251/255, blue: 242/255, alpha: 1.0)
@@ -75,13 +82,49 @@ class TripViewController: UIViewController {
         subtitleLabel.textColor = OCEAN
         view.addSubview(subtitleLabel)
         
-        tableView = UITableView()
+        tableView = UITableView(frame: CGRect(), style: .grouped)
+        tableView.backgroundColor = .none
+        tableView.separatorStyle = .none
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(TripTableViewCell.self, forCellReuseIdentifier: tripReuseIdentifier)
         view.addSubview(tableView)
         
+        // headerGradient
+        headerGradientView = UIView()
+        headerGradient = CAGradientLayer()
+        headerGradient.colors = [UIColor.CREAM.cgColor, UIColor.CLEAR.cgColor]
+        headerGradientView.layer.insertSublayer(headerGradient, at: 0)
+        view.addSubview(headerGradientView)
+        
+        // footerGradient
+        footerGradientView = UIView()
+        footerGradient = CAGradientLayer()
+        footerGradient.colors = [UIColor.CLEAR.cgColor, UIColor.CREAM.cgColor]
+        footerGradientView.layer.insertSublayer(footerGradient, at: 0)
+        view.addSubview(footerGradientView)
+        
+        // Bring cloudy gradients to front
+        view.bringSubviewToFront(headerGradientView)
+        view.bringSubviewToFront(footerGradientView)
+        
         setupConstraints()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        headerGradient.frame = headerGradientView.bounds
+        footerGradient.frame = footerGradientView.bounds
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if tableView.contentOffset.y <= 1 {
+            headerGradient.opacity = 0
+        }
+        else {
+            headerGradient.opacity = 1
+        }
     }
     
     func setupConstraints() {
@@ -116,6 +159,22 @@ class TripViewController: UIViewController {
             make.width.equalTo(view.frame.width - SPACING_16*2)
             make.height.equalTo(BODY_TEXT_HEIGHT)
         }
+        
+        tableView.snp.makeConstraints { (make) in
+            make.top.equalTo(subtitleLabel.snp.bottomMargin).offset(SPACING_8)
+            make.leading.trailing.bottom.equalToSuperview()
+        }
+        
+        headerGradientView.snp.makeConstraints { (make) in
+            make.top.equalTo(subtitleLabel.snp.bottom)
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(GRADIENT_HEIGHT)
+        }
+        
+        footerGradientView.snp.makeConstraints { (make) in
+            make.bottom.leading.trailing.equalToSuperview()
+            make.height.equalTo(GRADIENT_HEIGHT)
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -148,23 +207,13 @@ extension TripViewController: UITableViewDelegate {
         return CELL_HEIGHT
     }
     
-//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        if section == 0 {
-//            return UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: CELL_HEIGHT))
-//        }
-//        else {
-//            return HeaderLabelView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: HEADER_HEIGHT))
-//        }
-//    }
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return HeaderLabelView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: HEADER_HEIGHT), dayNum: section)
+    }
     
-//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        if section == 0 {
-//            return CELL_HEIGHT
-//        }
-//        else {
-//            return HEADER_LABEL_HEIGHT
-//        }
-//    }
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return HEADER_LABEL_HEIGHT
+    }
 }
 
 extension TripViewController: UITableViewDataSource {
@@ -172,6 +221,7 @@ extension TripViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: tripReuseIdentifier, for: indexPath) as! TripTableViewCell
         cell.cellLabel.text = cells[indexPath.section][indexPath.row]
+        
         return cell
     }
     
