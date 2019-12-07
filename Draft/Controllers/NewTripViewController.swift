@@ -56,14 +56,14 @@ class NewTripViewController: UIViewController {
         cells = createCellsFromTrip(trip: self.trip)
         
         // Set up tableView
-        tableView = UITableView()
+        tableView = UITableView(frame: CGRect(), style: .grouped)
         tableView.backgroundColor = .CREAM
         tableView.separatorColor = .RAIN
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(InputTableViewCell.self, forCellReuseIdentifier: inputReuseIdentifier)
         tableView.register(ButtonTableViewCell.self, forCellReuseIdentifier: buttonReuseIdentifier)
-        let buttonFooterView = ButtonFooterView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: BUTTON_FOOTER_HEIGHT))
+        let buttonFooterView = ButtonFooterView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: BUTTON_FOOTER_HEIGHT))
         buttonFooterView.addDayDelegate = self
         tableView.tableFooterView = buttonFooterView
         view.addSubview(tableView)

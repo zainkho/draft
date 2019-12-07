@@ -12,6 +12,8 @@ class ButtonFooterView: UIView {
     var addDayButton: UIButton!
     var addDayDelegate: AddDayDelegate?
     
+    let BUTTON_HEIGHT: CGFloat = 50
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
 
@@ -36,8 +38,8 @@ class ButtonFooterView: UIView {
         // addDayButton
         addDayButton.snp.makeConstraints { (make) in
             make.top.equalToSuperview().offset(SPACING_24)
-            make.height.equalTo(50)
             make.leading.trailing.equalToSuperview().inset(SPACING_16)
+            make.height.equalTo(BUTTON_HEIGHT)
         }
     }
     
