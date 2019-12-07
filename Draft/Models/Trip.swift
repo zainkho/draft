@@ -21,6 +21,7 @@ class Trip {
         self.location = location
         self.days = days
         self.len = self.days.count
+        self.url = "https://images.unsplash.com/photo-1535726917010-060104716686?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjEwMjY4OH0"
     }
     
     func length() -> Int {

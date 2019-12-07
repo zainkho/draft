@@ -13,9 +13,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-//        Networking.shared.getUsers { (result) in
-//            print(result)
-//        }
+        
+        let userDefaults = UserDefaults.standard
+        if userDefaults.value(forKey: "user") == nil {
+            let userID = UUID().uuidString
+            Networking.shared.createUser(userID: userID) { (userID) in
+                userDefaults.set(userID, forKey: "user")
+            }
+        }
 
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = UINavigationController(rootViewController: ViewController())

@@ -60,7 +60,7 @@ class TripViewController: UIViewController {
         
         headerImageView = UIImageView()
         headerImageView.backgroundColor = .darkGray
-        headerImageView.kf.setImage(with: URL(string: trip.url)
+        headerImageView.kf.setImage(with: URL(string: trip.url))
         headerImageView.contentMode = .scaleAspectFill
         headerImageView.clipsToBounds = true
         view.addSubview(headerImageView)

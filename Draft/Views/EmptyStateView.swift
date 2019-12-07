@@ -18,7 +18,7 @@ class EmptyStateView: UIView {
     let TAGLINE_HEIGHT: CGFloat = 144
     let BUTTON_HEIGHT: CGFloat = 50
     
-    var presentDelegate: PresentEditCardDelegate?
+    var presentDelegate: PresentNewTripDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -75,7 +75,7 @@ class EmptyStateView: UIView {
     }
     
     @objc func presentEditViewController() {
-        presentDelegate?.presentEditViewController(trip: Trip(emoji: randomEmoji(), name: "New trip", location: "", days: [Day(num: 1, attractions: [], restaurants: [])]), title: "New Trip")
+        presentDelegate?.presentNewTripViewController(trip: Trip(emoji: randomEmoji(), name: "New trip", location: "", days: [Day(num: 1, attractions: [""], restaurants: [""])]), title: "New Trip")
     }
     
     required init?(coder: NSCoder) {

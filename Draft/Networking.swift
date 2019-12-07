@@ -113,38 +113,6 @@ final class Networking {
     }
 
     static let shared = Networking()
-
-//    func getUsers(_ completion: @escaping (Result<[User], Swift.Error>) -> Void) {
-//        guard let usersUrl = URL(string: "https://draft-backend.duckdns.org/api/users/") else {
-//            completion(.success([]))
-//            return
-//        }
-//
-//        let task = URLSession.shared.dataTask(with: usersUrl) { (data, response, error) in
-//            guard let data = data, error == nil else {
-//                completion(error.map { .failure($0) } ?? .success([]))
-//                return
-//            }
-//
-//            do {
-//                guard let response = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
-//                    completion(.success([]))
-//                    return
-//                }
-//
-//                if let success = response["success"] as? Bool, success,
-//                    let usersArray = response["data"] as? [[String: Any]] {
-//                    completion(.success(usersArray.compactMap(User.init)))
-//                } else if let error = response["error"] as? String {
-//                    completion(.failure(Error.backendError(error)))
-//                }
-//            } catch {
-//                completion(.failure(error))
-//            }
-//        }
-//
-//        task.resume()
-//    }
     
     func getUser(forUser user: User, _ completion: @escaping (User) -> Void) {
         let user_id = user.id
@@ -182,9 +150,22 @@ final class Networking {
         }
     }
 
-    func createUser(userID: String) {
-        
-        
+    func createUser(userID: String, _ completion: @escaping (Int) -> Void) {
+        let params = ["name": userID]
+        let userEndpoint = "https://draft-backend.duckdns.org/api/users/"
+        Alamofire.request(userEndpoint, method: .post, parameters: params, encoding: JSONEncoding.default).validate().responseData { response in
+            switch response.result {
+            case .success(let data):
+                let jsonDecoder = JSONDecoder()
+                
+                if let userData = try? jsonDecoder.decode(APIResponse<User>.self, from: data) {
+                    completion(userData.data.id)
+                }
+                
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
     
     private init() {
