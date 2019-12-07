@@ -115,7 +115,6 @@ extension EditTripViewController : UITableViewDelegate {
         return CELL_HEIGHT
     }
     
-    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 0 {
             return UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: CELL_HEIGHT))
@@ -137,10 +136,14 @@ extension EditTripViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = cells[indexPath.section-1][indexPath.row]
         if cell.type == .aButton {
-            trip.days[indexPath.section-1].attractions.append("")
+            if !trip.days[indexPath.section-1].attractions.contains("") {
+                trip.days[indexPath.section-1].attractions.append("")
+            }
         }
         else if cell.type == .rButton {
-            trip.days[indexPath.section-1].restaurants.append("")
+            if !trip.days[indexPath.section-1].restaurants.contains("") {
+                trip.days[indexPath.section-1].restaurants.append("")
+            }
         }
         cells = createCellsFromTrip(trip: self.trip)
         tableView.reloadData()

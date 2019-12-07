@@ -29,7 +29,6 @@ class NewTripViewController: UIViewController {
         self.trip = trip
         self.tripName = trip.name
         self.location = trip.location
-        //        self.days = [Day(num: 1, attractions: [], restaurants: [])]
         super.init(nibName: nil, bundle: nil)
         self.title = title
     }
@@ -141,10 +140,14 @@ extension NewTripViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = cells[indexPath.section-1][indexPath.row]
         if cell.type == .aButton {
-            trip.days[indexPath.section-1].attractions.append("")
+            if !trip.days[indexPath.section-1].attractions.contains("") {
+                trip.days[indexPath.section-1].attractions.append("")
+            }
         }
         else if cell.type == .rButton {
-            trip.days[indexPath.section-1].restaurants.append("")
+            if !trip.days[indexPath.section-1].restaurants.contains("") {
+                trip.days[indexPath.section-1].restaurants.append("")
+            }
         }
         cells = createCellsFromTrip(trip: self.trip)
         tableView.reloadData()
