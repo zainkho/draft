@@ -13,6 +13,7 @@ class Trip {
     var location: String
     var len: Int
     var days: [Day]
+    var url: String
 
     init(emoji: String, name: String, location: String, days: [Day] ) {
         self.emoji = emoji
