@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Alamofire
 
 final class Networking {
 
@@ -20,7 +21,7 @@ final class Networking {
         }
     }
 
-    struct Entry {
+    struct Entry: Codable {
 
         let id: Int
         let description: String
@@ -54,7 +55,7 @@ final class Networking {
 
     }
 
-    struct Trip {
+    struct Trip: Codable {
 
         let id: Int
         let name: String
@@ -91,7 +92,7 @@ final class Networking {
 
     }
 
-    struct User {
+    struct User: Codable {
 
         let id: Int
         let name: String
@@ -144,9 +145,50 @@ final class Networking {
 
         task.resume()
     }
-
-    private init() {
+    
+    func getUser(forUser user: User, _ completion: @escaping (User) -> Void) {
+        let user_id = user.id
+        let userEndpoint = "https://draft-backend.duckdns.org/api/user/\(user_id)/"
+        Alamofire.request(userEndpoint, method: .get).validate().responseData { response in
+            switch response.result {
+            case .success(let data):
+                let jsonDecoder = JSONDecoder()
+                
+                if let userData = try? jsonDecoder.decode(User.self, from: data) {
+                    completion(userData)
+                }
+                
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func getTrips(forUser user: User, _ completion: @escaping ([Trip]) -> Void) {
+        let user_id = user.id
+        let userEndpoint = "https://draft-backend.duckdns.org/api/user/\(user_id)/"
+        Alamofire.request(userEndpoint, method: .get).validate().responseData { response in
+            switch response.result {
+            case .success(let data):
+                let jsonDecoder = JSONDecoder()
+                
+                if let userData = try? jsonDecoder.decode(User.self, from: data) {
+                    completion(userData.trips)
+                }
+                
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
 
+    func createUser(userID: String) {
+        
+        
+    }
+    
+    private init() {
+    }
+    
 }
 
