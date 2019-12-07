@@ -48,12 +48,12 @@ func randomEmoji() -> String {
     return emoji ?? "x"
 }
 
-func randomAttraction() -> String {
-    return sampleAttractions.randomElement()!
+func randomAttraction(index: Int) -> String {
+    return sampleAttractions[index % sampleAttractions.count]
 }
 
-func randomRestaurant() -> String {
-    return sampleRestaurants.randomElement()!
+func randomRestaurant(index: Int) -> String {
+    return sampleRestaurants[index % sampleRestaurants.count]
 }
 
 extension UIColor {
@@ -89,3 +89,10 @@ let labelAttrs = [
     NSAttributedString.Key.foregroundColor: UIColor.SPACE,
     NSAttributedString.Key.font: UIFont.LABEL!
 ]
+
+func randomUserID(length: Int) -> String {
+    let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+    return String((0..<length).map{ _ in letters.randomElement()! })
+}
+
+

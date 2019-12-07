@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Alamofire
 
 final class Networking {
 
@@ -20,7 +21,7 @@ final class Networking {
         }
     }
 
-    struct Entry {
+    struct Entry: Codable {
 
         let id: Int
         let description: String
@@ -54,7 +55,7 @@ final class Networking {
 
     }
 
-    struct Trip {
+    struct Trip: Codable {
 
         let id: Int
         let name: String
@@ -91,7 +92,7 @@ final class Networking {
 
     }
 
-    struct User {
+    struct User: Codable {
 
         let id: Int
         let name: String
@@ -113,40 +114,81 @@ final class Networking {
 
     static let shared = Networking()
 
-    func getUsers(_ completion: @escaping (Result<[User], Swift.Error>) -> Void) {
-        guard let usersUrl = URL(string: "https://draft-backend.duckdns.org/api/users/") else {
-            completion(.success([]))
-            return
-        }
-
-        let task = URLSession.shared.dataTask(with: usersUrl) { (data, response, error) in
-            guard let data = data, error == nil else {
-                completion(error.map { .failure($0) } ?? .success([]))
-                return
-            }
-
-            do {
-                guard let response = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
-                    completion(.success([]))
-                    return
+//    func getUsers(_ completion: @escaping (Result<[User], Swift.Error>) -> Void) {
+//        guard let usersUrl = URL(string: "https://draft-backend.duckdns.org/api/users/") else {
+//            completion(.success([]))
+//            return
+//        }
+//
+//        let task = URLSession.shared.dataTask(with: usersUrl) { (data, response, error) in
+//            guard let data = data, error == nil else {
+//                completion(error.map { .failure($0) } ?? .success([]))
+//                return
+//            }
+//
+//            do {
+//                guard let response = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+//                    completion(.success([]))
+//                    return
+//                }
+//
+//                if let success = response["success"] as? Bool, success,
+//                    let usersArray = response["data"] as? [[String: Any]] {
+//                    completion(.success(usersArray.compactMap(User.init)))
+//                } else if let error = response["error"] as? String {
+//                    completion(.failure(Error.backendError(error)))
+//                }
+//            } catch {
+//                completion(.failure(error))
+//            }
+//        }
+//
+//        task.resume()
+//    }
+    
+    func getUser(forUser user: User, _ completion: @escaping (User) -> Void) {
+        let user_id = user.id
+        let userEndpoint = "https://draft-backend.duckdns.org/api/user/\(user_id)/"
+        Alamofire.request(userEndpoint, method: .get).validate().responseData { response in
+            switch response.result {
+            case .success(let data):
+                let jsonDecoder = JSONDecoder()
+                
+                if let userData = try? jsonDecoder.decode(User.self, from: data) {
+                    completion(userData)
                 }
-
-                if let success = response["success"] as? Bool, success,
-                    let usersArray = response["data"] as? [[String: Any]] {
-                    completion(.success(usersArray.compactMap(User.init)))
-                } else if let error = response["error"] as? String {
-                    completion(.failure(Error.backendError(error)))
-                }
-            } catch {
-                completion(.failure(error))
+                
+            case .failure(let error):
+                print(error.localizedDescription)
             }
         }
-
-        task.resume()
+    }
+    
+    func getTrips(forUser user: User, _ completion: @escaping ([Trip]) -> Void) {
+        let user_id = user.id
+        let userEndpoint = "https://draft-backend.duckdns.org/api/user/\(user_id)/"
+        Alamofire.request(userEndpoint, method: .get).validate().responseData { response in
+            switch response.result {
+            case .success(let data):
+                let jsonDecoder = JSONDecoder()
+                
+                if let userData = try? jsonDecoder.decode(User.self, from: data) {
+                    completion(userData.trips)
+                }
+                
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
 
+    func createUser(userID: String) {
+        
+        
+    }
+    
     private init() {
     }
-
+    
 }
 

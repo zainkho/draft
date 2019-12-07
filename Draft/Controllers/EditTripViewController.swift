@@ -206,7 +206,7 @@ extension EditTripViewController : UITableViewDataSource {
                 cell.cellType = .ainput
                 cell.selectionStyle = .none
                 cell.inputField.text = pathCell.text
-                cell.inputField.attributedPlaceholder = NSAttributedString(string: randomAttraction(), attributes: placeholderAttrs)
+                cell.inputField.attributedPlaceholder = NSAttributedString(string: randomAttraction(index: indexPath.row+indexPath.section), attributes: placeholderAttrs)
                 cell.didModifyInputField = { newText in
                     self.trip.days[indexPath.section - 1].attractions[indexPath.row] = newText
                 }
@@ -217,7 +217,7 @@ extension EditTripViewController : UITableViewDataSource {
                 cell.cellType = .rinput
                 cell.selectionStyle = .none
                 cell.inputField.text = pathCell.text
-                cell.inputField.attributedPlaceholder = NSAttributedString(string: randomRestaurant(), attributes: placeholderAttrs)
+                cell.inputField.attributedPlaceholder = NSAttributedString(string: randomRestaurant(index: indexPath.row+indexPath.section), attributes: placeholderAttrs)
                 cell.didModifyInputField = { newText in
                     self.trip.days[indexPath.section - 1].restaurants[indexPath.row-(self.trip.days[indexPath.section-1].attractions.count+1)] = newText
                 }
