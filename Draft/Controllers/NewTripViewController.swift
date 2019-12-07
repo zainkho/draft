@@ -17,6 +17,7 @@ class NewTripViewController: UIViewController {
     var location: String
     
     var reloadDelegate: ReloadTripDelegate!
+    var emptyStateDelegate: EmptyStateDelegate!
     
     let inputReuseIdentifier = "inputCellReuseIdentifiers"
     let buttonReuseIdentifier = "buttonCellReuseIdentifiers"
@@ -82,6 +83,7 @@ class NewTripViewController: UIViewController {
     }
     
     @objc func donePressed() {
+        emptyStateDelegate.dismissEmptyState()
         reloadDelegate.reloadTrips(trip: trip)
         dismiss(animated: true)
     }

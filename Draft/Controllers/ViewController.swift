@@ -24,6 +24,10 @@ protocol AddDayDelegate: class {
     func addDay()
 }
 
+protocol EmptyStateDelegate: class {
+    func dismissEmptyState()
+}
+
 class ViewController: UIViewController {
     
     var collectionView: UICollectionView!
@@ -218,7 +222,7 @@ extension ViewController : PresentEditCardDelegate {
     
 }
 
-extension ViewController : ReloadTripDelegate {
+extension ViewController: ReloadTripDelegate {
     func reloadTrips(trip: Trip?) {
         if let newTrip = trip {
             trips.append(newTrip)
@@ -227,12 +231,19 @@ extension ViewController : ReloadTripDelegate {
     }
 }
 
-extension ViewController : PresentNewTripDelegate {
+extension ViewController: PresentNewTripDelegate {
     func presentNewTripViewController(trip: Trip, title: String) {
         let viewController = NewTripViewController(trip: trip, title: title)
         viewController.reloadDelegate = self
+        viewController.emptyStateDelegate = self
         let newTripViewController = UINavigationController(rootViewController: viewController)
         
         present(newTripViewController, animated: true, completion: nil)
+    }
+}
+
+extension ViewController: EmptyStateDelegate {
+    func dismissEmptyState() {
+        emptyState.alpha = 0
     }
 }

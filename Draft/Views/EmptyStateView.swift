@@ -48,7 +48,7 @@ class EmptyStateView: UIView {
         startButton.layer.shadowRadius = 3
         addSubview(startButton)
         
-        startButton.addTarget(self, action: #selector(presentEditViewController), for: .touchUpInside)
+        startButton.addTarget(self, action: #selector(presentNewTripViewController), for: .touchUpInside)
 
         setupConstraints()
     }
@@ -74,7 +74,7 @@ class EmptyStateView: UIView {
         }
     }
     
-    @objc func presentEditViewController() {
+    @objc func presentNewTripViewController() {
         presentDelegate?.presentNewTripViewController(trip: Trip(emoji: randomEmoji(), name: "New trip", location: "", days: [Day(num: 1, attractions: [""], restaurants: [""])]), title: "New Trip")
     }
     

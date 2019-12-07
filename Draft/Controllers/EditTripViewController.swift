@@ -243,7 +243,7 @@ extension EditTripViewController : UITableViewDataSource {
     }
 }
 
-extension EditTripViewController : AddDayDelegate {
+extension EditTripViewController: AddDayDelegate {
     func addDay() {
         self.trip.days.append(Day(num: trip.days.count+1, attractions: [""], restaurants: [""]))
         reloadDelegate.reloadTrips(trip: nil)
