@@ -56,7 +56,7 @@ class NewTripViewController: UIViewController {
         cells = createCellsFromTrip(trip: self.trip)
         
         // Set up tableView
-        tableView = UITableView()
+        tableView = UITableView(frame: CGRect(), style: .grouped)
         tableView.backgroundColor = .CREAM
         tableView.separatorColor = .RAIN
         tableView.dataSource = self
