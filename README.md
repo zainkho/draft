@@ -4,7 +4,7 @@
 ### Embracing spontaneity in travel
 Draft is for those who get caught up in the magic of ideas. For the times when your friend suggested you visit the glaciers of Greenland or ski on the slopes in Slovakia, Draft is there is help you keep track of where you want to go and what you want to do.
 
-<img width="1369" alt="README-mockup" src="https://user-images.githubusercontent.com/6846673/70396642-d11a1800-19d8-11ea-9ef3-0caa29f72cc2.png">
+<img width="1369" alt="README-mockup" src="https://user-images.githubusercontent.com/6846673/70397016-708cda00-19dc-11ea-8591-dee5581be768.png">
 
 ## Features
 ### Create a Trip
