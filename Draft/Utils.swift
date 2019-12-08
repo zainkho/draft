@@ -95,4 +95,25 @@ func randomUserID(length: Int) -> String {
     return String((0..<length).map{ _ in letters.randomElement()! })
 }
 
-
+func daysToEntries(days: [Day]) -> [[String:Any]] {
+    
+    var entries = [[String:Any]]()
+    for day in days {
+        for attraction in day.attractions {
+            entries.append([
+                "description": attraction,
+                "kind": "attraction",
+                "day_index": day.num
+            ])
+        }
+        for restaurant in day.restaurants {
+            entries.append([
+                "description": restaurant,
+                "kind": "restaurant",
+                "day_index": day.num
+            ])
+        }
+    }
+    
+    return entries
+}

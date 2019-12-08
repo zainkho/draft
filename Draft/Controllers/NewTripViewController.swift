@@ -84,7 +84,16 @@ class NewTripViewController: UIViewController {
     
     @objc func donePressed() {
         emptyStateDelegate.dismissEmptyState()
-        reloadDelegate.reloadTrips(trip: trip)
+        
+        let userDefaults = UserDefaults.standard
+        if let userID = userDefaults.value(forKey: "user") as? Int {
+            
+            Networking.shared.createTrip(userID: userID, name: trip.name, start: trip.len, location: trip.location, entries: daysToEntries(days: trip.days)) { (trip) in
+                print(trip)
+            }
+        }
+        
+//        reloadDelegate.reloadTrips(trip: trip)
         dismiss(animated: true)
     }
     

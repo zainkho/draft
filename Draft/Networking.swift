@@ -21,40 +21,6 @@ final class Networking {
         }
     }
 
-    struct Entry: Codable {
-
-        let id: Int
-        let description: String
-        let dayIndex: Int
-
-        let kind: String?
-        let completed: Bool
-
-        init(id: Int, description: String, dayIndex: Int, kind: String?, completed: Bool) {
-            self.id = id
-            self.description = description
-            self.dayIndex = dayIndex
-            self.kind = kind
-            self.completed = completed
-        }
-
-        init?(json: [String: Any]) {
-            guard let id = json["id"] as? Int,
-                let description = json["description"] as? String,
-                let dayIndex = json["day_index"] as? Int else {
-                    return nil
-            }
-
-            self.id = id
-            self.description = description
-            self.dayIndex = dayIndex
-
-            self.kind = json["kind"] as? String
-            self.completed = json["completed"] as? Bool ?? false
-        }
-
-    }
-
     struct Trip: Codable {
 
         let id: Int
@@ -149,9 +115,28 @@ final class Networking {
         }
     }
     
-    func createTrip(userID: Int, name: String, start: Int, location: String, entries: [Entry], _ completion: @escaping (Int) -> Void) {
+    func createTrip(userID: Int, name: String, start: Int, location: String, entries: [[String:Any]], _ completion: @escaping (Int) -> Void) {
+
         let params = ["name": name, "start": start, "location": location, "entries": entries] as [String : Any]
-        let userEndpoint = "https://draft-backend.duckdns.org/api/user/\(userID)/trip"
+        let userEndpoint = "https://draft-backend.duckdns.org/api/user/\(userID)/trip/"
+        Alamofire.request(userEndpoint, method: .post, parameters: params, encoding: JSONEncoding.default).validate().responseData { response in
+            switch response.result {
+            case .success(let data):
+                let jsonDecoder = JSONDecoder()
+                
+                if let userData = try? jsonDecoder.decode(APIResponse<Trip>.self, from: data) {
+                    completion(userData.data.id)
+                }
+                
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func updateTrip(tripID: Int, name: String, start: Int, entries: [Entry], _ completion: @escaping (Int) -> Void) {
+        let params = ["name": name, "start": start, "entries": entries] as [String : Any]
+        let userEndpoint = "https://draft-backend.duckdns.org/api/trip/\(tripID)/"
         Alamofire.request(userEndpoint, method: .post, parameters: params, encoding: JSONEncoding.default).validate().responseData { response in
             switch response.result {
             case .success(let data):

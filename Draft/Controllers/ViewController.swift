@@ -222,7 +222,7 @@ extension ViewController : PresentEditCardDelegate {
 extension ViewController: ReloadTripDelegate {
     func reloadTrips(trip: Trip?) {
         if let newTrip = trip {
-            trips.append(newTrip)
+            trips.insert(newTrip, at: 0)
         }
         self.collectionView.reloadData()
     }

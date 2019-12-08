@@ -25,6 +25,7 @@
 		5DDE1C5F2384DFED009523EE /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDE1C5E2384DFED009523EE /* Networking.swift */; };
 		921649B62383A340000CADF7 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921649B52383A340000CADF7 /* HeaderView.swift */; };
 		9217A00E239C6235000C0E4A /* APIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9217A00D239C6235000C0E4A /* APIResponse.swift */; };
+		9217A010239C8672000C0E4A /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9217A00F239C8672000C0E4A /* Entry.swift */; };
 		9279F8F723848F0600143DAC /* NewYorkMedium-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9279F8F523848F0600143DAC /* NewYorkMedium-Bold.otf */; };
 		9279F8F823848F0600143DAC /* NewYorkMedium-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9279F8F623848F0600143DAC /* NewYorkMedium-Regular.otf */; };
 		9279F8FC2384A70400143DAC /* EditTripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9279F8FB2384A70400143DAC /* EditTripViewController.swift */; };
@@ -56,6 +57,7 @@
 		5DDE1C5E2384DFED009523EE /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		921649B52383A340000CADF7 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		9217A00D239C6235000C0E4A /* APIResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResponse.swift; sourceTree = "<group>"; };
+		9217A00F239C8672000C0E4A /* Entry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
 		9279F8F523848F0600143DAC /* NewYorkMedium-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NewYorkMedium-Bold.otf"; sourceTree = "<group>"; };
 		9279F8F623848F0600143DAC /* NewYorkMedium-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NewYorkMedium-Regular.otf"; sourceTree = "<group>"; };
 		9279F8FB2384A70400143DAC /* EditTripViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTripViewController.swift; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 				2F796F74238324AA00D143FE /* Day.swift */,
 				2F18FEE52384DC1800B9239A /* InputCell.swift */,
 				2FEA8F28239A05C2009EC21D /* TripViewCellModel.swift */,
+				9217A00F239C8672000C0E4A /* Entry.swift */,
 				9217A00D239C6235000C0E4A /* APIResponse.swift */,
 			);
 			path = Models;
@@ -310,6 +313,7 @@
 				92E17648239A043C006F184D /* ButtonFooterView.swift in Sources */,
 				9279F8FE2384A8BF00143DAC /* TripViewController.swift in Sources */,
 				2F7AC75E238071AE00A7FC3A /* TripCollectionViewCell.swift in Sources */,
+				9217A010239C8672000C0E4A /* Entry.swift in Sources */,
 				2FC03DDD2396F7FB0032B219 /* TripTableViewCell.swift in Sources */,
 				2FEA8F29239A05C2009EC21D /* TripViewCellModel.swift in Sources */,
 				5DDE1C5F2384DFED009523EE /* Networking.swift in Sources */,
