@@ -40,7 +40,7 @@ class ViewController: UIViewController {
     let tripCellReuseIdentifier = "tripCellReuseIdentifier"
     let headerViewReuseIdentifier = "filterViewReuseIdentifier"
     
-    var trips: [Trip]!
+    var trips = [Trip]()
     
     let HEADER_HEIGHT: CGFloat = 168
     let CELL_HEIGHT: CGFloat = 168
@@ -69,8 +69,6 @@ class ViewController: UIViewController {
         footerGradientView.layer.insertSublayer(footerGradient, at: 0)
         view.addSubview(footerGradientView)
         
-        trips = []
-
         // Set up tripsLayout
         let tripsLayout = UICollectionViewFlowLayout()
         tripsLayout.scrollDirection = .vertical
