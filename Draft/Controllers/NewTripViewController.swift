@@ -11,6 +11,7 @@ class NewTripViewController: UIViewController {
     
     var trip: Trip
     var tableView: UITableView!
+    var buttonFooterView: ButtonFooterView!
     var cells: [[InputCell]]!
     
     var tripName: String
@@ -57,24 +58,23 @@ class NewTripViewController: UIViewController {
         cells = createCellsFromTrip(trip: self.trip)
         
         // Set up tableView
-        tableView = UITableView(frame: CGRect(), style: .grouped)
+        tableView = UITableView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height), style: .grouped)
         tableView.backgroundColor = .CREAM
         tableView.separatorColor = .RAIN
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(InputTableViewCell.self, forCellReuseIdentifier: inputReuseIdentifier)
         tableView.register(ButtonTableViewCell.self, forCellReuseIdentifier: buttonReuseIdentifier)
-        let buttonFooterView = ButtonFooterView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: BUTTON_FOOTER_HEIGHT))
+        buttonFooterView = ButtonFooterView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: BUTTON_FOOTER_HEIGHT))
         buttonFooterView.addDayDelegate = self
         tableView.tableFooterView = buttonFooterView
         view.addSubview(tableView)
-
         setupConstraints()
     }
     
     func setupConstraints() {
         tableView.snp.makeConstraints { (make) in
-            make.top.leading.trailing.bottom.equalToSuperview()
+            make.edges.equalToSuperview()
         }
     }
     
