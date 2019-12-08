@@ -154,9 +154,9 @@
 			children = (
 				2F7AC74B23805CB600A7FC3A /* ViewController.swift */,
 				9279F8FB2384A70400143DAC /* EditTripViewController.swift */,
+				2FEA8F262399FBA7009EC21D /* NewTripViewController.swift */,
 				9279F8FD2384A8BF00143DAC /* TripViewController.swift */,
 				921649B52383A340000CADF7 /* HeaderView.swift */,
-				2FEA8F262399FBA7009EC21D /* NewTripViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
