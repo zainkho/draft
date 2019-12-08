@@ -44,7 +44,6 @@ class ButtonFooterView: UIView {
     }
     
     @objc func addDay() {
-        print("here1")
         self.addDayDelegate?.addDay()
     }
     

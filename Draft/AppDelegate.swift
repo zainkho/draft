@@ -16,12 +16,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let userDefaults = UserDefaults.standard
         if let userID = userDefaults.value(forKey: "user") as? Int {
-            print("hacingodl")
             Networking.shared.getUser(forUser: userID) { (user) in
-                print(user.trips)
             }
         } else {
-            print("making new")
             let username = UUID().uuidString
             Networking.shared.createUser(userID: username) { (userID) in
                 userDefaults.set(userID, forKey: "user")

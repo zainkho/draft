@@ -79,7 +79,6 @@ class EditTripViewController: UIViewController {
     
     @objc func donePressed() {
         Networking.shared.updateTrip(tripID: trip.id!, name: trip.name, start: trip.len, entries: daysToEntries(days: trip.days)) { (trip) in
-            print(trip)
             self.reloadDelegate.reloadTrips(trip: nil)
             self.dismiss(animated: true)
         }

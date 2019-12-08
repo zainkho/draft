@@ -88,7 +88,6 @@ final class Networking {
                 let jsonDecoder = JSONDecoder()
                 jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
                 if let userData = try? jsonDecoder.decode(APIResponse<User>.self, from: data) {
-                    print(userData.data.trips[0].imageUrl)
                     completion(userData.data)
                 }
                 
