@@ -117,3 +117,35 @@ func daysToEntries(days: [Day]) -> [[String:Any]] {
     
     return entries
 }
+
+func convertBackendTrip(trip: Networking.Trip) -> Trip {
+    var dayInfo = [Int: ([String], [String])]()
+    for i in 0..<7 {
+        dayInfo[i] = ([], [])
+    }
+    for entry in trip.entries {
+        if entry.kind == "restaurant" {
+            dayInfo[entry.dayIndex]?.0.append(entry.description)
+        } else {
+            dayInfo[entry.dayIndex]?.1.append(entry.description)
+        }
+    }
+    var days = [Day]()
+    dayInfo.forEach { (dayIndex, info) in
+        if !info.0.isEmpty || !info.1.isEmpty {
+            days.append(Day(num: dayIndex, attractions: info.1, restaurants: info.0))
+        }
+    }
+    let newTrip = Trip(emoji: randomEmoji(), name: trip.name, location: trip.location ?? "", days: days)
+    newTrip.id = trip.id
+    return newTrip
+}
+
+func convertBackendTrips(trips: [Networking.Trip]) -> [Trip] {
+    var convertedTrips = [Trip]()
+    for trip in trips {
+        let newTrip = convertBackendTrip(trip: trip)
+        convertedTrips.append(newTrip)
+    }
+    return convertedTrips
+}

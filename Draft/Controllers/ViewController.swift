@@ -40,7 +40,7 @@ class ViewController: UIViewController {
     let tripCellReuseIdentifier = "tripCellReuseIdentifier"
     let headerViewReuseIdentifier = "filterViewReuseIdentifier"
     
-    var trips: [Trip]!
+    var trips = [Trip]()
     
     let HEADER_HEIGHT: CGFloat = 168
     let CELL_HEIGHT: CGFloat = 168
@@ -54,10 +54,6 @@ class ViewController: UIViewController {
         navigationController?.navigationBar.isTranslucent = true
         
         view.backgroundColor = .BREEZE
-        
-        let trips = Networking.shared.getUserTrips(forUser: UserDefaults.standard.value(forKey: "user") as! String) { (trips) in
-            self.trips = trips
-        }
         
         // headerGradient
         headerGradientView = UIView()
@@ -101,11 +97,16 @@ class ViewController: UIViewController {
         emptyState = EmptyStateView()
         emptyState.presentDelegate = self
         view.addSubview(emptyState)
-        if trips.isEmpty {
-            emptyState.alpha = 1
-        }
-        else {
-            emptyState.alpha = 0
+        emptyState.alpha = trips.isEmpty ? 1 : 0
+        
+        if let userID = UserDefaults.standard.value(forKey: "user") as? Int {
+            Networking.shared.getUserTrips(forUser: userID) { (trips) in
+                self.trips = convertBackendTrips(trips: trips)
+                DispatchQueue.main.async {
+                    self.emptyState.alpha = trips.isEmpty ? 1 : 0
+                    self.collectionView.reloadData()
+                }
+            }
         }
         
         setupConstraints()

@@ -28,7 +28,7 @@ final class Networking {
         let entries: [Entry]
 
         let location: String?
-        let imageUrl: URL?
+        let imageUrl: String?
         let imageCredits: String?
 
         init(id: Int, name: String, entries: [Entry], location: String) {
@@ -40,21 +40,21 @@ final class Networking {
             self.imageCredits = nil
         }
 
-        init?(json: [String: Any]) {
-            guard let id = json["id"] as? Int,
-                let name = json["name"] as? String,
-                let entriesData = json["entries"] as? [[String: Any]] else {
-                    return nil
-            }
-
-            self.id = id
-            self.name = name
-            self.entries = entriesData.compactMap(Entry.init)
-
-            self.location = json["location"] as? String
-            self.imageUrl = (json["image_url"] as? String).flatMap { URL(string: $0) }
-            self.imageCredits = json["image_credits"] as? String
-        }
+//        init?(json: [String: Any]) {
+//            guard let id = json["id"] as? Int,
+//                let name = json["name"] as? String,
+//                let entriesData = json["entries"] as? [[String: Any]] else {
+//                    return nil
+//            }
+//
+//            self.id = id
+//            self.name = name
+//            self.entries = entriesData.compactMap(Entry.init)
+//
+//            self.location = json["location"] as? String
+//            self.imageUrl = (json["image_url"] as? String).flatMap { URL(string: $0) }
+//            self.imageCredit = json["image_credits"] as? String
+//        }
 
     }
 
@@ -64,29 +64,29 @@ final class Networking {
         let name: String
         let trips: [Trip]
 
-        init?(json: [String: Any]) {
-            guard let id = json["id"] as? Int,
-                let name = json["name"] as? String,
-                let tripsData = json["trips"] as? [[String: Any]] else {
-                    return nil
-            }
-
-            self.id = id
-            self.name = name
-            self.trips = tripsData.compactMap(Trip.init)
-        }
+//        init?(json: [String: Any]) {
+//            guard let id = json["id"] as? Int,
+//                let name = json["name"] as? String,
+//                let tripsData = json["trips"] as? [[String: Any]] else {
+//                    return nil
+//            }
+//
+//            self.id = id
+//            self.name = name
+//            self.trips = tripsData.compactMap(Trip.init)
+//        }
 
     }
 
     static let shared = Networking()
     
-    func getUser(forUser userID: String, _ completion: @escaping (User) -> Void) {
+    func getUser(forUser userID: Int, _ completion: @escaping (User) -> Void) {
         let userEndpoint = "https://draft-backend.duckdns.org/api/user/\(userID)/"
         Alamofire.request(userEndpoint, method: .get).validate().responseData { response in
             switch response.result {
             case .success(let data):
                 let jsonDecoder = JSONDecoder()
-                
+                jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
                 if let userData = try? jsonDecoder.decode(APIResponse<User>.self, from: data) {
                     completion(userData.data)
                 }
@@ -97,13 +97,13 @@ final class Networking {
         }
     }
 
-    func getUserTrips(forUser userID: String, _ completion: @escaping ([Trip]) -> Void) {
+    func getUserTrips(forUser userID: Int, _ completion: @escaping ([Trip]) -> Void) {
         let userEndpoint = "https://draft-backend.duckdns.org/api/user/\(userID)/"
         Alamofire.request(userEndpoint, method: .get).validate().responseData { response in
             switch response.result {
             case .success(let data):
                 let jsonDecoder = JSONDecoder()
-                
+                jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
                 if let userData = try? jsonDecoder.decode(APIResponse<User>.self, from: data) {
                     completion(userData.data.trips)
                 }
@@ -121,7 +121,7 @@ final class Networking {
             switch response.result {
             case .success(let data):
                 let jsonDecoder = JSONDecoder()
-                
+                jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
                 if let userData = try? jsonDecoder.decode(APIResponse<User>.self, from: data) {
                     completion(userData.data.id)
                 }
@@ -132,7 +132,7 @@ final class Networking {
         }
     }
     
-    func createTrip(userID: Int, name: String, start: Int, location: String, entries: [[String:Any]], _ completion: @escaping (Int) -> Void) {
+    func createTrip(userID: Int, name: String, start: Int, location: String, entries: [[String:Any]], _ completion: @escaping (Trip) -> Void) {
 
         let params = ["name": name, "start": start, "location": location, "entries": entries] as [String : Any]
         let userEndpoint = "https://draft-backend.duckdns.org/api/user/\(userID)/trip/"
@@ -140,9 +140,9 @@ final class Networking {
             switch response.result {
             case .success(let data):
                 let jsonDecoder = JSONDecoder()
-                
+                jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
                 if let tripData = try? jsonDecoder.decode(APIResponse<Trip>.self, from: data) {
-                    completion(tripData.data.id)
+                    completion(tripData.data)
                 }
                 
             case .failure(let error):
@@ -158,7 +158,7 @@ final class Networking {
             switch response.result {
             case .success(let data):
                 let jsonDecoder = JSONDecoder()
-                
+                jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
                 if let userData = try? jsonDecoder.decode(APIResponse<Trip>.self, from: data) {
                     completion(userData.data.id)
                 }

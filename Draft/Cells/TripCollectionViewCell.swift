@@ -157,13 +157,7 @@ class TripCollectionViewCell: UICollectionViewCell {
     @objc func presentEditViewController() {
         presentDelegate?.presentEditViewController(trip: trip, title: "Edit Trip")
     }
-    
-    func randomEmoji() -> String {
-        let emojiStart = 0x1F601
-        let ascii = emojiStart + Int(arc4random_uniform(UInt32(35)))
-        let emoji = UnicodeScalar(ascii)?.description
-        return emoji ?? "x"
-    }
+
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
