@@ -1,5 +1,5 @@
 //
-//  APIResposne.swift
+//  APIResponse.swift
 //  Draft
 //
 //  Created by Zain Khoja on 12/7/19.

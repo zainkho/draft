@@ -135,6 +135,7 @@ extension EditTripViewController : UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = cells[indexPath.section-1][indexPath.row]
+        
         if cell.type == .aButton {
             if !trip.days[indexPath.section-1].attractions.contains("") {
                 trip.days[indexPath.section-1].attractions.append("")

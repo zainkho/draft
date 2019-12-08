@@ -69,9 +69,6 @@ class ViewController: UIViewController {
         footerGradientView.layer.insertSublayer(footerGradient, at: 0)
         view.addSubview(footerGradientView)
         
-//        let day1 = Day(num: 1, attractions: ["statue of liberty","empire state building"], restaurants: ["ichiran", "chipotle"])
-//        let day2 = Day(num: 2, attractions: ["uh","uhh"], restaurants: ["yum", "tasty"])
-//        let nyc = Trip(emoji: randomEmoji(), name:"NYC Spring Break", location: "nyc", days: [day1, day2] )
         trips = []
 
         // Set up tripsLayout
