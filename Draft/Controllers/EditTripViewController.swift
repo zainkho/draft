@@ -38,7 +38,7 @@ class EditTripViewController: UIViewController {
         
         // Appearance
         title = self.title
-
+        
         navigationController?.navigationBar.titleTextAttributes = labelAttrs
         // Cancel button
         let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelPressed))
@@ -63,7 +63,7 @@ class EditTripViewController: UIViewController {
         buttonFooterView.addDayDelegate = self
         tableView.tableFooterView = buttonFooterView
         view.addSubview(tableView)
-
+        
         setupConstraints() 
     }
     
@@ -79,17 +79,24 @@ class EditTripViewController: UIViewController {
     
     @objc func donePressed() {
         reloadDelegate.reloadTrips(trip: nil)
+        
+        let userDefaults = UserDefaults.standard
+        if let userID = userDefaults.value(forKey: "user") as? Int {
+            
+            Networking.shared.createTrip(userID: userID, name: trip.name, start: trip.len, location: trip.location, entries: <#T##[Networking.Entry]#>) { (trip) in
+            }
+        }
         dismiss(animated: true)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     @objc func dismissViewController() {
         dismiss(animated: true, completion: nil)
     }
-
+    
     func createCellsFromTrip(trip: Trip) -> [[InputCell]] {
         var inputCells = [[InputCell]]()
         let days = trip.days
@@ -198,7 +205,7 @@ extension EditTripViewController : UITableViewDataSource {
                 return cell
             }
         }
-        //for all other sections
+            //for all other sections
         else {
             let pathCell = cells[indexPath.section-1][indexPath.row]
             //input cells
@@ -224,7 +231,7 @@ extension EditTripViewController : UITableViewDataSource {
                 }
                 return cell
             }
-            //add attraction cells
+                //add attraction cells
             else if pathCell.type == .aButton {
                 let cell = tableView.dequeueReusableCell(withIdentifier: buttonReuseIdentifier, for: indexPath) as! ButtonTableViewCell
                 cell.cellType = .aButton
@@ -232,7 +239,7 @@ extension EditTripViewController : UITableViewDataSource {
                 cell.buttonLabel.textColor = .SKY
                 return cell
             }
-            //add restaurant cells
+                //add restaurant cells
             else {
                 let cell = tableView.dequeueReusableCell(withIdentifier: buttonReuseIdentifier, for: indexPath) as! ButtonTableViewCell
                 cell.cellType = .rButton
