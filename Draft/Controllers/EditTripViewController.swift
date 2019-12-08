@@ -78,15 +78,11 @@ class EditTripViewController: UIViewController {
     }
     
     @objc func donePressed() {
+        Networking.shared.updateTrip(tripID: trip.id!, name: trip.name, start: trip.len, entries: daysToEntries(days: trip.days)) { (trip) in
+            print(trip)
+        }
+        
         reloadDelegate.reloadTrips(trip: nil)
-        
-//        let userDefaults = UserDefaults.standard
-//        if let userID = userDefaults.value(forKey: "user") as? Int {
-//            
-//            // TODO
-//            Networking.shared.updateTrip(tripID: <#T##Int#>, name: <#T##String#>, start: <#T##Int#>, entries: <#T##[Networking.Entry]#>, <#T##completion: (Int) -> Void##(Int) -> Void#>)
-//        }
-        
         dismiss(animated: true)
     }
     

@@ -68,7 +68,7 @@ class ViewController: UIViewController {
         footerGradient.colors = [UIColor.CLEAR.cgColor, UIColor.BREEZE.cgColor]
         footerGradientView.layer.insertSublayer(footerGradient, at: 0)
         view.addSubview(footerGradientView)
-        
+
         // Set up tripsLayout
         let tripsLayout = UICollectionViewFlowLayout()
         tripsLayout.scrollDirection = .vertical
@@ -97,11 +97,16 @@ class ViewController: UIViewController {
         emptyState = EmptyStateView()
         emptyState.presentDelegate = self
         view.addSubview(emptyState)
-        if trips.isEmpty {
-            emptyState.alpha = 1
-        }
-        else {
-            emptyState.alpha = 0
+        emptyState.alpha = trips.isEmpty ? 1 : 0
+        
+        if let userID = UserDefaults.standard.value(forKey: "user") as? Int {
+            Networking.shared.getUserTrips(forUser: userID) { (trips) in
+                self.trips = convertBackendTrips(trips: trips)
+                DispatchQueue.main.async {
+                    self.emptyState.alpha = trips.isEmpty ? 1 : 0
+                    self.collectionView.reloadData()
+                }
+            }
         }
         
         setupConstraints()
