@@ -138,6 +138,7 @@ func convertBackendTrip(trip: Networking.Trip) -> Trip {
     }
     let newTrip = Trip(emoji: randomEmoji(), name: trip.name, location: trip.location ?? "", days: days)
     newTrip.id = trip.id
+    newTrip.url = trip.imageUrl ?? "https://images.unsplash.com/photo-1535726917010-060104716686?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjEwMjY4OH0"
     return newTrip
 }
 
