@@ -88,6 +88,7 @@ final class Networking {
                 let jsonDecoder = JSONDecoder()
                 jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
                 if let userData = try? jsonDecoder.decode(APIResponse<User>.self, from: data) {
+                    print(userData.data.trips[0].imageUrl)
                     completion(userData.data)
                 }
                 
@@ -154,7 +155,7 @@ final class Networking {
     func updateTrip(tripID: Int, name: String, start: Int, entries: [[String:Any]], _ completion: @escaping (Int) -> Void) {
         let params = ["name": name, "start": start, "entries": entries] as [String : Any]
         let userEndpoint = "https://draft-backend.duckdns.org/api/trip/\(tripID)/"
-        Alamofire.request(userEndpoint, method: .post, parameters: params, encoding: JSONEncoding.default).validate().responseData { response in
+        Alamofire.request(userEndpoint, method: .put, parameters: params, encoding: JSONEncoding.default).validate().responseData { response in
             switch response.result {
             case .success(let data):
                 let jsonDecoder = JSONDecoder()
@@ -173,4 +174,3 @@ final class Networking {
     }
     
 }
-
