@@ -16,29 +16,29 @@ let SPACING_24: CGFloat = 24
 let SPACING_48: CGFloat = 48
 
 let sampleAttractions = [
-    "Eiffel Tower",
-    "Colosseum",
-    "Great Wall of China",
-    "Golden Gate Bridge",
+    "World Trade Center",
+    "Statue of Liberty",
+    "Central Park",
+    "Washington Square Arch",
     "Empire State Building",
     "Times Square",
-    "Sydney Opera House",
-    "Buckingham Palace",
-    "Burj Khalifa",
-    "Leaning Tower of Pisa"
+    "Bryant Park",
+    "Radio City Music Hall",
+    "The Vessel",
+    "Chelsea Market"
 ]
 
 let sampleRestaurants = [
     "Ichiran Ramen",
-    "Din Tai Fung Dim Sum",
-    "Gusteau's Restaurant",
-    "Milk Bar",
+    "Black Seed Bagels",
+    "Joe's Pizza",
+    "Fat Witch Brownies",
     "Halal Guys",
-    "BCD Tofu House",
-    "Tiger Sugar Boba",
+    "Drunken Dumpling",
+    "Los Tacos",
     "Abiko Curry",
     "Peter Luger's Steakhouse",
-    "Udon Mugizo"
+    "Boba Guys"
 ]
 
 func randomEmoji() -> String {
