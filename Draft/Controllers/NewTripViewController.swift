@@ -87,13 +87,12 @@ class NewTripViewController: UIViewController {
         
         let userDefaults = UserDefaults.standard
         if let userID = userDefaults.value(forKey: "user") as? Int {
-            
-            Networking.shared.createTrip(userID: userID, name: trip.name, start: trip.len, location: trip.location, entries: daysToEntries(days: trip.days)) { (trip) in
-                print(trip)
+            Networking.shared.createTrip(userID: userID, name: trip.name, start: trip.len, location: trip.location, entries: daysToEntries(days: trip.days)) { (id) in
+                self.trip.id = id
             }
         }
         
-//        reloadDelegate.reloadTrips(trip: trip)
+        reloadDelegate.reloadTrips(trip: trip)
         dismiss(animated: true)
     }
     

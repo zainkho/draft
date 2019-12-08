@@ -15,11 +15,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         let userDefaults = UserDefaults.standard
-        if let userID = userDefaults.value(forKey: "user") as? Int {
+        if let userID = userDefaults.value(forKey: "user") as? String {
+            print("hacingodl")
             Networking.shared.getUser(forUser: userID) { (user) in
                 print(user.trips)
             }
         } else {
+            print("making new")
             let userID = UUID().uuidString
             Networking.shared.createUser(userID: userID) { (userID) in
                 userDefaults.set(userID, forKey: "user")

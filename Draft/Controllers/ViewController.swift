@@ -55,6 +55,10 @@ class ViewController: UIViewController {
         
         view.backgroundColor = .BREEZE
         
+        let trips = Networking.shared.getUserTrips(forUser: UserDefaults.standard.value(forKey: "user") as! String) { (trips) in
+            self.trips = trips
+        }
+        
         // headerGradient
         headerGradientView = UIView()
         headerGradient = CAGradientLayer()
@@ -68,8 +72,6 @@ class ViewController: UIViewController {
         footerGradient.colors = [UIColor.CLEAR.cgColor, UIColor.BREEZE.cgColor]
         footerGradientView.layer.insertSublayer(footerGradient, at: 0)
         view.addSubview(footerGradientView)
-        
-        trips = []
 
         // Set up tripsLayout
         let tripsLayout = UICollectionViewFlowLayout()

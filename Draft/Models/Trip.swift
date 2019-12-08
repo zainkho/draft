@@ -14,8 +14,9 @@ class Trip {
     var len: Int
     var days: [Day]
     var url: String
+    var id: Int?
 
-    init(emoji: String, name: String, location: String, days: [Day] ) {
+    init(emoji: String, name: String, location: String, days: [Day]) {
         self.emoji = emoji
         self.name = name
         self.location = location

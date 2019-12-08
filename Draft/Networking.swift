@@ -80,7 +80,7 @@ final class Networking {
 
     static let shared = Networking()
     
-    func getUser(forUser userID: Int, _ completion: @escaping (User) -> Void) {
+    func getUser(forUser userID: String, _ completion: @escaping (User) -> Void) {
         let userEndpoint = "https://draft-backend.duckdns.org/api/user/\(userID)/"
         Alamofire.request(userEndpoint, method: .get).validate().responseData { response in
             switch response.result {
@@ -97,6 +97,23 @@ final class Networking {
         }
     }
 
+    func getUserTrips(forUser userID: String, _ completion: @escaping ([Trip]) -> Void) {
+        let userEndpoint = "https://draft-backend.duckdns.org/api/user/\(userID)/"
+        Alamofire.request(userEndpoint, method: .get).validate().responseData { response in
+            switch response.result {
+            case .success(let data):
+                let jsonDecoder = JSONDecoder()
+                
+                if let userData = try? jsonDecoder.decode(APIResponse<User>.self, from: data) {
+                    completion(userData.data.trips)
+                }
+                
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
     func createUser(userID: String, _ completion: @escaping (Int) -> Void) {
         let params = ["name": userID]
         let userEndpoint = "https://draft-backend.duckdns.org/api/users/"
@@ -124,8 +141,8 @@ final class Networking {
             case .success(let data):
                 let jsonDecoder = JSONDecoder()
                 
-                if let userData = try? jsonDecoder.decode(APIResponse<Trip>.self, from: data) {
-                    completion(userData.data.id)
+                if let tripData = try? jsonDecoder.decode(APIResponse<Trip>.self, from: data) {
+                    completion(tripData.data.id)
                 }
                 
             case .failure(let error):
@@ -134,7 +151,7 @@ final class Networking {
         }
     }
     
-    func updateTrip(tripID: Int, name: String, start: Int, entries: [Entry], _ completion: @escaping (Int) -> Void) {
+    func updateTrip(tripID: Int, name: String, start: Int, entries: [[String:Any]], _ completion: @escaping (Int) -> Void) {
         let params = ["name": name, "start": start, "entries": entries] as [String : Any]
         let userEndpoint = "https://draft-backend.duckdns.org/api/trip/\(tripID)/"
         Alamofire.request(userEndpoint, method: .post, parameters: params, encoding: JSONEncoding.default).validate().responseData { response in
